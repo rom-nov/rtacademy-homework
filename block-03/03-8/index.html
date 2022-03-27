@@ -1,0 +1,633 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/a78fdb0cc2.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&family=Open+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <title>Mara – Beautiful Photo WordPress Blog Theme</title>
+</head>
+<body>
+    <header class="header _container">
+        <div class="header__row">
+            <div class="header__col logo">
+                <a class="logo__link" href="#">mara</a>
+            </div>
+            <nav class="header__col menu">
+                <div class="menu__burger _burger-icon">
+                    <span></span>
+                </div>
+                <div class="menu__wrapper">
+                    <ul class="menu__body">
+                    <li class="menu__item">
+                        <a class="menu__link _active" href="#">home</a>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link" href="#">home styles</a>
+                        <ul class="submenu">
+                            <li class="submenu__item">
+                                <a class="submenu__link" href="#">3-1 cols layout</a>
+                            </li>
+                            <li class="submenu__item">
+                                <a class="submenu__link" href="#">2-1 cols layout</a>
+                            </li>
+                            <li class="submenu__item">
+                                <a class="submenu__link" href="#">zigzag layout</a>
+                            </li>
+                            <li class="submenu__item">
+                                <a class="submenu__link" href="#">3 cols layout</a>
+                            </li>
+                            <li class="submenu__item">
+                                <a class="submenu__link" href="#">2 cols layout</a>
+                            </li>
+                            <li class="submenu__item">
+                                <a class="submenu__link" href="#">1 col layout</a>
+                            </li>
+                            <li class="submenu__item">
+                                <a class="submenu__link" href="#">static 2 cols layout</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link" href="#">lifestyle</a>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link" href="#">travel</a>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link" href="#">pages</a>
+                        <ul class="submenu">
+                            <li class="submenu__item">
+                                <a class="submenu__link" href="#">contact</a>
+                            </li>
+                            <li class="submenu__item">
+                                <a class="submenu__link" href="#">author page</a>
+                            </li>
+                            <li class="submenu__item">
+                                <a class="submenu__link" href="#">single article – sidebar</a>
+                            </li>
+                            <li class="submenu__item">
+                                <a class="submenu__link" href="#">full width</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="menu__item">
+                        <a class="menu__link" href="#">buy now</a>
+                    </li>
+                </ul>
+                </div>
+            </nav>
+            <div class="header__col search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+        </div>
+    </header>
+    <main class="main _container">
+        <section class="main__section-title">
+            <h4 class="title-small">Explore.Discover.Share</h4>
+            <h1 class="title-main">Start Your Journey</h1>
+        </section>
+        <section class="slider-main">
+            <div class="slider-main__wrapper">
+                <picture class="slider-main__image">
+                    <!--
+                    1200px = 75rem
+                    1199px = 74.94rem
+                    992px = 57.5rem
+                    460px = 28.75rem
+                    -->
+                    <source media="(max-width: 28.75rem)" srcset="images/460px/image-3.webp" type="image/webp">
+                    <source media="(max-width: 28.75rem)" srcset="images/460px/image-3.jpg" type="image/jpeg">
+                    <source media="(max-width: 57.5rem)" srcset="images/690px/image-3.webp" type="image/webp">
+                    <source media="(max-width: 57.5rem)" srcset="images/690px/image-3.jpg" type="image/jpeg">
+                    <source media="(max-width: 74.94rem)" srcset="images/910px/image-3.webp" type="image/webp">
+                    <source media="(max-width: 74.94rem)" srcset="images/910px/image-3.jpg" type="image/jpeg">
+                    <source media="(min-width: 75rem)" srcset="images/1110px/image-3.webp" type="image/webp">
+                    <source media="(min-width: 75rem)" srcset="images/1110px/image-3.jpg" type="image/jpeg">
+                    <img src="images/460px/image-3.jpg" alt="Mountains and lake">
+                </picture>
+                <div class="slider__meta">
+                    <h3 class="slider-main__category category">
+                        <a class="category__link" href="#">Nature</a>
+                    </h3>
+                    <h2 class="slider-main__title title-post">
+                        <a class="title-post__link" href="#">Explore New Places</a>
+                    </h2>
+                    <a class="link-post" href="#">read more</a>
+                </div>
+                <div class="slider-main__control">
+                    <span class="control-btn control-btn--left">&lt;</span>
+                    <span class="control-btn control-btn--right">&gt;</span>
+                </div>
+            </div>
+        </section>
+        <section class="main__grid grid screen">
+            <div class="grid__wrapper">
+                <div class="grid__item grid__item--big">
+                    <picture>
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-2.webp" type="image/webp">
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-2.jpg" type="image/jpeg">
+                        <source media="(max-width: 57.5rem)" srcset="images/690px/image-2.webp" type="image/webp">
+                        <source media="(max-width: 57.5rem)" srcset="images/690px/image-2.jpg" type="image/jpeg">
+                        <source media="(max-width: 74.94rem)" srcset="images/910px/image-2.webp" type="image/webp">
+                        <source media="(max-width: 74.94rem)" srcset="images/910px/image-2.jpg" type="image/jpeg">
+                        <source media="(min-width: 75rem)" srcset="images/1110px/image-2.webp" type="image/webp">
+                        <source media="(min-width: 75rem)" srcset="images/1110px/image-2.jpg" type="image/jpeg">
+                        <img src="images/460px/image-2.jpg" alt="Mountains and lake">
+                    </picture>
+                    <a class="grid__post-link" href="#"></a>
+                    <div class="grid__meta">
+                        <h3 class="grid__category category">
+                            <a class="category__link" href="#">Lifestyle</a>
+                        </h3>
+                        <h2 class="grid__title title-post">
+                            <a class="title-post__link" href="#">Turn Heads with This Outfit</a>
+                        </h2>
+                        <div class="grid__post-info">
+                            <a class="author-post" href="#">April Smith</a>
+                            <time class="date-post" datetime="2022-01-17 09:00">January 17, 2022</time>
+                        </div>
+                        <a class="grid__link link-post" href="#">read more</a>
+                    </div>
+                </div>
+                <div class="grid__item">
+                    <picture>
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-1.webp" type="image/webp">
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-1.jpg" type="image/jpeg">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-1.webp" type="image/webp">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-1.jpg" type="image/jpeg">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-1.webp" type="image/webp">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-1.jpg" type="image/jpeg">
+                        <img src="images/460px/image-1.jpg" alt="Mountains and lake">
+                    </picture>
+                    <a class="grid__post-link" href="#"></a>
+                    <div class="grid__meta">
+                            <h3 class="grid__category category">
+                                <a class="category__link" href="#">Lifestyle</a>
+                                <a class="category__link" href="#">Travel</a>
+                            </h3>
+                            <h2 class="grid__title title-post title-post--small">
+                                <a class="title-post__link" href="#">Summer Vacation Ideas</a>
+                            </h2>
+                            <div class="grid__post-info">
+                                <a class="author-post" href="#">April Smith</a>
+                                <time class="date-post" datetime="2022-01-16 09:00">January 16, 2022</time>
+                            </div>
+                            <a class="grid__link link-post" href="#">read more</a>
+                        </div>
+                </div>
+                <div class="grid__item">
+                    <picture>
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-7.webp" type="image/webp">
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-7.jpg" type="image/jpeg">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-7.webp" type="image/webp">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-7.jpg" type="image/jpeg">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-7.webp" type="image/webp">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-7.jpg" type="image/jpeg">
+                        <img src="images/460px/image-7.jpg" alt="Mountains and lake">
+                    </picture>
+                    <a class="grid__post-link" href="#"></a>
+                    <div class="grid__meta">
+                            <h3 class="grid__category category">
+                                <a class="category__link" href="#">Lifestyle</a>
+                            </h3>
+                            <h2 class="grid__title title-post title-post--small">
+                                <a class="title-post__link" href="#">Photo Session in the Woods</a>
+                            </h2>
+                            <div class="grid__post-info">
+                                <a class="author-post" href="#">April Smith</a>
+                                <time class="date-post" datetime="2022-01-15 09:00">January 15, 2022</time>
+                            </div>
+                            <a class="grid__link link-post" href="#">read more</a>
+                        </div>
+                </div>
+                <div class="grid__item">
+                    <picture>
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-15.webp" type="image/webp">
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-15.jpg" type="image/jpeg">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-15.webp" type="image/webp">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-15.jpg" type="image/jpeg">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-15.webp" type="image/webp">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-15.jpg" type="image/jpeg">
+                        <img src="images/460px/image-15.jpg" alt="Mountains and lake">
+                    </picture>
+                    <a class="grid__post-link" href="#"></a>
+                    <div class="grid__meta">
+                            <h3 class="grid__category category">
+                                <a class="category__link" href="#">Lifestyle</a>
+                            </h3>
+                            <h2 class="grid__title title-post title-post--small">
+                                <a class="title-post__link" href="#">Charm and Magic</a>
+                            </h2>
+                            <div class="grid__post-info">
+                                <a class="author-post" href="#">April Smith</a>
+                                <time class="date-post" datetime="2022-01-14 09:00">January 14, 2022</time>
+                            </div>
+                            <a class="grid__link link-post" href="#">read more</a>
+                        </div>
+                </div>
+                <div class="grid__item grid__item--big">
+                    <picture>
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-13.webp" type="image/webp">
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-13.jpg" type="image/jpeg">
+                        <source media="(max-width: 57.5rem)" srcset="images/690px/image-13.webp" type="image/webp">
+                        <source media="(max-width: 57.5rem)" srcset="images/690px/image-13.jpg" type="image/jpeg">
+                        <source media="(max-width: 74.94rem)" srcset="images/910px/image-13.webp" type="image/webp">
+                        <source media="(max-width: 74.94rem)" srcset="images/910px/image-13.jpg" type="image/jpeg">
+                        <source media="(min-width: 75rem)" srcset="images/1110px/image-13.webp" type="image/webp">
+                        <source media="(min-width: 75rem)" srcset="images/1110px/image-13.jpg" type="image/jpeg">
+                        <img src="images/460px/image-13.jpg" alt="Mountains and lake">
+                    </picture>
+                    <a class="grid__post-link" href="#"></a>
+                    <div class="grid__meta">
+                            <h3 class="grid__category category">
+                                <a class="category__link" href="#">Nature</a>
+                            </h3>
+                            <h2 class="grid__title title-post">
+                                <a class="title-post__link" href="#">Morning Exercises</a>
+                            </h2>
+                            <div class="grid__post-info">
+                                <a class="author-post" href="#">April Smith</a>
+                                <time class="date-post" datetime="2022-01-13 09:00">January 13, 2022</time>
+                            </div>
+                            <a class="grid__link link-post" href="#">read more</a>
+                        </div>
+                </div>
+                <div class="grid__item">
+                    <picture>
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-3.webp" type="image/webp">
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-3.jpg" type="image/jpeg">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-3.webp" type="image/webp">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-3.jpg" type="image/jpeg">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-3.webp" type="image/webp">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-3.jpg" type="image/jpeg">
+                        <img src="images/460px/image-3.jpg" alt="Mountains and lake">
+                    </picture>
+                    <a class="grid__post-link" href="#"></a>
+                    <div class="grid__meta">
+                            <h3 class="grid__category category">
+                                <a class="category__link" href="#">Nature</a>
+                            </h3>
+                            <h2 class="grid__title title-post title-post--small">
+                                <a class="title-post__link" href="#">Explore New Places</a>
+                            </h2>
+                            <div class="grid__post-info">
+                                <a class="author-post" href="#">April Smith</a>
+                                <time class="date-post" datetime="2022-01-12 09:00">January 12, 2022</time>
+                            </div>
+                            <a class="grid__link link-post" href="#">read more</a>
+                        </div>
+                </div>
+                <div class="grid__item">
+                    <picture>
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-11.webp" type="image/webp">
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-11.jpg" type="image/jpeg">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-11.webp" type="image/webp">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-11.jpg" type="image/jpeg">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-11.webp" type="image/webp">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-11.jpg" type="image/jpeg">
+                        <img src="images/460px/image-11.jpg" alt="Mountains and lake">
+                    </picture>
+                    <a class="grid__post-link" href="#"></a>
+                    <div class="grid__meta">
+                            <h3 class="grid__category category">
+                                <a class="category__link" href="#">Lifestyle</a>
+                            </h3>
+                            <h2 class="grid__title title-post title-post--small">
+                                <a class="title-post__link" href="#">Rainy Days</a>
+                            </h2>
+                            <div class="grid__post-info">
+                                <a class="author-post" href="#">April Smith</a>
+                                <time class="date-post" datetime="2022-01-11 09:00">January 11, 2022</time>
+                            </div>
+                            <a class="grid__link link-post" href="#">read more</a>
+                        </div>
+                </div>
+                <div class="grid__item">
+                    <picture>
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-10.webp" type="image/webp">
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-10.jpg" type="image/jpeg">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-10.webp" type="image/webp">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-10.jpg" type="image/jpeg">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-10.webp" type="image/webp">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-10.jpg" type="image/jpeg">
+                        <img src="images/460px/image-10.jpg" alt="Mountains and lake">
+                    </picture>
+                    <a class="grid__post-link" href="#"></a>
+                    <div class="grid__meta">
+                            <h3 class="grid__category category">
+                                <a class="category__link" href="#">Lifestyle</a>
+                            </h3>
+                            <h2 class="grid__title title-post title-post--small">
+                                <a class="title-post__link" href="#">Hot Air Balloons</a>
+                            </h2>
+                            <div class="grid__post-info">
+                                <a class="author-post" href="#">April Smith</a>
+                                <time class="date-post" datetime="2022-01-10 09:00">January 10, 2022</time>
+                            </div>
+                            <a class="grid__link link-post" href="#">read more</a>
+                        </div>
+                </div>
+                <div class="grid__item grid__item--big">
+                    <picture>
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-9.webp" type="image/webp">
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-9.jpg" type="image/jpeg">
+                        <source media="(max-width: 57.5rem)" srcset="images/690px/image-9.webp" type="image/webp">
+                        <source media="(max-width: 57.5rem)" srcset="images/690px/image-9.jpg" type="image/jpeg">
+                        <source media="(max-width: 74.94rem)" srcset="images/910px/image-9.webp" type="image/webp">
+                        <source media="(max-width: 74.94rem)" srcset="images/910px/image-9.jpg" type="image/jpeg">
+                        <source media="(min-width: 75rem)" srcset="images/1110px/image-9.webp" type="image/webp">
+                        <source media="(min-width: 75rem)" srcset="images/1110px/image-9.jpg" type="image/jpeg">
+                        <img src="images/460px/image-9.jpg" alt="Mountains and lake">
+                    </picture>
+                    <a class="grid__post-link" href="#"></a>
+                    <div class="grid__meta">
+                            <h3 class="grid__category category">
+                                <a class="category__link" href="#">Nature</a>
+                                <a class="category__link" href="#">Travel</a>
+                            </h3>
+                            <h2 class="grid__title title-post">
+                                <a class="title-post__link" href="#">The Road</a>
+                            </h2>
+                            <div class="grid__post-info">
+                                <a class="author-post" href="#">April Smith</a>
+                                <time class="date-post" datetime="2022-01-09 09:00">January 9, 2022</time>
+                            </div>
+                            <a class="grid__link link-post" href="#">read more</a>
+                        </div>
+                </div>
+                <div class="grid__item">
+                    <picture>
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-8.webp" type="image/webp">
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-8.jpg" type="image/jpeg">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-8.webp" type="image/webp">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-8.jpg" type="image/jpeg">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-8.webp" type="image/webp">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-8.jpg" type="image/jpeg">
+                        <img src="images/460px/image-8.jpg" alt="Mountains and lake">
+                    </picture>
+                    <a class="grid__post-link" href="#"></a>
+                    <div class="grid__meta">
+                            <h3 class="grid__category category">
+                                <a class="category__link" href="#">Nature</a>
+                                <a class="category__link" href="#">Travel</a>
+                            </h3>
+                            <h2 class="grid__title title-post title-post--small">
+                                <a class="title-post__link" href="#">Trip to Sea</a>
+                            </h2>
+                            <div class="grid__post-info">
+                                <a class="author-post" href="#">April Smith</a>
+                                <time class="date-post" datetime="2022-01-08 09:00">January 8, 2022</time>
+                            </div>
+                            <a class="grid__link link-post" href="#">read more</a>
+                        </div>
+                </div>
+                <div class="grid__item">
+                    <picture>
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-4.webp" type="image/webp">
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-4.jpg" type="image/jpeg">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-4.webp" type="image/webp">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-4.jpg" type="image/jpeg">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-4.webp" type="image/webp">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-4.jpg" type="image/jpeg">
+                        <img src="images/460px/image-4.jpg" alt="Mountains and lake">
+                    </picture>
+                    <a class="grid__post-link" href="#"></a>
+                    <div class="grid__meta">
+                        <h3 class="grid__category category">
+                            <a class="category__link" href="#">Travel</a>
+                        </h3>
+                        <h2 class="grid__title title-post title-post--small">
+                            <a class="title-post__link" href="#">Travel Days</a>
+                        </h2>
+                        <div class="grid__post-info">
+                            <a class="author-post" href="#">April Smith</a>
+                            <time class="date-post" datetime="2022-01-07 09:00">January 7, 2022</time>
+                        </div>
+                        <a class="grid__link link-post" href="#">read more</a>
+                    </div>
+                </div>
+                <div class="grid__item">
+                    <picture>
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-5.webp" type="image/webp">
+                        <source media="(max-width: 28.75rem)" srcset="images/460px/image-5.jpg" type="image/jpeg">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-5.webp" type="image/webp">
+                        <source media="(max-width: 690rem)" srcset="images/690px/image-5.jpg" type="image/jpeg">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-5.webp" type="image/webp">
+                        <source media="(min-width: 690rem)" srcset="images/690px/image-5.jpg" type="image/jpeg">
+                        <img src="images/460px/image-5.jpg" alt="Mountains and lake">
+                    </picture>
+                    <a class="grid__post-link" href="#"></a>
+                    <div class="grid__meta">
+                        <h3 class="grid__category category">
+                            <a class="category__link" href="#">Lifestyle</a>
+                        </h3>
+                        <h2 class="grid__title title-post title-post--small">
+                            <a class="title-post__link" href="#">Wearing White Dress</a>
+                        </h2>
+                        <div class="grid__post-info">
+                            <a class="author-post" href="#">April Smith</a>
+                            <time class="date-post" datetime="2022-01-06 09:00">January 6, 2022</time>
+                        </div>
+                        <a class="grid__link link-post" href="#">read more</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="print">
+            <div class="print__item">
+                <picture>
+                    <source srcset="images/460px/image-2.webp" type="image/webp">
+                    <source srcset="images/460px/image-2.jpg" type="image/jpeg">
+                    <img src="images/460px/image-2.jpg" alt="Mountains and lake">
+                </picture>
+                <p class="print__title">Turn Heads with This Outfit</p>
+                <p><span class="print__author">April Smith</span><span class="print__time">January 17, 2022</span></p>
+            </div>
+            <div class="print__item">
+                <picture>
+                    <source srcset="images/460px/image-1.webp" type="image/webp">
+                    <source srcset="images/460px/image-1.jpg" type="image/jpeg">
+                    <img src="images/460px/image-1.jpg" alt="Mountains and lake">
+                </picture>
+               <p class="print__title">Summer Vacation Ideas</p>
+               <p><span class="print__author">April Smith</span><span class="print__time">January 16, 2022</span></p>
+            </div>
+            <div class="print__item">
+                <picture>
+                    <source srcset="images/460px/image-7.webp" type="image/webp">
+                    <source srcset="images/460px/image-7.jpg" type="image/jpeg">
+                    <img src="images/460px/image-7.jpg" alt="Mountains and lake">
+                </picture>
+                <p class="print__title">Photo Session in the Woods</p>
+                <p><span class="print__author">April Smith</span><span class="print__time">January 15, 2022</span></p>
+            </div>
+            <div class="print__item">
+                <picture>
+                    <source srcset="images/460px/image-15.webp" type="image/webp">
+                    <source srcset="images/460px/image-15.jpg" type="image/jpeg">
+                    <img src="images/460px/image-15.jpg" alt="Mountains and lake">
+                </picture>
+                <p class="print__title">Charm and Magic</p>
+                <p><span class="print__author">April Smtih</span><span class="print__time">January 14, 2022</span></p>
+            </div>
+            <div class="print__item">
+                <picture>
+                    <source srcset="images/460px/image-13.webp" type="image/webp">
+                    <source srcset="images/460px/image-13.jpg" type="image/jpeg">
+                    <img src="images/460px/image-13.jpg" alt="Mountains and lake">
+                </picture>
+                <p class="print__title">Morning Exercises</p>
+                <p><span class="print__author">April Smith</span><span class="print__time">January 13, 2022</span></p>
+            </div>
+            <div class="print__item">
+                <picture>
+                    <source srcset="images/460px/image-3.webp" type="image/webp">
+                    <source srcset="images/460px/image-3.jpg" type="image/jpeg">
+                    <img src="images/460px/image-3.jpg" alt="Mountains and lake">
+                </picture>
+                <p class="print__title">Explore New Places</p>
+                <p><span class="print__author">April Smith</span><span class="print__time">January 12, 2022</span></p>
+            </div>
+            <div class="print__item">
+                <picture>
+                    <source srcset="images/460px/image-11.webp" type="image/webp">
+                    <source srcset="images/460px/image-11.jpg" type="image/jpeg">
+                    <img src="images/460px/image-11.jpg" alt="Mountains and lake">
+                </picture>
+                <p class="print__title">Rainy Days</p>
+                <p><span class="print__author">April Smith</span><span class="print__time">January 11, 2022</span></p>
+            </div>
+            <div class="print__item">
+                <picture>
+                    <source srcset="images/460px/image-10.webp" type="image/webp">
+                    <source srcset="images/460px/image-10.jpg" type="image/jpeg">
+                    <img src="images/460px/image-10.jpg" alt="Mountains and lake">
+                </picture>
+                <p class="print__title">Hot Air Balloons</p>
+                <p><span class="print__author">April Smith</span><span class="print__time">January 10, 2022</span></p>
+            </div>
+            <div class="print__item">
+                <picture>
+                    <source srcset="images/460px/image-9.webp" type="image/webp">
+                    <source srcset="images/460px/image-9.jpg" type="image/jpeg">
+                    <img src="images/460px/image-9.jpg" alt="Mountains and lake">
+                </picture>
+                <p class="print__title">The Road</p>
+                <p><span class="print__author">April Smith</span><span class="print__time">January 9, 2022</span></p>
+            </div>
+            <div class="print__item">
+                <picture>
+                    <source srcset="images/460px/image-8.webp" type="image/webp">
+                    <source srcset="images/460px/image-8.jpg" type="image/jpeg">
+                    <img src="images/460px/image-8.jpg" alt="Mountains and lake">
+                </picture>
+                <p class="print__title">Trip to Sea</p>
+                <p><span class="print__author">April Smith</span><span class="print__time">January 8, 2022</span></p>
+            </div>
+            <div class="print__item">
+                <picture>
+                    <source srcset="images/460px/image-4.webp" type="image/webp">
+                    <source srcset="images/460px/image-4.jpg" type="image/jpeg">
+                    <img src="images/460px/image-4.jpg" alt="Mountains and lake">
+                </picture>
+                <p class="print__title">Travel Days</p>
+                <p><span class="print__author">April Smith</span><span class="print__time">January 7, 2022</span></p>
+            </div>
+            <div class="print__item">
+                <picture>
+                    <source srcset="images/460px/image-5.webp" type="image/webp">
+                    <source srcset="images/460px/image-5.jpg" type="image/jpeg">
+                    <img src="images/460px/image-5.jpg" alt="Mountains and lake">
+                </picture>
+                <p class="print__title">Wearing White Dress</p>
+                <p><span class="print__author">April Smith</span><span class="print__time">January 6, 2022</span></p>
+            </div>
+        </div>
+    </main>
+    <footer class="footer _container">
+        <section class="footer__row">
+            <div class="footer__item info">
+                <h4 class="info__title title-small title-small--b title-small--w">About</h4>
+                <p class="info__text">Donec lacinia magna sit amet arcu aliquet luctus. Maecenas vehicula metus nisi, nec finibus justo vulputate eget.</p>
+                <p class="info__text">Pellentesque porta felis id erat sodales condimentum. Nam a lectus egestas, fermentum mi in, auctor lacus.</p>
+            </div>
+            <div class="footer__item collage">
+                <h4 class="collage__title title-small title-small--b title-small--w">Follow me</h4>
+                <div class="collage__wrapper">
+                    <a class="collage__link" href="#"><img class="collage__img" src="images/footer/01.jpg" alt="instagram photo"></a>
+                    <a class="collage__link" href="#"><img class="collage__img" src="images/footer/02.jpg" alt="instagram photo"></a>
+                    <a class="collage__link" href="#"><img class="collage__img" src="images/footer/03.jpg" alt="instagram photo"></a>
+                    <a class="collage__link" href="#"><img class="collage__img" src="images/footer/04.jpg" alt="instagram photo"></a>
+                    <a class="collage__link" href="#"><img class="collage__img" src="images/footer/05.jpg" alt="instagram photo"></a>
+                    <a class="collage__link" href="#"><img class="collage__img" src="images/footer/06.jpg" alt="instagram photo"></a>
+                    <a class="collage__link" href="#"><img class="collage__img" src="images/footer/07.jpg" alt="instagram photo"></a>
+                    <a class="collage__link" href="#"><img class="collage__img" src="images/footer/08.jpg" alt="instagram photo"></a>
+                </div>
+            </div>
+            <div class="footer__item tags">
+                <h4 class="tags__title title-small title-small--b title-small--w">More Stories</h4>
+                <div class="tags__wrapper">
+                    <a class="tags__item" href="#">air</a>
+                    <a class="tags__item" href="#">animation</a>
+                    <a class="tags__item" href="#">balloon</a>
+                    <a class="tags__item" href="#">beach</a>
+                    <a class="tags__item" href="#">bike</a>
+                    <a class="tags__item" href="#">boat</a>
+                    <a class="tags__item" href="#">car</a>
+                    <a class="tags__item" href="#">city</a>
+                    <a class="tags__item" href="#">clouds</a>
+                    <a class="tags__item" href="#">dress</a>
+                    <a class="tags__item" href="#">forest</a>
+                    <a class="tags__item" href="#">gif</a>
+                    <a class="tags__item" href="#">hat</a>
+                    <a class="tags__item" href="#">ideas</a>
+                    <a class="tags__item" href="#">lake</a>
+                    <a class="tags__item" href="#">model</a>
+                    <a class="tags__item" href="#">morning</a>
+                    <a class="tags__item" href="#">mountains</a>
+                    <a class="tags__item" href="#">outfit</a>
+                    <a class="tags__item" href="#">photo</a>
+                    <a class="tags__item" href="#">rain</a>
+                    <a class="tags__item" href="#">ride</a>
+                    <a class="tags__item" href="#">road</a>
+                    <a class="tags__item" href="#">sea</a>
+                    <a class="tags__item" href="#">summer</a>
+                    <a class="tags__item" href="#">sun</a>
+                    <a class="tags__item" href="#">top</a>
+                    <a class="tags__item" href="#">trip</a>
+                    <a class="tags__item" href="#">vintage</a>
+                    <a class="tags__item" href="#">yoga</a>
+                </div>
+            </div>
+        </section>
+        <nav class="footer__social social">
+            <ul class="social__list">
+                <li class="social__item">
+                    <a class="social__link social__link--facebook" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                </li>
+                <li class="social__item">
+                    <a class="social__link social__link--twitter" href="#"><i class="fa-brands fa-twitter"></i></a>
+                </li>
+                <li class="social__item">
+                    <a class="social__link social__link--instagram" href="#"><i class="fa-brands fa-instagram"></i></a>
+                </li>
+                <li class="social__item">
+                    <a class="social__link social__link--youtube" href="#"><i class="fa-brands fa-youtube"></i></a>
+                </li>
+                <li class="social__item">
+                    <a class="social__link social__link--pinterest" href="#"><i class="fa-brands fa-pinterest"></i></a>
+                </li>
+                <li class="social__item">
+                    <a class="social__link social__link--vimeo" href="#"><i class="fa-brands fa-vimeo"></i></a>
+                </li>
+            </ul>
+            <p class="footer__copyright">2022 © Mara. Designed by <a href="#">MatchThemes.com</a></p>
+        </nav>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+div {
+    width: 400px;
+    height: auto;
+    background-color: #f1faee;
+    border: 5px solid #aad9dc;
+    color: #457b9d;
+    font-family: Arial, sans-serif;
+    padding: 20px 15px 30px;
+    margin: 20px 40px;
+}
+
+div:before {
+    content: "before ";
+    color: #9c7f28;
+}
+
+div:after{
+    content: " after";
+    color: #9c7f28;
+}

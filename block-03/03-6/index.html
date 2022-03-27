@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <main>
+        <img sizes="(max-width: 500px) 320px,
+                    (max-width: 820px) 480px,
+                    (max-width: 1460px) 800px,
+                    (min-width: 1460px) 1440px"
+             srcset="image/01-320.jpg 320w,
+                     image/01-480.jpg 480w,
+                     image/01-800.jpg 800w,
+                     image/01-1440.jpg 1440w"
+             src="image/01-1440.jpg" alt="The mountains of Switzerland">
+        <picture>
+            <source media="(max-width: 500px)" srcset="image/02-320.webp" type="image/webp">
+            <source media="(max-width: 820px)" srcset="image/02-480.webp" type="image/webp">
+            <source media="(max-width: 1460px)" srcset="image/02-800.webp" type="image/webp">
+            <source media="(min-width: 1460px)" srcset="image/02-1440.webp" type="image/webp">
+            <source media="(max-width: 500px)" srcset="image/02-320.jpg" type="image/jpeg">
+            <source media="(max-width: 820px)" srcset="image/02-480.jpg" type="image/jpeg">
+            <source media="(max-width: 1460px)" srcset="image/02-800.jpg" type="image/jpeg">
+            <source media="(min-width: 1460px)" srcset="image/02-1440.jpg" type="image/jpeg">
+            <img src="image/02-1440.jpg" alt="The mountains of Switzerland">
+        </picture>
+    </main>
+</body>
+</html>

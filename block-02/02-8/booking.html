@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="utf-8">
+    <title>Название страницы</title>
+</head>
+<body>
+    <header>
+        <h1>Название сайта</h1>
+    </header>
+    <nav>
+        Меню навигации
+        <ul>
+            <li><a href="index.html">Главная страница</a></li>
+            <li><a href="contacts.html">Контакты</a></li>
+            <li>Фото студия</li>
+        </ul>
+    </nav>
+    <main>
+        <h2>Бронирование зала фотостудии</h2>
+        <form action="#" method="get">
+            <div><label for="lastname">* Фамилия:</label></div>
+            <div><input type="text" id="lastname" name="user-lastname" placeholder="Введите фамилию" required minlength="2" maxlength="64"></div>
+            <div><label for="firstname">* Имя:</label></div>
+            <div><input type="text" id="firstname" name="user-firstname" placeholder="Введите имя" required minlength="2" maxlength="64"></div>
+            <div><label for="email">* Email:</label></div>
+            <div><input type="email" id="email" name="user-email" placeholder="Введите email" required minlength="6" maxlength="255"></div>
+            <div><label for="telphone">* Телефон:</label></div>
+            <div><input type="tel" id="telphone" name="usertelphone" placeholder="+380000000000" required minlength="13" maxlength="13"></div>
+            <div><label for="instagram">Профиль Instagram:</label></div>
+            <div><input type="url" id="instagram" name="userinstagram" placeholder="https://instagram.com" minlength="23" maxlength="255"></div>
+            <div><label for="room">* Зал:</label></div>
+            <div>
+                <select id="room">
+                    <option>Выберите зал</option>
+                    <option value="room1">Зал 1</option>
+                    <option value="room2">Зал 2</option>
+                    <option value="room3">Зал 3</option>
+                    <option value="room4">Зал 4</option>
+                </select>
+            </div>
+            <div><label for="startdate">* Дата и время начала:</label></div>
+            <div><input type="datetime-local" id="startdate" name="date-start" required min="2022-01-30T00:00" max="2023-01-01T00:00"></div>
+            <div><label for="enddate">* Дата и время окончания:</label></div>
+            <div><input type="datetime-local" id="enddate" name="date-end" required min="2022-01-30T00:00" max="2023-01-01T00:00"></div>
+            <div><label for="number">* Количество людей в зале:</label></div>
+            <div><input type="number" min="1" max="10" step="1" id="number" name="user-number" value="2" required></div>
+            <div><label for="color">Цвет фона:</label></div>
+            <div><input type="color" id="color"></div>
+            <div><label for="comment">Коментарий:</label></div>
+            <div><textarea name="user-comment" id="comment" cols="30" rows="5"></textarea></div>
+            <div><input type="checkbox" id="rule" required><label for="rule"> Я согласен с </label><a href="#">правилами фотостудии</a></div>
+            <div>
+                <button type="reset">Очистить</button>
+                <button type="submit">Отправить</button>
+            </div>
+        </form>
+    </main>
+    <footer>
+        Подвал страницы
+    </footer>
+</body>
+</html>
