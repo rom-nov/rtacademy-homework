@@ -6,21 +6,25 @@
 </head>
 <body>
     <script>
-        let cityName = 'киїВ'; // ще варіанти: "лЬвів", "одеСА", "хАРКіВ"
+        let cityName = 'ОдеСА'; // ще варіанти: "лЬвів", "одеСА", "хАРКіВ", "киїВ"
         let cityNameCapitalized;
+        let firstLetter;
+        let subString;
 
         // 1
-        let firstLetter = cityName[0];
-        let subString = cityName.substring(1);
+        firstLetter = cityName[0];
+        subString = cityName.substring(1);
         cityNameCapitalized = firstLetter.toUpperCase() + subString.toLowerCase();
 
         //2
-        //cityName = cityName.toLowerCase();
-        //cityNameCapitalized = cityName.replace( cityName[0], cityName[0].toUpperCase() );
+        // cityName = cityName.toLowerCase();
+        // firstLetter = cityName[0];
+        // cityNameCapitalized = cityName.replace( firstLetter, firstLetter.toUpperCase() );
 
         //3
         // cityName = cityName.toUpperCase();
-        // cityNameCapitalized = cityName.replace( cityName.substring(1), cityName.substring(1).toLowerCase() );
+        // subString = cityName.substring(1);
+        // cityNameCapitalized = cityName.replace( subString, subString.toLowerCase() );
 
         console.log( cityNameCapitalized );
     </script>
