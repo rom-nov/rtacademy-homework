@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6.3</title>
+</head>
+<body>
+    <script>
+        let a = 10, b = 20;
+
+        // 1
+        a = [a, b];
+        b = a[0];
+        a = a[1];
+
+        // 2
+        // a = {'a': a, 'b': b};
+        // b = a.a;
+        // a = a.b;
+
+        // 3
+        // a = a + ',' + b;
+        // b = + a.substring( 0, a.indexOf( ',' ) );
+        // a = + a.substring( a.indexOf( ',' ) + 1 );
+
+        // 4
+        // a += b;
+        // b = a - b;
+        // a = a - b;
+
+        // 5
+        // a *= b;
+        // b = a / b;
+        // a = a / b;
+
+        console.log( a, b ); // => 20, 10
+    </script>
+</body>
+</html>
