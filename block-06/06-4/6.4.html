@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6.4</title>
+</head>
+<body>
+    <script>
+        let age = 15,
+            withParents = true,
+            accessAllowed;
+
+        accessAllowed = ( age > 18 ) ? 'Yes' : ( withParents ? 'Yes' : 'No' );
+        console.info( accessAllowed );
+
+        if( age > 18 )
+        {
+            accessAllowed = 'Yes';
+        }
+        else if( withParents )
+        {
+            accessAllowed = 'Yes';
+        }
+        else
+        {
+            accessAllowed = 'No';
+        }
+        console.info( accessAllowed );
+    </script>
+</body>
+</html>
