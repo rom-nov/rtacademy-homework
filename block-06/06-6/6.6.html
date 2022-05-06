@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6.6</title>
+</head>
+<body>
+    <script>
+        function showError()
+        {
+            console.log('Очікую рядок або масив рядків!');
+        }
+
+        function modifyString( str )
+        {
+            let firstLetter = str[0].toUpperCase();
+            let subString = str.substring(1).toLowerCase();
+            return firstLetter + subString;
+        }
+
+        function modifyArrayString( arr )
+        {
+            for( let i = 0; i <= arr.length - 1; i++ )
+            {
+                if( typeof( arr[i] ) === 'string' )
+                {
+                    arr[i] = modifyString( arr[i] );
+                }
+                else
+                {
+                    showError();
+                    return null;
+                }
+            }
+            return arr;
+        }
+
+        function capitalize( param )
+        {
+            switch( typeof( param ) )
+            {
+                case( 'string' ):
+                    return modifyString( param );
+                case( 'object' ):
+                    if( param !== null && param.length )
+                        return modifyArrayString(param);
+                default:
+                    showError();
+                    return null;
+            }
+        }
+
+        let cityNameCapitalized = capitalize( 'стОКГольМ' );
+        console.log( cityNameCapitalized );
+
+        // Варіанти для перевірки:
+        // ['лЬвів', 'ОдеСА', 'хАРКіВ', 'киїВ']
+        // 'стОКГольМ'
+        // ['лЬвів', 'ОдеСА', 654, 'киїВ']
+        // []
+        // {}
+        // null
+    </script>
+</body>
+</html>
