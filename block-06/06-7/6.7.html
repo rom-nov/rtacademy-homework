@@ -17,17 +17,17 @@
             return null;
         }
 
-        function splitString ( str )
+        function splitString( str )
         {
-            return str.split('-');
+            return str.split( '-' );
         }
 
-        function joinString ( arr )
+        function joinString( arr )
         {
-            return arr.join('-');
+            return arr.join( '-' );
         }
 
-        function modifyShortSubStrings ( arr )
+        function modifyShortSubStrings( arr )
         {
             for( let i = 1; i < arr.length - 1; i++ )
             {
@@ -37,15 +37,15 @@
             return arr;
         }
 
-        function modifyHardString ( str )
+        function modifyHardString( str )
         {
             return joinString( modifyShortSubStrings( modifyArrayStrings( splitString( str ) ) ) );
         }
 
-        function modifyNormalString (str)
+        function modifyNormalString( str )
         {
             let firstLetter = str[0].toUpperCase();
-            let subString = str.substring(1).toLowerCase();
+            let subString = str.substring( 1 ).toLowerCase();
             return firstLetter + subString;
         }
 
@@ -53,7 +53,7 @@
         {
             if( checkHardString( str ) )
                 return modifyHardString( str );
-            return modifyNormalString (str);
+            return modifyNormalString( str );
         }
 
         function modifyArrayStrings( arr )
@@ -80,7 +80,7 @@
                     return modifyString( param );
                 case( 'object' ):
                     if( param !== null && param.length )
-                        return modifyArrayStrings(param);
+                        return modifyArrayStrings( param );
                 default:
                     return showError();
             }
@@ -91,9 +91,9 @@
 
         // Варіанти для перевірки:
         // ['лЬвів', 'ОдеСА', 'хАРКіВ', 'киїВ']
-        // 'стОКГольМ'
         // ['лЬвів', 'ОдеСА', 654, 'киїВ']
         // ['киїВ', 'ньЮ-йоРк', 'лЬвів', 'рІо-дЕ-жаНеЙро', 'франкфурт-на-майні', 'сЕН-сАтЮрНЕн-ЛЕЗ-аПт']
+        // 'стОКГольМ'
         // []
         // {}
         // null
