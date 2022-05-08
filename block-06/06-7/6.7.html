@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6.7</title>
+</head>
+<body>
+    <script>
+        function checkHardString( str )
+        {
+            return str.indexOf( '-' ) > 0 ? true : false;
+        }
+
+        function showError()
+        {
+            console.log('Очікую рядок або масив рядків!');
+            return null;
+        }
+
+        function splitString ( str )
+        {
+            return str.split('-');
+        }
+
+        function joinString ( arr )
+        {
+            return arr.join('-');
+        }
+
+        function modifyShortSubStrings ( arr )
+        {
+            for( let i = 1; i < arr.length - 1; i++ )
+            {
+                if( arr[i].length <= 4 )
+                    arr[i] = arr[i].toLowerCase();
+            }
+            return arr;
+        }
+
+        function modifyHardString ( str )
+        {
+            return joinString( modifyShortSubStrings( modifyArrayStrings( splitString( str ) ) ) );
+        }
+
+        function modifyNormalString (str)
+        {
+            let firstLetter = str[0].toUpperCase();
+            let subString = str.substring(1).toLowerCase();
+            return firstLetter + subString;
+        }
+
+        function modifyString( str )
+        {
+            if( checkHardString( str ) )
+                return modifyHardString( str );
+            return modifyNormalString (str);
+        }
+
+        function modifyArrayStrings( arr )
+        {
+            for( let i = 0; i < arr.length; i++ )
+            {
+                if( typeof( arr[i] ) === 'string' )
+                {
+                    arr[i] = modifyString( arr[i] );
+                }
+                else
+                {
+                    return showError();
+                }
+            }
+            return arr;
+        }
+
+        function capitalize( param )
+        {
+            switch( typeof( param ) )
+            {
+                case( 'string' ):
+                    return modifyString( param );
+                case( 'object' ):
+                    if( param !== null && param.length )
+                        return modifyArrayStrings(param);
+                default:
+                    return showError();
+            }
+        }
+
+        let cityNameCapitalized = capitalize( ['киїВ', 'ньЮ-йоРк', 'лЬвів', 'рІо-дЕ-жаНеЙро', 'франкфурт-на-майні', 'сЕН-сАтЮрНЕн-ЛЕЗ-аПт'] );
+        console.log( cityNameCapitalized );
+
+        // Варіанти для перевірки:
+        // ['лЬвів', 'ОдеСА', 'хАРКіВ', 'киїВ']
+        // 'стОКГольМ'
+        // ['лЬвів', 'ОдеСА', 654, 'киїВ']
+        // ['киїВ', 'ньЮ-йоРк', 'лЬвів', 'рІо-дЕ-жаНеЙро', 'франкфурт-на-майні', 'сЕН-сАтЮрНЕн-ЛЕЗ-аПт']
+        // []
+        // {}
+        // null
+        // 1234567
+        // 999999n
+        // false
+        // 'нью-йорк'
+        // 'ріо-де-жанейро'
+        // 'франкфурт-на-майні'
+        // 'сен-сатюрнен-лез-апт'
+    </script>
+</body>
+</html>
