@@ -8,14 +8,14 @@
     <script>
         function showError()
         {
-            console.log('Очікую рядок або масив рядків!');
+            console.log( 'Очікую рядок або масив рядків!' );
             return null;
         }
 
         function modifyString( str )
         {
             let firstLetter = str[0].toUpperCase();
-            let subString = str.substring(1).toLowerCase();
+            let subString = str.substring( 1 ).toLowerCase();
             return firstLetter + subString;
         }
 
@@ -43,7 +43,7 @@
                    return modifyString( param );
                case( 'object' ):
                    if( param !== null && param.length )
-                       return modifyArrayStrings(param);
+                       return modifyArrayStrings( param );
                default:
                    return showError();
             }
