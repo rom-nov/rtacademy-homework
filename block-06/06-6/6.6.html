@@ -9,6 +9,7 @@
         function showError()
         {
             console.log('Очікую рядок або масив рядків!');
+            return null;
         }
 
         function modifyString( str )
@@ -18,7 +19,7 @@
             return firstLetter + subString;
         }
 
-        function modifyArrayString( arr )
+        function modifyArrayStrings( arr )
         {
             for( let i = 0; i < arr.length; i++ )
             {
@@ -28,8 +29,7 @@
                 }
                 else
                 {
-                    showError();
-                    return null;
+                    return showError();
                 }
             }
             return arr;
@@ -39,18 +39,17 @@
         {
             switch( typeof( param ) )
             {
-                case( 'string' ):
-                    return modifyString( param );
-                case( 'object' ):
-                    if( param !== null && param.length )
-                        return modifyArrayString(param);
-                default:
-                    showError();
-                    return null;
+               case( 'string' ):
+                   return modifyString( param );
+               case( 'object' ):
+                   if( param !== null && param.length )
+                       return modifyArrayStrings(param);
+               default:
+                   return showError();
             }
         }
 
-        let cityNameCapitalized = capitalize( 'стОКГольМ' );
+        let cityNameCapitalized = capitalize( ['лЬвів', 'ОдеСА', 'хАРКіВ', 'киїВ'] );
         console.log( cityNameCapitalized );
 
         // Варіанти для перевірки:
