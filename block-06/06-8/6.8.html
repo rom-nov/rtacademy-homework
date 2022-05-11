@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6.8</title>
+</head>
+<body>
+    <script>
+        function checkInt( arg )
+        {
+            if( typeof( arg ) === 'bigint' )
+                return parseInt( arg.toString() );
+            return Math.round( arg );
+        }
+        function getRandomInt( min, max )
+        {
+            if( min > max )
+                return getRandomInt( max, min );
+            min = checkInt( min );
+            max = checkInt( max );
+            return Math.floor( Math.random() * ( max - min + 1 ) + min );
+        }
+        let randomInt = getRandomInt( 100, 1 );
+        console.log( 'Випадкове число: ' + randomInt );
+    </script>
+</body>
+</html>
