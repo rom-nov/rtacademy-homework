@@ -74,13 +74,12 @@
 
         function capitalize( param )
         {
-            switch( typeof( param ) )
+            switch( true )
             {
-                case( 'string' ):
+                case( typeof( param ) === 'string' ):
                     return modifyString( param );
-                case( 'object' ):
-                    if( param !== null && param.length )
-                        return modifyArrayStrings( param );
+                case( typeof( param ) === 'object' && param !== null && param.length > 0 ):
+                    return modifyArrayStrings(param);
                 default:
                     return showError();
             }
