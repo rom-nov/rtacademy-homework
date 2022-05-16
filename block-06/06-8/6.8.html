@@ -6,21 +6,47 @@
 </head>
 <body>
     <script>
-        function checkInt( arg )
+        function validationArg( arg )
         {
-            if( typeof( arg ) === 'bigint' )
-                return parseInt( arg.toString() );
-            return Math.round( arg );
+            switch( typeof( arg ) )
+            {
+                case 'string':
+                    arg = parseInt( arg );
+                break;
+                case 'bigint':
+                    arg = parseInt( arg.toString() );
+                break;
+                case "number":
+                    arg = Math.trunc( arg );
+                break;
+                default:
+                    arg = NaN;
+                break;
+            }
+
+            return arg;
         }
+
         function getRandomInt( min, max )
         {
+            min = validationArg( min );
+            max = validationArg( max );
+
+            if( isNaN( min ) || isNaN( max ) )
+            {
+                console.log( 'Не вірний аргумент!' );
+                return null;
+            }
+
             if( min > max )
+            {
                 return getRandomInt( max, min );
-            min = checkInt( min );
-            max = checkInt( max );
+            }
+
             return Math.floor( Math.random() * ( max - min + 1 ) + min );
         }
-        let randomInt = getRandomInt( 100, 1 );
+
+        let randomInt = getRandomInt( '100n', 1 );
         console.log( 'Випадкове число: ' + randomInt );
     </script>
 </body>
