@@ -6,40 +6,56 @@
 </head>
 <body>
     <script>
-        function checkHardString( str )
-        {
-            return str.indexOf( '-' ) > 0 ? true : false;
-        }
 
-        function showError()
+        const showError = () => console.log( 'Очікую рядок або масив рядків!' );
+        const checkOnHardString = ( str ) => ( str.indexOf( '-' ) > 0  || str.indexOf( ' ' ) > 0 ) ? true : false;
+        const getSeparator = ( str ) => str.indexOf( '-' ) > 0 ? '-' : ' ';
+        const splitString = ( str, separator ) => str.split( separator );
+        const joinString = ( arr, separator ) => arr.join( separator );
+
+        function Error()
         {
-            console.log( 'Очікую рядок або масив рядків!' );
+            showError();
             return null;
         }
 
-        function splitString( str )
+        function checkOnExeption( item, index, arr )
         {
-            return str.split( '-' );
-        }
-
-        function joinString( arr )
-        {
-            return arr.join( '-' );
-        }
-
-        function modifyShortSubStrings( arr )
-        {
-            for( let i = 1; i < arr.length - 1; i++ )
+            if( index > 0 && index < arr.length - 1 && item.length <= 3 ||
+                item === 'І' || item === 'Та' )
             {
-                if( arr[i].length <= 4 )
-                    arr[i] = arr[i].toLowerCase();
+                arr[index] = item.toLowerCase();
             }
-            return arr;
+
+            if( item.indexOf( "Д'" ) === 0 || item.indexOf( "Л'" ) === 0  && item.length > 3 )
+            {
+                if( index > 0 )
+                {
+                    arr[index] = item.substring(0, 2).toLowerCase() + modifyString( item.substring(2) );
+                }
+                else
+                {
+                    arr[index] = item.substring(0, 2) + modifyString( item.substring(2) );
+                }
+            }
+
+            if( index === 1 && arr[0] === "Ла" || arr[0] === "Сі" )
+            {
+                arr[index] = modifyString( item );
+            }
+
+            if( index > 0 && item === 'Апон' )
+            {
+                arr[index] = item.replace( item[0], item[0].toLowerCase() );
+            }
         }
 
-        function modifyHardString( str )
+        function modifyHardString( str, separator )
         {
-            return joinString( modifyShortSubStrings( modifyArrayStrings( splitString( str ) ) ) );
+            let arrayWords = splitString( str, separator );
+            let modifyArrayWords = modifyArrayStrings( arrayWords );
+            modifyArrayWords.forEach( checkOnExeption );
+            return joinString( modifyArrayWords, separator );
         }
 
         function modifyNormalString( str )
@@ -51,8 +67,11 @@
 
         function modifyString( str )
         {
-            if( checkHardString( str ) )
-                return modifyHardString( str );
+            if( checkOnHardString( str ) )
+            {
+                return modifyHardString( str, getSeparator( str ) );
+            }
+
             return modifyNormalString( str );
         }
 
@@ -60,14 +79,12 @@
         {
             for( let i = 0; i < arr.length; i++ )
             {
-                if( typeof( arr[i] ) === 'string' )
+                if( typeof( arr[i] ) !== 'string' )
                 {
-                    arr[i] = modifyString( arr[i] );
+                    return Error();
                 }
-                else
-                {
-                    return showError();
-                }
+
+                arr[i] = modifyString( arr[i] );
             }
             return arr;
         }
@@ -78,31 +95,42 @@
             {
                 case( typeof( param ) === 'string' ):
                     return modifyString( param );
+
                 case( typeof( param ) === 'object' && param !== null && param.length > 0 ):
                     return modifyArrayStrings(param);
+
                 default:
-                    return showError();
+                    return Error();
             }
         }
 
-        let cityNameCapitalized = capitalize( ['киїВ', 'ньЮ-йоРк', 'лЬвів', 'рІо-дЕ-жаНеЙро', 'франкфурт-на-майні', 'сЕН-сАтЮрНЕн-ЛЕЗ-аПт'] );
+        let cityNameCapitalized = capitalize( ["лА-рОш-СЮР-іОн", "ЛЕ-сАБль-Д'олОНн", "брАЙтон І гоУв", "кіНГСТон-апОН-гаЛЛ", "л'аї-ЛЕ-рОз", "лагАРД-д'АПТ", "нова грАДишКА"] );
         console.log( cityNameCapitalized );
 
         // Варіанти для перевірки:
-        // ['лЬвів', 'ОдеСА', 'хАРКіВ', 'киїВ']
-        // ['лЬвів', 'ОдеСА', 654, 'киїВ']
-        // ['киїВ', 'ньЮ-йоРк', 'лЬвів', 'рІо-дЕ-жаНеЙро', 'франкфурт-на-майні', 'сЕН-сАтЮрНЕн-ЛЕЗ-аПт']
-        // 'стОКГольМ'
+        // ['лЬвів', 'ОдеСА', 65432, 'киїВ']
+        // ['киїВ', 'ньЮ-йоРк', 'лЬвів', 'рІо-дЕ-жаНеЙро', 'франкфурт-на-майні', 'сЕН-сАтЮрНЕн-ЛЕЗ-аПт', 'сі-фур-ЛЕ-плаЖ']
+        // ["лА-рОш-СЮР-іОн", "ЛЕ-сАБль-Д'олОНн", "брАЙтон І гоУв", "кіНГСТон-апОН-гаЛЛ", "л'аї-ЛЕ-рОз", "лагАРД-д'АПТ", "нова грАДишКА"]
         // []
         // {}
         // null
         // 1234567
         // 999999n
         // false
-        // 'нью-йорк'
-        // 'ріо-де-жанейро'
-        // 'франкфурт-на-майні'
-        // 'сен-сатюрнен-лез-апт'
+
+        // Правильні варіанти:
+        // 'Ла-Сейн-сюр-Мер' (фр. La Seyne-sur-Mer)
+        // 'Вільнев-Сен-Жорж' (фр. Villeneuve-Saint-Georges)
+        // 'Сі-Фур-ле-Плаж' (фр. Six-Fours-les-Plages)
+        // 'Л'Аї-ле-Роз' (фр. L'Haÿ-les-Roses)
+        // 'Ла-Рош-сюр-Іон' (фр. La Roche-sur-Yon)
+        // 'Ле-Сабль-д'Олонн'
+        // 'Лагард-д'Апт'
+        // 'Брайтон і Гоув'
+        // 'Кінгстон-апон-Галл' (англ. Kingston upon Hull)
+        // 'Ньюкасл-апон-Тайн' (англ. Newcastle upon Tyne)
+        // 'Славонський Брод'
+        // 'Нова Градишка'
     </script>
 </body>
 </html>
