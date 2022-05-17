@@ -20,12 +20,23 @@ Mykolayiv,46.9677,31.9843,Ukraine,510840
         function arrToObj( arr )
         {
             return {
-                "city" : arr[0].toString(),
+                "city" : arr[0].trim(),
                 "latitude" : parseFloat(arr[1]),
                 "longitude" : parseFloat(arr[2]),
-                "country" : arr[3].toString(),
+                "country" : arr[3].trim(),
                 "population" : parseInt(arr[4])
+            };
+        }
+        function validationObj( obj )
+        {
+            for( let key in obj )
+            {
+                if( !obj[key] )
+                {
+                    return false;
+                }
             }
+            return true;
         }
         function parseCSV( str )
         {
@@ -34,9 +45,16 @@ Mykolayiv,46.9677,31.9843,Ukraine,510840
             for ( let i = 0; i < arr.length; i++ )
             {
                 if( arr[i].length < 10 )
+                {
                     continue;
-                let inArr = arr[i].split( ',' );
-                resultArray.push( arrToObj( inArr ) );
+                }
+                let innerArr = arr[i].split( ',' );
+                let obj = arrToObj( innerArr );
+                if( !validationObj( obj ) )
+                {
+                    continue;
+                }
+                resultArray.push( obj );
             }
             return resultArray;
         }
