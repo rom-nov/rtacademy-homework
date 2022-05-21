@@ -11,20 +11,14 @@
             switch( typeof( arg ) )
             {
                 case 'string':
-                    arg = parseInt( arg );
-                break;
+                    return parseInt( arg );
                 case 'bigint':
-                    arg = parseInt( arg.toString() );
-                break;
-                case "number":
-                    arg = Math.trunc( arg );
-                break;
+                    return parseInt( arg.toString() );
+                case 'number':
+                    return Math.trunc( arg );
                 default:
-                    arg = NaN;
-                break;
+                    return NaN;
             }
-
-            return arg;
         }
 
         function getRandomInt( min, max )
@@ -40,7 +34,7 @@
 
             if( min > max )
             {
-                return getRandomInt( max, min );
+                [min, max] = [max, min];
             }
 
             return Math.floor( Math.random() * ( max - min + 1 ) + min );
