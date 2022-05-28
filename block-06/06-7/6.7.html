@@ -21,7 +21,6 @@
 
         function checkOnExeption( item, index, arr )
         {
-
             if ( index > 0 && index < arr.length - 1 &&
                  ( item === 'Сюр' || item === 'Ле'   ||
                    item === 'На'  || item === 'І'    ||
@@ -67,6 +66,10 @@
 
         function modifyString( str )
         {
+            if( typeof( str ) !== 'string' || !str.length )
+            {
+                return Error();
+            }
             if( checkOnHardString( str ) )
             {
                 return modifyHardString( str, getSeparator( str ) );
@@ -74,25 +77,11 @@
             return modifyNormalString( str );
         }
 
-        // function modifyArrayStrings( arr )
-        // {
-        //     for( let i = 0; i < arr.length; i++ )
-        //     {
-        //         if( typeof( arr[i] ) !== 'string' )
-        //         {
-        //             return Error();
-        //         }
-        //
-        //         arr[i] = modifyString( arr[i] );
-        //     }
-        //     return arr;
-        // }
-
         function modifyArrayStrings( array, inc = 0 )
         {
             if( inc < array.length )
             {
-                if ( typeof( array[inc] ) === 'object' )
+                if ( typeof( array[inc] ) === 'object' && array[inc] !== null && array[inc].length > 0 )
                 {
                     array[inc] = modifyArrayStrings( array[inc] , 0 );
                 }
@@ -119,7 +108,7 @@
                     return Error();
             }
         }
-/*
+
         //Тестування роботи:
         console.log( '===== string ====== ' );
         'Київ' === capitalize( 'киїВ' ) ? console.log('OK') : console.error('ERR');
@@ -153,6 +142,9 @@
             }
         }
         count === 6 ? console.log('OK') : console.error('ERR');
+        console.log( '===== array recursion ====== ' );
+        let cityNameCapitalizedRec = capitalize( ["лА-рОш-СЮР-іОн", ['киїВ', 'ньЮ-йоРк', 'лЬвів'], "ЛЕ-сАБль-Д'олОНн", "брАЙтон І гоУв", "кіНГСТон-апОН-гаЛЛ", "л'аї-ЛЕ-рОз", "лагАРД-д'АПТ", "нова грАДишКА"] );
+        console.log( cityNameCapitalizedRec );
         console.log( '===== other value ====== ' );
         null === capitalize( [] ) ? console.log('OK') : console.error('ERR');
         null === capitalize( {} ) ? console.log('OK') : console.error('ERR');
@@ -160,10 +152,6 @@
         null === capitalize( 1234567 ) ? console.log('OK') : console.error('ERR');
         null === capitalize( 999999n ) ? console.log('OK') : console.error('ERR');
         null === capitalize( false ) ? console.log('OK') : console.error('ERR');
-*/
-        let cityNameCapitalized2 = capitalize( ["лА-рОш-СЮР-іОн", ['киїВ', 'ньЮ-йоРк', 'лЬвів'], "ЛЕ-сАБль-Д'олОНн", "брАЙтон І гоУв", "кіНГСТон-апОН-гаЛЛ", "л'аї-ЛЕ-рОз", "лагАРД-д'АПТ", "нова грАДишКА"] );
-        // let cityNameCapitalized2 = capitalize( ['киїВ', 'ньЮ-йоРк', 'лЬвів', 'рІо-дЕ-жаНеЙро', 'франкфурт-на-майні', 'сЕН-сАтЮрНЕн-ЛЕЗ-аПт', 'сі-фур-ЛЕ-плаЖ', 'вільНЕв-сЕн-жОРж'] );
-        console.log( cityNameCapitalized2 );
 
     // let arr = [ 1, 1, 1, 0, [2, 4, 6, [8, 8, 8] ] , [10, [12, 12, 12, 12, [10, 10, 10] ], 14, 16] ];
     // console.log( arr );
