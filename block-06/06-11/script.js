@@ -1,8 +1,8 @@
-let operand1 = document.getElementById( 'operand1' );
-let operand2 = document.getElementById( 'operand2' );
-let btnCalc = document.getElementById( 'btn-calc' );
-let operation = document.getElementById( 'operation' );
-let result = document.getElementById( 'result' );
+const operand1 = document.getElementById( 'operand1' );
+const operand2 = document.getElementById( 'operand2' );
+const btnCalc = document.getElementById( 'btn-calc' );
+const operation = document.getElementById( 'operation' );
+const result = document.getElementById( 'result' );
 
 btnCalc.addEventListener( 'click', calc );
 
@@ -24,10 +24,26 @@ function calc()
             calcResult = num1 * num2;
         break;
         case '/':
-            calcResult = num1 / num2;
+            if( num2 === 0 || num2 === 0n )
+            {
+                calcResult = NaN;
+                operand2.classList.add('error');
+            }
+            else
+            {
+                calcResult = num1 / num2;
+            }
         break;
         case '%':
-            calcResult = num1 % num2;
+            if( num2 === 0 || num2 === 0n )
+            {
+                calcResult = NaN;
+                operand2.classList.add('error');
+            }
+            else
+            {
+                calcResult = num1 % num2;
+            }
         break;
         case '**':
             calcResult = num1 ** num2;
@@ -51,24 +67,31 @@ function parseBigInt( arg )
 {
     arg = arg.trim();
     let number = parseInt( arg );
-    let prefix = arg[ number.toString().length ];
-    if( !isNaN( number ) && prefix === 'n' && arg.length === number.toString().length + prefix.length )
+    let postfix = arg[ number.toString().length ];
+    if( !isNaN( number ) && postfix === 'n' && arg.length === number.toString().length + postfix.length )
     {
         return BigInt( number );
     }
+    return NaN;
 }
 
 function validationValue( ...values )
 {
-    let outArr = values.map( ( element ) => ( !element.value.trim() ) ? NaN : parseBigInt( element.value ) || Number( element.value ) );
-
-    outArr.forEach( (item, index) => {
-        values[index].classList.remove('error');
-        if( typeof(item) !== 'bigint' && isNaN( item ) )
+    let outArr = values.map( function( element )
+    {
+        if( !element.value.trim() )
         {
-            values[index].classList.add('error');
+            return NaN;
         }
-    } );
+        else if ( parseBigInt( element.value ) === 0n )
+        {
+            return 0n;
+        }
+        else
+        {
+            return parseBigInt( element.value ) || Number( element.value );
+        }
+    });
 
     switch( true )
     {
@@ -82,5 +105,14 @@ function validationValue( ...values )
             [ outArr[0], outArr[1] ] = [ Number( outArr[0] ), Number( outArr[1] ) ];
             break;
     }
+
+    outArr.forEach( (item, index) => {
+        values[index].classList.remove('error');
+        if( typeof(item) !== 'bigint' && isNaN( item ) )
+        {
+            values[index].classList.add('error');
+        }
+    } );
+
     return outArr;
 }
