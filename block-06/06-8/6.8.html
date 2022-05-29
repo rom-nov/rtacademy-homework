@@ -12,10 +12,11 @@
             {
                 case 'string':
                     return parseInt( arg );
-                case 'bigint':
-                    return parseInt( arg.toString() );
                 case 'number':
-                    return Math.trunc( arg );
+                    if( Math.trunc( arg ) <= Number.MAX_SAFE_INTEGER || Math.trunc( arg ) >= Number.MIN_SAFE_INTEGER )
+                    {
+                        return Math.trunc( arg );
+                    }
                 default:
                     return NaN;
             }
@@ -40,7 +41,7 @@
             return Math.floor( Math.random() * ( max - min + 1 ) + min );
         }
 
-        let randomInt = getRandomInt( '100n', 1 );
+        let randomInt = getRandomInt( -100, 100 );
         console.log( 'Випадкове число: ' + randomInt );
     </script>
 </body>
