@@ -46,7 +46,8 @@ function calc()
             }
         break;
         case '**':
-            calcResult = num1 ** num2;
+            ( ( typeof( num1 ) !== 'bigint' && isNaN( num1 ) ) &&
+              ( num2 === 0 || num2 === 0n ) ) ? calcResult = NaN : calcResult = num1 ** num2;
         break;
         default:
             operation.classList.add('error');
@@ -78,19 +79,16 @@ function parseBigInt( arg )
 
 function validationValue( ...values )
 {
-    let outArr = values.map( function( element )
+    let outArr = values.map( function( val )
     {
-        if( !element.value.trim() )
+        switch( true )
         {
-            return NaN;
-        }
-        else if ( parseBigInt( element.value ) === 0n )
-        {
-            return 0n;
-        }
-        else
-        {
-            return parseBigInt( element.value ) || Number( element.value );
+            case !val.value.trim():
+                return NaN;
+            case parseBigInt( val.value ) === 0n:
+                return 0n;
+            default:
+                return parseBigInt( val.value ) || Number( val.value );
         }
     });
 
