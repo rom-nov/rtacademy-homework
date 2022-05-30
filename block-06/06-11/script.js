@@ -68,7 +68,8 @@ function parseBigInt( arg )
     arg = arg.trim();
     let number = parseInt( arg );
     let postfix = arg[ number.toString().length ];
-    if( !isNaN( number ) && postfix === 'n' && arg.length === number.toString().length + postfix.length )
+    if( !isNaN( number ) && postfix === 'n' && arg.length === number.toString().length + postfix.length ||
+        number > Number.MAX_SAFE_INTEGER || number < Number.MIN_SAFE_INTEGER )
     {
         return BigInt( number );
     }
@@ -93,17 +94,18 @@ function validationValue( ...values )
         }
     });
 
-    switch( true )
+    let filterBigInt = outArr.filter( num => typeof( num ) === 'bigint' );
+    let filterNumber = outArr.filter( num => typeof( num ) === 'number' );
+    let filterNaN = filterNumber.filter( num => isNaN( num ) );
+
+    if( !filterNaN.length && filterBigInt.length && filterBigInt.length !== outArr.length )
     {
-        case( typeof( outArr[0] ) === 'bigint' && typeof( outArr[1] ) !== 'bigint' && !isNaN( outArr[1] ) ):
-            outArr[1] = BigInt( outArr[1] );
-            break;
-        case( typeof( outArr[1] ) === 'bigint' && typeof( outArr[0] ) !== 'bigint' && !isNaN( outArr[0] ) ):
-            outArr[0] = BigInt( outArr[0] );
-            break;
-        case( typeof( outArr[0] ) !== 'bigint' && isNaN( outArr[0] ) || typeof( outArr[1] ) !== 'bigint' && isNaN( outArr[1] ) ):
-            [ outArr[0], outArr[1] ] = [ Number( outArr[0] ), Number( outArr[1] ) ];
-            break;
+        outArr = outArr.map( num => BigInt( num ) );
+    }
+
+    if( filterNaN.length )
+    {
+        outArr = outArr.map( num => Number( num ) );
     }
 
     outArr.forEach( (item, index) => {
