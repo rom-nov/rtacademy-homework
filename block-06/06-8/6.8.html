@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>6.8</title>
+</head>
+<body>
+    <script>
+        function validationArg( arg )
+        {
+            switch( typeof( arg ) )
+            {
+                case 'string':
+                    return parseInt( arg );
+                case 'number':
+                    if( Math.trunc( arg ) <= Number.MAX_SAFE_INTEGER || Math.trunc( arg ) >= Number.MIN_SAFE_INTEGER )
+                    {
+                        return Math.trunc( arg );
+                    }
+                default:
+                    return NaN;
+            }
+        }
+
+        function getRandomInt( min, max )
+        {
+            min = validationArg( min );
+            max = validationArg( max );
+
+            if( isNaN( min ) || isNaN( max ) )
+            {
+                console.log( 'Не вірний аргумент!' );
+                return null;
+            }
+
+            if( min > max )
+            {
+                [min, max] = [max, min];
+            }
+
+            return Math.floor( Math.random() * ( max - min + 1 ) + min );
+        }
+
+        let randomInt = getRandomInt( -100, 100 );
+        console.log( 'Випадкове число: ' + randomInt );
+    </script>
+</body>
+</html>
