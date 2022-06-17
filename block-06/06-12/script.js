@@ -79,8 +79,7 @@ function calc()
 
 function validationNumber( ...values )
 {
-    // const regexpAll = /^[+-]?((\dn?)|(0\.|[1-9])\d*(\.\d+|\d+n?))$/i;
-    const regexpNumber = /^[+-]?(\d|(0\.|[1-9])\d*\.?\d+)$/;
+    const regexpNumber = /^[+-]?(\d|(0\.|[1-9]\d*\.?)\d+)$/;
     const regexpBigInt = /^[+-]?\d+n$/i;
 
     let outArr = values.map( function( str )
