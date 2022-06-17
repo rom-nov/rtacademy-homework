@@ -7,7 +7,7 @@ function calc()
 {
     clearResult();
 
-    const regexpDate = /^([1-9]\d{3})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3]):([0-6]\d)$/;
+    const regexpDate = /^([1-9]\d{3})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3]):([0-5]\d)$/;
     const dateStart = document.getElementById( 'date-start' );
     const dateEnd = document.getElementById( 'date-end' );
 
@@ -44,11 +44,29 @@ function visualResult( regexp, dateStart, dateEnd, day, hours, min )
         const content = document.createElement( 'p' );
         content.innerHTML = `Різниця між <span>${start[3]}.${start[2]}.${start[1]} ${start[4]}:${start[5]}</span> та 
                             <span>${end[3]}.${end[2]}.${end[1]} ${end[4]}:${end[5]}</span> становить <br>
-                            ${day} дні, ${hours} години та ${min} хвилину`;
+                            ${day} ${ choiceWord( day, 'd' ) }, 
+                            ${hours} годин${ choiceWord( hours, 'h' ) } та 
+                            ${min} хвилин${ choiceWord( min, 'm' ) }`;
 
         wrapper.append( header );
         wrapper.append( content );
         element.append( wrapper );
+    }
+}
+
+function choiceWord( number, flag )
+{
+    const end1 = /\d*(?<!1)1$/;
+    const end234 = /\d*(?<!1)[234]$/;
+
+    switch( true )
+    {
+        case end1.test( number.toString() ):
+            return (flag === 'd') ? 'день' : 'у';
+        case end234.test( number.toString() ):
+            return (flag === 'd') ? 'дні' : 'и';
+        default:
+            return (flag === 'd') ? 'днів' : '';
     }
 }
 
