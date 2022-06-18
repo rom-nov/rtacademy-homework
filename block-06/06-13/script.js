@@ -20,10 +20,10 @@ function calc()
     const msEnd = Date.parse( dateEnd.value );
     const msDif = ( msEnd - msStart ) / 1000;
     const dayDif = Math.trunc( msDif / 86400 );
-    const hoursDif = Math.trunc( msDif / 3600 ) % 24;
+    const hourDif = Math.trunc( msDif / 3600 ) % 24;
     const minDif = Math.round( ( ( msDif / 3600 ) - Math.trunc( msDif / 3600 ) ) * 60 );
 
-    visualResult( regexpDate, dateStart.value, dateEnd.value, dayDif, hoursDif, minDif );
+    visualResult( regexpDate, dateStart.value, dateEnd.value, dayDif, hourDif, minDif );
 }
 
 function visualResult( regexp, dateStart, dateEnd, day, hours, min )
@@ -44,9 +44,9 @@ function visualResult( regexp, dateStart, dateEnd, day, hours, min )
         const content = document.createElement( 'p' );
         content.innerHTML = `Різниця між <span>${start[3]}.${start[2]}.${start[1]} ${start[4]}:${start[5]}</span> та 
                             <span>${end[3]}.${end[2]}.${end[1]} ${end[4]}:${end[5]}</span> становить <br>
-                            ${day} ${ choiceWord( day, 'd' ) }, 
-                            ${hours} годин${ choiceWord( hours, 'h' ) } та 
-                            ${min} хвилин${ choiceWord( min, 'm' ) }`;
+                            ${ choicePhrase( day, 'd', 'uk' ) }
+                            ${ choicePhrase( hours, 'h', 'uk' ) }
+                            ${ choicePhrase( min, 'm', 'uk' ) }`;
 
         wrapper.append( header );
         wrapper.append( content );
@@ -54,20 +54,42 @@ function visualResult( regexp, dateStart, dateEnd, day, hours, min )
     }
 }
 
-function choiceWord( number, flag )
+function choicePhrase( number, flag, lang )
 {
     const end1 = /\d*(?<!1)1$/;
     const end234 = /\d*(?<!1)[234]$/;
+    let indexLang = 0;
+    let word;
+    let dWord = [ ['день', 'дні', 'днів'],          ['day', 'days', 'days'] ];
+    let hWord = [ ['годину', 'години', 'годин'],    ['hour', 'hours', 'hours'] ];
+    let mWord = [ ['хвилину', 'хвилини', 'хвилин'], ['minute', 'minutes', 'minutes'] ];
+
+    switch( lang )
+    {
+        case 'eng':
+            indexLang = 1;
+        break;
+        default:
+            indexLang = 0;
+        break;
+    }
 
     switch( true )
     {
+        case number === 0:
+            return '';
         case end1.test( number.toString() ):
-            return (flag === 'd') ? 'день' : 'у';
+            ( flag === 'd' ) ? word = dWord[indexLang][0] : ( ( flag === 'h' ) ? word = hWord[indexLang][0] : word = mWord[indexLang][0] );
+            break;
         case end234.test( number.toString() ):
-            return (flag === 'd') ? 'дні' : 'и';
+            ( flag === 'd' ) ? word = dWord[indexLang][1] : ( ( flag === 'h' ) ? word = hWord[indexLang][1] : word = mWord[indexLang][1] );
+            break;
         default:
-            return (flag === 'd') ? 'днів' : '';
+            ( flag === 'd' ) ? word = dWord[indexLang][2] : ( ( flag === 'h' ) ? word = hWord[indexLang][2] : word = mWord[indexLang][2] );
+            break;
     }
+
+    return number + ' ' + word;
 }
 
 function validationDate( regexp, dateStart, dateEnd )
