@@ -2,15 +2,15 @@
 <html lang="uk">
 <head>
     <meta charset="utf-8">
-    <title>Название страницы</title>
+    <title>Бронирование</title>
 </head>
 <body>
     <header>
-        <h1>Название сайта</h1>
+        <h1>Бронирование фотостудии</h1>
     </header>
     <main>
         <h2>Бронирование зала фотостудии</h2>
-        <form action="#" method="get">
+        <form id="form" action="#" method="get">
             <div><label for="lastname">* Фамилия:</label></div>
             <div><input type="text" id="lastname" name="user-lastname" placeholder="Введите фамилию" required minlength="2" maxlength="64"></div>
             <div><label for="firstname">* Имя:</label></div>
@@ -44,7 +44,6 @@
             <div>
                 <button type="reset" id="btn-clear">Очистить</button>
                 <button type="submit" id="btn-submit" disabled>Отправить</button>
-                <button type="button" id="btn">CALC</button>
             </div>
         </form>
     </main>
