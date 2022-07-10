@@ -1,0 +1,28 @@
+body, input {
+    font-size: 1.25rem;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.25rem;
+    letter-spacing: 0.1rem;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+label {
+    margin: 0 0 0.5rem 0;
+    font-weight: 700;
+}
+input {
+    width: 15rem;
+    font-size: 1rem;
+    margin: 0 0 0.5rem 0;
+}
+table, td, th {
+   outline: 0.1rem solid black;
+}
+td, th {
+    padding: 0.5rem 0.25rem;
+    text-align: center;
+}
