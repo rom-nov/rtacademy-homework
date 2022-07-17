@@ -135,11 +135,11 @@ function showCities( cities )
 function arrToObj( arr )
 {
     return {
-        "city" : arr[0].trim(),
-        "latitude" : parseFloat(arr[1]),
-        "longitude" : parseFloat(arr[2]),
-        "country" : arr[3].trim(),
-        "population" : parseInt(arr[4])
+        "city" : arr[ 0 ].trim(),
+        "latitude" : parseFloat( arr[ 1 ] ),
+        "longitude" : parseFloat( arr[ 2 ] ),
+        "country" : arr[ 3 ].trim(),
+        "population" : parseInt( arr[ 4 ] )
     };
 }
 
@@ -147,7 +147,7 @@ function validationObj( obj )
 {
     for( let key in obj )
     {
-        if( !obj[key] )
+        if( !obj[ key ] )
         {
             return false;
         }
@@ -161,11 +161,11 @@ function parseCSV( str )
     let arr = str.split( '\n' );
     for ( let i = 0; i < arr.length; i++ )
     {
-        if( arr[i].length < 10 )
+        if( arr[ i ].length < 10 )
         {
             continue;
         }
-        let innerArr = arr[i].split( ',' );
+        let innerArr = arr[ i ].split( ',' );
         let obj = arrToObj( innerArr );
         if( !validationObj( obj ) )
         {
@@ -202,11 +202,11 @@ function checkOnExeption( item, index, arr )
     {
         if( index > 0 )
         {
-            item = item.substring(0, 2).toLowerCase() + modifyString( item.substring(2) );
+            item = item.substring( 0, 2 ).toLowerCase() + modifyString( item.substring( 2 ) );
         }
         else
         {
-            item = item.substring(0, 2) + modifyString( item.substring(2) );
+            item = item.substring( 0, 2 ) + modifyString( item.substring( 2 ) );
         }
     }
 
@@ -227,7 +227,7 @@ function modifyHardString( str, separator )
 
 function modifyNormalString( str )
 {
-    let firstLetter = str[0].toUpperCase();
+    let firstLetter = str[ 0 ].toUpperCase();
     let subString = str.substring( 1 ).toLowerCase();
     return firstLetter + subString;
 }
@@ -249,13 +249,13 @@ function modifyArrayStrings( array, inc = 0 )
 {
     if( inc < array.length )
     {
-        if ( typeof( array[inc] ) === 'object' && array[inc] !== null && array[inc].length > 0 )
+        if ( typeof( array[ inc ] ) === 'object' && array[ inc ] !== null && array[ inc ].length > 0 )
         {
-            array[inc] = modifyArrayStrings( array[inc] , 0 );
+            array[ inc ] = modifyArrayStrings( array[ inc ] , 0 );
         }
         else
         {
-            array[inc] =  modifyString( array[inc] );
+            array[ inc ] =  modifyString( array[ inc ] );
         }
         modifyArrayStrings( array, ++inc );
     }
