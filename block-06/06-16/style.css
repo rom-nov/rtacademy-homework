@@ -26,3 +26,15 @@ td, th {
     padding: 0.5rem;
     text-align: center;
 }
+th:first-child, th:last-child {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+button {
+    margin: 0 0.3rem;
+}
+button {
+    transform: rotateZ( 90deg );
+}

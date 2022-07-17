@@ -97,7 +97,7 @@ function showCities( cities )
     table.setAttribute( "id", "table" );
     const trHeader = document.createElement( "tr" );
     const headerTable = {
-        cityName: document.createTextNode( "Назва" ),
+        city: document.createTextNode( "Назва" ),
         coordinates: document.createTextNode( "Координати" ),
         population: document.createTextNode( "Населення" )
     };
@@ -108,6 +108,10 @@ function showCities( cities )
         const thHeader = document.createElement( "th" );
         thHeader.append( headerTable[ key ] );
         if( key === 'coordinates' ) thHeader.setAttribute( "colspan", "2" );
+        if( key === 'city' || key === 'population' )
+        {
+            addButtonSort( key, thHeader, cities );
+        }
         trHeader.append( thHeader );
     }
 
@@ -128,6 +132,36 @@ function showCities( cities )
     } );
 
     form.append( table );
+}
+
+function addButtonSort( keySort, parentElement, arrData )
+{
+    const asc = document.createElement( "button" ),
+          desc = document.createElement( "button" );
+    asc.append( document.createTextNode( "<" ) );
+    desc.append( document.createTextNode( ">" ) );
+    asc.setAttribute( "type", "button" );
+    desc.setAttribute( "type", "button" );
+    parentElement.append( asc );
+    parentElement.append( desc );
+
+    asc.addEventListener( 'click', () => {
+        arrData.sort( ( a, b ) => {
+            if( a[ keySort ] > b[ keySort ] ) return 1;
+            if( a[ keySort ] < b[ keySort ] ) return -1;
+            return 0;
+        } );
+        showCities( arrData );
+    } );
+
+    desc.addEventListener( 'click', () => {
+        arrData.sort( ( a, b ) => {
+            if( a[ keySort ] < b[ keySort ] ) return 1;
+            if( a[ keySort ] > b[ keySort ] ) return -1;
+            return 0;
+        } );
+        showCities( arrData );
+    } );
 }
 
 //===== parseCSV (6.9)
