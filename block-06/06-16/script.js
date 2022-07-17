@@ -1,6 +1,6 @@
-//main function
-( async () => {
-
+//===== main function
+( async () =>
+{
     const countriesJSON = await loadFile( "countries.json", "json" );
     const citiesCSV = await loadFile( "cities.csv", "text" );
     const citiesArr = parseCSV( citiesCSV );
@@ -9,26 +9,31 @@
     {
         return;
     }
+
     showCountries( countriesJSON );
+
     const inputCountries = document.getElementById( "country" );
     if( inputCountries )
     {
-        inputCountries.addEventListener( "change", ( event ) => {
+        inputCountries.addEventListener( "change", ( event ) =>
+        {
             const country = event.target.value;
-            const citiesOfCountry =
-                citiesArr.filter( ( item ) => item.country === country ).
-                          sort( ( a, b ) => {
-                              if( a.city > b.city ) return 1;
-                              if( a.city < b.city ) return -1;
-                              return 0;
-                          } );
-            // console.log( citiesOfCountry );
+            const citiesOfCountry = citiesArr.filter( ( item ) => item.country === country ).
+                                    sort( ( a, b ) => {
+                                        if( a.city > b.city ) return 1;
+                                        if( a.city < b.city ) return -1;
+                                        return 0;
+                                    } ).
+                                    map( ( item ) => {
+                                        item.city = capitalize( item.city );
+                                        return item;
+                                    } );
             showCities( citiesOfCountry );
         } );
     }
 } )();
 
-// other function
+//=====
 async function loadFile( url, typeResponse )
 {
     let response = await fetch( url );
@@ -47,7 +52,7 @@ function showCountries( countries )
 {
     const form = document.createElement( "form" );
     const label = document.createElement( "label" );
-    const labelText = document.createTextNode( "Країни світу" );
+    const labelText = document.createTextNode( "Країни" );
     const input = document.createElement( "input" );
     const datalist = document.createElement( "datalist" );
 
@@ -90,11 +95,10 @@ function showCities( cities )
     const form = document.getElementById( "form" );
     const table = document.createElement( "table" );
     table.setAttribute( "id", "table" );
-    const trHader = document.createElement( "tr" );
+    const trHeader = document.createElement( "tr" );
     const headerTable = {
         cityName: document.createTextNode( "Назва" ),
-        lat: document.createTextNode( "Широта" ),
-        lon: document.createTextNode( "Довгота" ),
+        coordinates: document.createTextNode( "Координати" ),
         population: document.createTextNode( "Населення" )
     };
 
@@ -103,9 +107,11 @@ function showCities( cities )
     {
         const thHeader = document.createElement( "th" );
         thHeader.append( headerTable[ key ] );
-        trHader.append( thHeader );
+        if( key === 'coordinates' ) thHeader.setAttribute( "colspan", "2" );
+        trHeader.append( thHeader );
     }
-    table.append( trHader );
+
+    table.append( trHeader );
 
     //body table
     cities.forEach( ( item ) => {
@@ -124,7 +130,7 @@ function showCities( cities )
     form.append( table );
 }
 
-//===== parseCSV
+//===== parseCSV (6.9)
 
 function arrToObj( arr )
 {
@@ -168,4 +174,105 @@ function parseCSV( str )
         resultArray.push( obj );
     }
     return resultArray;
+}
+
+//===== capitalize (6.7)
+
+const showError = () => console.log( 'Очікую рядок або масив рядків!' );
+const checkOnHardString = ( str ) => ( str.indexOf( '-' ) > 0  || str.indexOf( ' ' ) > 0 );
+const getSeparator = ( str ) => str.indexOf( '-' ) > 0 ? '-' : ' ';
+const splitString = ( str, separator ) => str.split( separator );
+const joinString = ( arr, separator ) => arr.join( separator );
+
+function Error()
+{
+    showError();
+    return null;
+}
+
+function checkOnExeption( item, index, arr )
+{
+    if ( index > 0 && index < arr.length - 1 &&
+        ( item.length <= 3 || item === 'upon' ) )
+    {
+        item = item.toLowerCase();
+    }
+
+    if( item === 'L\'haÿ' || item === 'D\'olonne' || item === 'D\'apt' )
+    {
+        if( index > 0 )
+        {
+            item = item.substring(0, 2).toLowerCase() + modifyString( item.substring(2) );
+        }
+        else
+        {
+            item = item.substring(0, 2) + modifyString( item.substring(2) );
+        }
+    }
+
+    if( index > 0 && item === 'sen' )
+    {
+        item = modifyString( item );
+    }
+
+    return item;
+}
+
+function modifyHardString( str, separator )
+{
+    let arrayWords = splitString( str, separator );
+    let modifyArrayWords = modifyArrayStrings( arrayWords ).map( checkOnExeption );
+    return joinString( modifyArrayWords, separator );
+}
+
+function modifyNormalString( str )
+{
+    let firstLetter = str[0].toUpperCase();
+    let subString = str.substring( 1 ).toLowerCase();
+    return firstLetter + subString;
+}
+
+function modifyString( str )
+{
+    if( typeof( str ) !== 'string' || !str.length )
+    {
+        return Error();
+    }
+    if( checkOnHardString( str ) )
+    {
+        return modifyHardString( str, getSeparator( str ) );
+    }
+    return modifyNormalString( str );
+}
+
+function modifyArrayStrings( array, inc = 0 )
+{
+    if( inc < array.length )
+    {
+        if ( typeof( array[inc] ) === 'object' && array[inc] !== null && array[inc].length > 0 )
+        {
+            array[inc] = modifyArrayStrings( array[inc] , 0 );
+        }
+        else
+        {
+            array[inc] =  modifyString( array[inc] );
+        }
+        modifyArrayStrings( array, ++inc );
+    }
+    return array;
+}
+
+function capitalize( param )
+{
+    switch( true )
+    {
+        case( typeof( param ) === 'string' ):
+            return modifyString( param );
+
+        case( typeof( param ) === 'object' && param !== null && param.length > 0 ):
+            return modifyArrayStrings( param );
+
+        default:
+            return Error();
+    }
 }
