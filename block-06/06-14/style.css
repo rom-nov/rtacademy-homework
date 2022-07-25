@@ -1,0 +1,102 @@
+html {
+    background: url("bgc.jpg") center no-repeat;
+    background-size: cover;
+}
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    color: #fff;
+    text-shadow: 0.1rem 0.1rem 0.1rem #000000;
+}
+header, main, footer {
+    width: 50%;
+    margin: 0 auto;
+}
+header, main {
+    margin-bottom: 1rem;
+}
+header, footer {
+    text-align: center;
+}
+footer a, form a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+footer a:hover, form a:hover {
+    color: #9c7f28;
+}
+form, input, textarea, button, label, select, option, a {
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    margin-bottom: 0.35rem;
+}
+input, textarea, select {
+    outline: none;
+    border: 0.1rem solid #333333;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+}
+select {
+    min-width: 25%;
+    height: 2rem;
+    background-color: #fff;
+}
+label {
+    display: inline-block;
+    margin-bottom: 0.15rem;
+}
+#color {
+    padding: 0.1rem;
+}
+#rule {
+    width: 1rem;
+    height: 1rem;
+    margin-right: 0.5rem;
+}
+button {
+    cursor: pointer;
+    padding: 0.35rem;
+}
+form, input, select, textarea, button {
+    position: relative;
+}
+#popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 10;
+    display: inline-block;
+    text-align: center;
+    padding: 0.75rem 2.25rem;
+    border-radius: 0.25rem;
+    box-shadow: 0.2rem 0.2rem 0.5rem #000;
+    background-color: #fff;
+    color: #000000;
+    text-shadow: none;
+}
+#btn-button {
+    display: inline-block;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    padding: 0.35rem 1rem;
+}
+#btn-button:last-child {
+    margin-right: 0;
+}
+#error-message p {
+    display: inline-block;
+    text-align: center;
+    padding: 0.75rem 0;
+    margin: 0;
+    color: #ff8080;
+    text-shadow: 0.1rem 0.1rem 0.1rem #000000;
+}
+.error {
+    box-shadow: 0 0 0.5rem #ff0000;
+}
