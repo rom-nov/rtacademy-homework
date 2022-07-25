@@ -188,6 +188,12 @@ function calcBill( form )
     //кількість денних годин
     day = countDay * 13 * 3600000 + partDayStartDate + partDayFinishDate;
     bill = ( night + day ) * form.room.element.value / 3600000 + multiplierPeople;
+
+    console.log( 'countDay = ' + countDay );
+    console.log( 'night = ' + night / 3600000 );
+    console.log( 'day = ' + day / 3600000 );
+    console.log( 'bill = ' + bill );
+
     return Math.round( bill );
 }
 
