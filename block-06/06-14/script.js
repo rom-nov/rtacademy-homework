@@ -160,8 +160,8 @@ function calcBill( form )
         if( startDate <= nightEndStartDate && startDate >= nightBeginStartDate )
         {
             partNightStartDate = nightEndStartDate - startDate +
-                               ( startDate <= Date.parse( parseStartDay + 'T21:00:00' ) ? 3 * 3600000 : 0) ;
-            partDayStartDate = ( startDate <= Date.parse( parseStartDay + 'T21:00:00' ) ? 13 * 3600000 : 0 );
+                               ( startDate < Date.parse( parseStartDay + 'T21:00:00' ) ? 3 * 3600000 : 0);
+            partDayStartDate = ( startDate < Date.parse( parseStartDay + 'T21:00:00' ) ? 13 * 3600000 : 0 );
         }
         else
         {
@@ -182,18 +182,12 @@ function calcBill( form )
     }
     //кількість "цілих" днів
     countDay = ( finishDate - partNightFinishDate - partDayFinishDate ) - ( startDate + partNightStartDate + partDayStartDate );
-    countDay = Math.trunc( countDay / ( 24 * 3600000 ) );
+    countDay = countDay / ( 24 * 3600000 );
     //кількість нічних годин
     night = ( countDay * 11 * 3600000 + partNightStartDate + partNightFinishDate ) * 1.5 ;
     //кількість денних годин
     day = countDay * 13 * 3600000 + partDayStartDate + partDayFinishDate;
     bill = ( night + day ) * form.room.element.value / 3600000 + multiplierPeople;
-
-    console.log( 'countDay = ' + countDay );
-    console.log( 'night = ' + night / 3600000 );
-    console.log( 'day = ' + day / 3600000 );
-    console.log( 'bill = ' + bill );
-
     return Math.round( bill );
 }
 
