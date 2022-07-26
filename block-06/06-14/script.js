@@ -58,6 +58,8 @@ if( document.getElementById( 'form' ) )
 
 function registration( event )
 {
+    delPopUp();
+
     if ( !checkFields( formPhoto ) || !checkDates( formPhoto ) )
     {
         event.preventDefault();
@@ -106,6 +108,7 @@ function clearAll()
             formPhoto[ key ].element.nextElementSibling.remove();
         }
     }
+    delPopUp();
 }
 
 function validationEnteredValue( event )
@@ -348,6 +351,14 @@ function showPopUp( parent, text, value = '', ok = true, cansel = false, submit 
             break;
     }
     parent.append( div );
+}
+
+function delPopUp()
+{
+    if( document.getElementById( 'popup' ) )
+    {
+        document.getElementById( 'popup' ).remove();
+    }
 }
 
 function setNowDate()
