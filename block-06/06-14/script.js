@@ -1,7 +1,7 @@
 const regexpName = /^((([a-z])+([\s\'\-])?([a-z])+)+|(([а-яіїєґ])+([\s\'\-])?([а-яіїєґ])+)+)$/i,
       regexpEmail = /[A-Z0-9\.\_\%\+\-]+\@[A-Z0-9\-\.]+\.[A-Z]{2,4}/i,
       regexpTelephone = /^\+380\d{9}$/,
-      regexpInstagram = /^(https\:\/\/)?(www\.)?instagram\.com\/[\w\-\/]+/i,
+      regexpInstagram = /^https\:\/\/(www\.)?instagram\.com\/[\w\-\/]+/i,
       regexpRoom = /800|900|1000/,
       regexpDate = /^([1-9]\d{3})-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])T([01]\d|2[0-3]):([0-5]\d)$/,
       regexpPeople = /^([1-9]|10)$/,
