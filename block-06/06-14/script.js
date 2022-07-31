@@ -102,11 +102,7 @@ function clearAll()
 {
     for( const key in formPhoto )
     {
-        if( formPhoto[ key ].element.classList.contains( 'error' ) )
-        {
-            formPhoto[ key ].element.classList.remove( 'error' );
-            formPhoto[ key ].element.nextElementSibling.remove();
-        }
+        delErrorMessage( formPhoto[ key ].element );
     }
     delPopUp();
 }
@@ -190,7 +186,7 @@ function calcBill( form )
     night = ( countDay * 11 * 3600000 + partNightStartDate + partNightFinishDate ) * 1.5 ;
     //кількість денних годин
     day = countDay * 13 * 3600000 + partDayStartDate + partDayFinishDate;
-    bill = ( night + day ) * form.room.element.value / 3600000 + multiplierPeople;
+    bill = ( night + day ) * form.room.element.value / 3600000 + ( ( night / 1.5 + day ) / 3600000 * multiplierPeople );
     return Math.round( bill );
 }
 
@@ -231,12 +227,12 @@ function checkDates( form )
 
 function checkFields( form )
 {
+    let result = true;
+
     for( const key in form )
     {
-        if( formPhoto[ key ].element.classList.contains( 'error' ) )
-        {
-            return false;
-        }
+
+        delErrorMessage( form[ key ].element )
 
         switch( true )
         {
@@ -246,30 +242,28 @@ function checkFields( form )
             case( form[ key ].element.type !== form[ key ].type ):
                 form[ key ].element.classList.add( 'error' );
                 showErrorMessage( form[ key ].element, 'Не коректний тип поля, оновіть сторінку' );
-                return false;
+                result = false;
+                break;
             case( form[ key ].required && !form[ key ].element.value ):
                 form[ key ].element.classList.add( 'error' );
                 showErrorMessage( form[ key ].element, 'Заповніть обов\'язкове поле' );
-                return false;
+                result = false;
+                break;
             case( form[ key ].required && form[ key ].regexp && !form[ key ].regexp.test( form[ key ].element.value ) ):
                 form[ key ].element.classList.add( 'error' );
                 showErrorMessage( form[ key ].element, 'Не коректне значення' );
-                return false;
+                result = false;
+                break;
         }
     }
-    return true;
+    return result;
 }
 
 function checkValue( form, key, target )
 {
     const value = target.value;
 
-    if( target.classList.contains( 'error' ) &&
-        target.nextElementSibling.getAttribute( 'id' ) === 'error-message' )
-    {
-        target.classList.remove( 'error' );
-        target.nextElementSibling.remove();
-    }
+    delErrorMessage( target );
 
     switch ( true )
     {
@@ -321,6 +315,16 @@ function showErrorMessage( parent, text )
     div.append( p );
     div.setAttribute( 'id', 'error-message' );
     parent.after( div );
+}
+
+function delErrorMessage( target )
+{
+    if( target.classList.contains( 'error' ) &&
+        target.nextElementSibling.getAttribute( 'id' ) === 'error-message' )
+    {
+        target.classList.remove( 'error' );
+        target.nextElementSibling.remove();
+    }
 }
 
 function showPopUp( parent, text, value = '', ok = true, cansel = false, submit = false )
