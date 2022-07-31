@@ -1,54 +1,33 @@
 //===== main function
 ( async () =>
 {
-    const countriesJSON = await loadFile( "countries.json", "json" );
     const citiesCSV = await loadFile( "cities.csv", "text" );
-    const citiesArr = parseCSV( citiesCSV );
-
-    if( !countriesJSON || !citiesCSV )
+    const citiesArr = citiesCSV ? parseCSV( citiesCSV ) : null;
+    const countriesJSON = citiesArr ? await loadFile( "countries.json", "json" ) : null;
+    if( !citiesArr || !countriesJSON )
     {
         return;
     }
-
-    showCountries( countriesJSON );
-
-    const inputCountries = document.getElementById( "country" );
-    if( inputCountries )
-    {
-        inputCountries.addEventListener( "change", ( event ) =>
-        {
-            const country = event.target.value;
-            const citiesOfCountry = citiesArr.filter( ( item ) => item.country === country ).
-                                    sort( ( a, b ) => {
-                                        if( a.city > b.city ) return 1;
-                                        if( a.city < b.city ) return -1;
-                                        return 0;
-                                    } ).
-                                    map( ( item ) => {
-                                        item.city = capitalize( item.city );
-                                        return item;
-                                    } );
-            showCities( citiesOfCountry );
-        } );
-    }
+    showListCountries( countriesJSON );
+    showTableCities( citiesArr );
 } )();
 
 //=====
 async function loadFile( url, typeResponse )
 {
-    let response = await fetch( url );
+    const response = await fetch( url );
     if( response.ok )
     {
         return await response[ typeResponse ]();
     }
     else
     {
-        console.error( `Помилка, данні не завантажено: ${response.status}: ${response.statusText}` );
+        console.error( `Помилка, дані не завантажено: ${response.status}: ${response.statusText}` );
         return null;
     }
 }
 
-function showCountries( countries )
+function showListCountries( countries )
 {
     const form = document.createElement( "form" );
     const label = document.createElement( "label" );
@@ -78,7 +57,33 @@ function showCountries( countries )
     document.body.prepend( form );
 }
 
-function showCities( cities )
+function showTableCities( arrCities )
+{
+    const inputCountries = document.getElementById( "country" );
+    if( inputCountries )
+    {
+        inputCountries.addEventListener( "change", ( event ) =>
+        {
+            const country = event.target.value;
+            const citiesOfCountry = arrCities.filter( ( item ) => item.country === country ).
+                                              sort( ( a, b ) => {
+                                                  switch( true )
+                                                  {
+                                                      case( a.city > b.city ): return 1;
+                                                      case( a.city < b.city ): return -1;
+                                                      default: return 0;
+                                                  }
+                                              } ).
+                                              map( ( item ) => {
+                                                  item.city = capitalize( item.city );
+                                                  return item;
+                                              } );
+            showTable( citiesOfCountry );
+        } );
+    }
+}
+
+function showTable( cities )
 {
     //remove table
     if( document.getElementById( "table" ) )
@@ -110,7 +115,7 @@ function showCities( cities )
         if( key === 'coordinates' ) thHeader.setAttribute( "colspan", "2" );
         if( key === 'city' || key === 'population' )
         {
-            addButtonSort( key, thHeader, cities );
+            addButtonSort( thHeader, cities, key );
         }
         trHeader.append( thHeader );
     }
@@ -134,7 +139,7 @@ function showCities( cities )
     form.append( table );
 }
 
-function addButtonSort( keySort, parentElement, arrData )
+function addButtonSort( parentElement, arrData, keySort )
 {
     const asc = document.createElement( "button" ),
           desc = document.createElement( "button" );
@@ -145,25 +150,26 @@ function addButtonSort( keySort, parentElement, arrData )
     parentElement.append( asc );
     parentElement.append( desc );
 
+    function sortASC( item1, item2 )
+    {
+        switch( true )
+        {
+            case( item1[ keySort ] > item2[ keySort ] ): return 1;
+            case( item1[ keySort ] < item2[ keySort ] ): return -1;
+            default: return 0;
+        }
+    }
+
     asc.addEventListener( 'click', () => {
-        arrData.sort( ( a, b ) => {
-            if( a[ keySort ] > b[ keySort ] ) return 1;
-            if( a[ keySort ] < b[ keySort ] ) return -1;
-            return 0;
-        } );
-        showCities( arrData );
+        arrData.sort( sortASC );
+        showTable( arrData );
     } );
 
     desc.addEventListener( 'click', () => {
-        arrData.sort( ( a, b ) => {
-            if( a[ keySort ] < b[ keySort ] ) return 1;
-            if( a[ keySort ] > b[ keySort ] ) return -1;
-            return 0;
-        } );
-        showCities( arrData );
+        arrData.sort( sortASC ).reverse();
+        showTable( arrData );
     } );
 }
-
 //===== parseCSV (6.9)
 
 function arrToObj( arr )
@@ -181,9 +187,15 @@ function validationObj( obj )
 {
     for( let key in obj )
     {
-        if( !obj[ key ] )
+        switch( true )
         {
-            return false;
+            case( ( key === 'latitude' ||
+                    key === 'longitude' ||
+                    key === 'population' ) &&
+                    isNaN( obj[ key ] ) ):
+                return false;
+            case( !obj[ key ] ):
+                return false;
         }
     }
     return true;
@@ -191,28 +203,38 @@ function validationObj( obj )
 
 function parseCSV( str )
 {
-    let resultArray = [];
-    let arr = str.split( '\n' );
-    for ( let i = 0; i < arr.length; i++ )
+    const resultArray = [];
+    const strToArr = str.split( '\n' );
+
+    for ( let i = 0; i < strToArr.length; i++ )
     {
-        if( arr[ i ].length < 10 )
+        if( strToArr[ i ].length < 10 )
         {
             continue;
         }
-        let innerArr = arr[ i ].split( ',' );
-        let obj = arrToObj( innerArr );
+        const innerArr = strToArr[ i ].split( ',' );
+        if( innerArr.length < 5 )
+        {
+            continue;
+        }
+        const obj = arrToObj( innerArr );
         if( !validationObj( obj ) )
         {
             continue;
         }
         resultArray.push( obj );
     }
+
+    if( !resultArray.length )
+    {
+        return null;
+    }
     return resultArray;
 }
 
 //===== capitalize (6.7)
 
-const showError = () => console.log( 'Очікую рядок або масив рядків!' );
+const showError = () => console.error( 'Очікую рядок або масив рядків!' );
 const checkOnHardString = ( str ) => ( str.indexOf( '-' ) > 0  || str.indexOf( ' ' ) > 0 );
 const getSeparator = ( str ) => str.indexOf( '-' ) > 0 ? '-' : ' ';
 const splitString = ( str, separator ) => str.split( separator );
