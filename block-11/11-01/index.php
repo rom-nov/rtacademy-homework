@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
     <meta charset="utf-8">
-    <title>Теги PHP</title>
+    <title>11.01</title>
 </head>
 <body>
     <?php
