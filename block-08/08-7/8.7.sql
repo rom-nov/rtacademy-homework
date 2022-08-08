@@ -15,6 +15,7 @@ WHERE lastname IS NULL AND firstname IS NULL;
 UPDATE user
 SET lastname = CONCAT(user.lastname, user.id),
     firstname = CONCAT(user.firstname, user.id);
+WHERE lastname = 'user_lastname' AND firstname = 'user_firstname';
 
 INSERT INTO post (author_id, category_id, title, alias, content, publish_date, status)
 VALUE (1, 1, 'title1', 'alias_title1', 'content for post 1', '2022-06-11 13:43:01', 'add'),
