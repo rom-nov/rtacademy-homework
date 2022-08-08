@@ -3,7 +3,7 @@ CREATE TABLE category (
     title varchar( 64 ) NOT NULL,
     alias varchar( 64 ) NOT NULL,
     PRIMARY KEY( id ),
-    UNIQUE( alias )
+    UNIQUE LOWER( alias )
 );
 
 CREATE TABLE user (
@@ -14,7 +14,7 @@ CREATE TABLE user (
     lastname  varchar( 64 )  DEFAULT NULL,
     firstname varchar( 64 )  DEFAULT NULL,
     PRIMARY KEY( id ),
-    UNIQUE( login, email )
+    UNIQUE LOWER( login, email )
 );
 
 CREATE TABLE post (
@@ -27,7 +27,7 @@ CREATE TABLE post (
     publish_date datetime       NOT NULL,
     status       varchar( 32 )  NOT NULL,
     PRIMARY KEY( id ),
-    UNIQUE( alias ),
+    UNIQUE LOWER( alias ),
     FOREIGN KEY( author_id )   REFERENCES user( id ),
     FOREIGN KEY( category_id ) REFERENCES category( id )
 );
@@ -38,7 +38,7 @@ CREATE TABLE post_cover (
     filename varchar( 128 ) NOT NULL,
     title    varchar( 64 )  DEFAULT NULL,
     PRIMARY KEY( id ),
-    UNIQUE( filename ),
+    UNIQUE LOWER( filename ),
     FOREIGN KEY( post_id ) REFERENCES post( id )
 );
 
