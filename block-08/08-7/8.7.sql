@@ -47,11 +47,11 @@ SELECT
     post_comment.comment AS post_comment
 FROM
     post
-        LEFT JOIN
+LEFT JOIN
     user ON (post.author_id = user.id)
-        LEFT JOIN
+LEFT JOIN
     category ON (post.category_id = category.id)
-        LEFT JOIN
+LEFT JOIN
     post_comment ON (post_comment.post_id = post.id)
 WHERE post.status = 'add'
 ORDER BY post.id DESC;
