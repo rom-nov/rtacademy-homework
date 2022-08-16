@@ -34,7 +34,7 @@
                     case error_load( $_FILES[$name]['error'] ):
                         safe_work( 'Сталася помилка під час завантаження файлу.' );
                         break;
-                    case check_mimetypes( $_FILES[$name]['type'] ):
+                    case check_mimetypes( mime_content_type( $_FILES[$name]['tmp_name'] ) ):
                         safe_work( 'Помилка. Файл повинен мати формат JPEG / PNG / GIF.' );
                         break;
                     case is_oversize( $_FILES[$name]['size'], $max_size ):
@@ -108,7 +108,6 @@
                 $y_output = round( ( $height - $height_output ) * 0.5 );
                 $image_output = imagecrop( $img, [ 'x' => $x_output, 'y' => $y_output, 'width' => $width_output, 'height' => $height_output ] );
                 return check_modifying_img( $image_output );
-
             }
 
             function scale_img( $img, $width, $height )
