@@ -28,16 +28,16 @@
             {
                 switch( true )
                 {
-                    case is_empty( $_FILES[$name]['name'] ):
+                    case is_empty( $_FILES[ $name ][ 'name' ] ):
                         safe_work( 'Помилка. Необхідно завантажити файл.' );
                         break;
-                    case error_load( $_FILES[$name]['error'] ):
+                    case error_load( $_FILES[ $name ][ 'error' ] ):
                         safe_work( 'Сталася помилка під час завантаження файлу.' );
                         break;
-                    case check_mimetypes( mime_content_type( $_FILES[$name]['tmp_name'] ) ):
+                    case check_mimetypes( mime_content_type( $_FILES[ $name ][ 'tmp_name' ] ) ):
                         safe_work( 'Помилка. Файл повинен мати формат JPEG / PNG / GIF.' );
                         break;
-                    case is_oversize( $_FILES[$name]['size'], $max_size ):
+                    case is_oversize( $_FILES[ $name ][ 'size' ], $max_size ):
                         safe_work( 'Помилка. Файл повинен бути менше ' . $max_size . ' байт.' );
                         break;
                     default:
@@ -63,7 +63,7 @@
 
             function check_mimetypes( $file_type )
             {
-                if( !in_array( $file_type, ['image/jpeg', 'image/png', 'image/gif'] ) )
+                if( !in_array( $file_type, [ 'image/jpeg', 'image/png', 'image/gif' ] ) )
                 {
                     return true;
                 }
@@ -79,14 +79,14 @@
 
             function creat_img( $name )
             {
-                switch( $_FILES[$name]['type'] )
+                switch( $_FILES[ $name ][ 'type' ] )
                 {
                     case 'image/jpeg':
-                        return imagecreatefromjpeg( $_FILES[$name]['tmp_name'] );
+                        return imagecreatefromjpeg( $_FILES[ $name ][ 'tmp_name' ] );
                     case 'image/png':
-                        return imagecreatefrompng( $_FILES[$name]['tmp_name'] );
+                        return imagecreatefrompng( $_FILES[ $name ][ 'tmp_name' ] );
                     case 'image/gif':
-                        return imagecreatefromgif( $_FILES[$name]['tmp_name'] );
+                        return imagecreatefromgif( $_FILES[ $name ][ 'tmp_name' ] );
                     default:
                         return false;
                 }
@@ -129,7 +129,7 @@
 
             function create_dir( $dir_path, $dir_name )
             {
-                if( ! file_exists( $dir_path . $dir_name ) )
+                if( !file_exists( $dir_path . $dir_name ) )
                 {
                     chmod( $dir_path, 0777 );
                     mkdir( $dir_path . $dir_name );
@@ -140,7 +140,7 @@
 
             function save_file( $img, $new_path )
             {
-                if( ! imagejpeg( $img, $new_path ) )
+                if( !imagejpeg( $img, $new_path ) )
                 {
                     safe_work( 'Помилка. Не вдалося зберегти файл.' );
                 }
@@ -157,10 +157,10 @@
             $img_width = imagesx( $img_origin );
             $img_height = imagesy( $img_origin );
             check_size_img( $img_width, $img_height );
-            $img_output = scale_img ( crop_img( $img_origin, $img_width, $img_height ), 240, 300 );
-            $new_path = create_dir( './', 'data/' ) . microtime(true) . '.jpg';
+            $img_output = scale_img( crop_img( $img_origin, $img_width, $img_height ), 240, 300 );
+            $new_path = create_dir( './', 'data/' ) . microtime( true ) . '.jpg';
             save_file( $img_output, $new_path );
-            echo( '<img src="'. $new_path .'" width=auto height=auto>' );
+            echo( '<img src="' . $new_path . '" width=auto height=auto>' );
             imagedestroy( $img_origin );
             imagedestroy( $img_output );
         ?>
