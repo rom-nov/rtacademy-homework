@@ -85,7 +85,15 @@
 
     function write_json( $resource, $array ) : void
 	{
+		//потрібна перевірка на запис даних у файл
 		fwrite( $resource, json_encode( $array ) );
+		//якщо перевірка пройшла, то необхідно створити посилання на завантаження файлу
+		//інакше вивести помилку
+	}
+
+	function link_file( $path )
+	{
+		echo( "<a href='$path' download='$path'>Завантажити файл</a>" );
 	}
 
     //===== main script
@@ -98,4 +106,5 @@
     $json_file = create_file( './', 'cities.json' );
 	write_json( $json_file, $array_csv );
     fclose( $json_file );
+	link_file( './cities.json' );
 ?>
