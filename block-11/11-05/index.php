@@ -112,7 +112,7 @@
         return $file;
     }
 
-    function write_data( $resource, $array ) : void
+    function write_data( $resource, array $array ) : void //Як задати resource у якості типу змінної $resource?
 	{
 		fwrite( $resource, START );
         foreach( $array as $inner_arr )
