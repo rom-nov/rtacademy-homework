@@ -38,15 +38,17 @@
             }
         }
 
-        function main( ControlLoadFile $file, GDImageModifyFile $img ) : void
+        function main( string $img_file ) : void
 		{
-			$file -> is_empty()
+			$file = ( new ControlLoadFile( $img_file ) )
+                  -> is_empty()
                   -> error_load()
                   -> set_mime()
                   -> check_mimetypes()
                   -> is_oversize();
 
-			$img -> check_size_img( 500 )
+			$img = ( new GDImageModifyFile( $file -> get_name() ) )
+                 -> check_size_img( 500 )
 				 -> crop_instagram()
 				 -> scale_img( 240, 300 );
 
@@ -64,7 +66,7 @@
 
         try
         {
-            main( new ControlLoadFile( 'img' ), new GDImageModifyFile( 'img' ) );
+            main( 'img' );
         }
         catch( Exception $error )
         {
