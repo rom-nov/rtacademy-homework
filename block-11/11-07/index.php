@@ -53,7 +53,6 @@
 			$path_file = create_dir( './', 'data/' ) . time() . '.jpg';
 			save_file( $img -> get_img(), $path_file );
 			echo( '<img src="' . $path_file . '" width=auto height=auto>' );
-			unset( $file, $img );
         }
 
         //===== main script
