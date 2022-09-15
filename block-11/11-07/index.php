@@ -18,43 +18,36 @@
         <?php
         require 'ControlLoadFile.php';
         require 'GDImageModifyFile.php';
-
-        function create_dir( string $dir_path, string $dir_name ) : string
-        {
-            if( !file_exists( $dir_path . $dir_name ) )
-            {
-                chmod( $dir_path, 0777 );
-                mkdir( $dir_path . $dir_name );
-                chmod( $dir_path, 0775 );
-            }
-            return $dir_path . $dir_name;
-        }
-
-        function save_file( GdImage $img, string $new_path ) : void
-        {
-            if( !imagejpeg( $img, $new_path ) )
-            {
-                throw new Exception( 'Помилка. Не вдалося зберегти файл.' );
-            }
-        }
+        require 'SaveFile.php';
 
         function main( string $img_file ) : void
 		{
-			$file = ( new ControlLoadFile( $img_file ) )
-                  -> is_empty()
-                  -> error_load()
-                  -> set_mime()
-                  -> check_mimetypes()
-                  -> is_oversize();
+			try
+			{
+				$file = ( new ControlLoadFile( $img_file ) )
+					-> is_empty()
+					-> error_load()
+					-> set_mime()
+					-> check_mimetypes()
+					-> is_oversize();
 
-			$img = ( new GDImageModifyFile( $file -> get_name() ) )
-                 -> check_size_img( 500 )
-				 -> crop_instagram()
-				 -> scale_img( 240, 300 );
+				$img = ( new GDImageModifyFile( $file -> get_name() ) )
+					-> check_size_img( 500 )
+					-> crop_instagram()
+					-> scale_img( 240, 300 );
 
-			$path_file = create_dir( './', 'data/' ) . time() . '.jpg';
-			save_file( $img -> get_img(), $path_file );
-			echo( '<img src="' . $path_file . '" width=auto height=auto>' );
+				SaveFile::save( $img -> get_img(), './', 'data/', time(), '.jpg' );
+				echo( '<img src="' . SaveFile::full_path() . '" width=auto height=auto>' );
+			}
+            catch( Exception $error )
+			{
+				echo( '<div class="error">' . $error -> getMessage() . '</div>' );
+				exit();
+            }
+            finally
+			{
+				$img -> destroy();
+			}
         }
 
         //===== main script
@@ -63,16 +56,7 @@
         {
             exit();
         }
-
-        try
-        {
-            main( 'img' );
-        }
-        catch( Exception $error )
-        {
-            echo( '<div class="error">' . $error -> getMessage() . '</div>' );
-            exit();
-        }
+        main( 'img' );
         ?>
     </form>
 </body>

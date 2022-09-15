@@ -88,4 +88,12 @@ class GDImageModifyFile
 		}
 		return $this;
 	}
+
+	public function destroy() : void
+	{
+		if( $this -> img )
+		{
+			imagedestroy( $this -> img );
+		}
+	}
 }
