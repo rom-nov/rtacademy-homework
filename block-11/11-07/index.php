@@ -36,16 +36,13 @@
 
 				SaveFile::save( $img -> get_img(), './', 'data/', time(), '.jpg' );
 				echo( '<img src="' . SaveFile::full_path() . '" width=auto height=auto>' );
+                $img -> destroy();
 			}
             catch( Exception $error )
 			{
 				echo( '<div class="error">' . $error -> getMessage() . '</div>' );
 				exit();
             }
-            finally
-			{
-				$img -> destroy();
-			}
         }
 
         //===== main script
