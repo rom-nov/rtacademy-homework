@@ -25,9 +25,7 @@
 			try
 			{
 				$file = ( new ControlLoadFile( $img_file ) )
-					-> is_empty()
 					-> error_load()
-					-> set_mime()
 					-> check_mimetypes()
 					-> is_oversize();
 
