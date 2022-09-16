@@ -20,8 +20,12 @@ class GDImageModifyFile
 				$this -> img = imagecreatefromgif( $_FILES[ $src_file ][ 'tmp_name' ] );
 				break;
 		}
-		$this -> set_width();
-		$this -> set_height();
+		if( !$this -> img )
+		{
+			throw new Exception( 'Помилка. Не вдалося створити зображення.' );
+		}
+		$this -> width = imagesx( $this -> img );
+		$this -> height = imagesy( $this -> img );
 	}
 
 	public function get_img() : GdImage|bool
@@ -29,27 +33,9 @@ class GDImageModifyFile
 		return $this -> img;
 	}
 
-	public function set_width() : void
-	{
-		if( !$this -> img )
-		{
-			throw new Exception( 'Помилка. Не вдалося створити зображення.' );
-		}
-		$this -> width = imagesx( $this -> img );
-	}
-
 	public function get_width() : int
 	{
 		return $this -> width;
-	}
-
-	public function set_height() : void
-	{
-		if( !$this -> img )
-		{
-			throw new Exception( 'Помилка. Не вдалося створити зображення.' );
-		}
-		$this -> height = imagesy( $this -> img );
 	}
 
 	public function get_height() : int
