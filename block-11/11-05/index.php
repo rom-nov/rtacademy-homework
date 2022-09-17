@@ -6,23 +6,23 @@ declare( strict_types = 1 );
 const START =
 	'<!doctype html>' .
 	'<html lang="uk">' .
-	'<head>' .
-	'<meta charset="UTF-8">' .
-	'<link rel="stylesheet" href="style.css">' .
-	'<title>Cities</title>' .
-	'</head>' .
-	'<body>' .
-	'<table class="table">' .
-	'<tr>' .
-	'<th>Місто</th>' .
-	'<th>Країна</th>' .
-	'<th>Населення</th>' .
-	'<th>Координати</th>' .
-	'</tr>';
+		'<head>' .
+			'<meta charset="UTF-8">' .
+			'<link rel="stylesheet" href="style.css">' .
+			'<title>Cities</title>' .
+		'</head>' .
+		'<body>' .
+			'<table class="table">' .
+				'<tr>' .
+					'<th>Місто</th>' .
+					'<th>Країна</th>' .
+					'<th>Населення</th>' .
+					'<th>Координати</th>' .
+				'</tr>';
 
 const END =
-	'</table>' .
-	'</body>' .
+			'</table>' .
+		'</body>' .
 	'</html>';
 
 //===== functions
@@ -35,7 +35,7 @@ function is_exists( string $path ) : void
 	}
 }
 
-function is_open( string $path ) //Як задати resource у якості типу, що повертає функція?
+function is_open( string $path )
 {
 	is_exists( $path );
 	if( !$resource = fopen( $path, 'r' ) )
@@ -75,7 +75,7 @@ function validation_data( array $arr ) : bool
 	return true;
 }
 
-function csv_in_array( $csv ) : array //Як задати resource у якості типу змінної $csv?
+function csv_in_array( $csv ) : array
 {
 	$out_array = array();
 	while( $data = fgetcsv( $csv ) )
@@ -101,7 +101,7 @@ function csv_work( string $path ) : array
 	return csv_in_array( is_open( $path ) );
 }
 
-function create_file( string $path, string $name ) //Як задати resource у якості типу, що повертає функція?
+function create_file( string $path, string $name )
 {
 	chmod( $path, 0777 );
 	if( !$file = fopen( $path.$name, 'w' ) )
@@ -112,17 +112,17 @@ function create_file( string $path, string $name ) //Як задати resource 
 	return $file;
 }
 
-function write_data( $resource, array $array ) : void //Як задати resource у якості типу змінної $resource?
+function write_data( $resource, array $array ) : void
 {
 	fwrite( $resource, START );
 	foreach( $array as $inner_arr )
 	{
 		fwrite( $resource,
 		'<tr>'.
-		'<td>' . $inner_arr[ 'city' ] . '</td>' .
-		'<td>' . $inner_arr[ 'country' ] . '</td>' .
-		'<td>' . $inner_arr[ 'population' ] . '</td>' .
-		'<td>' . $inner_arr[ 'latitude' ] . ', ' . $inner_arr[ 'longitude' ] . '</td>' .
+			'<td>' . $inner_arr[ 'city' ] . '</td>' .
+			'<td>' . $inner_arr[ 'country' ] . '</td>' .
+			'<td>' . $inner_arr[ 'population' ] . '</td>' .
+			'<td>' . $inner_arr[ 'latitude' ] . ', ' . $inner_arr[ 'longitude' ] . '</td>' .
 		'</tr>');
 	}
 	fwrite( $resource, END );
