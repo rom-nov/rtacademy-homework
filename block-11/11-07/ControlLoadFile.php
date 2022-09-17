@@ -9,24 +9,25 @@ class ControlLoadFile
 	public function __construct( string $name )
 	{
 		$this -> name = $name;
-		$this -> is_empty();
-		$this -> set_mime();
+		$this -> is_empty() -> set_mime();
 	}
 
-	private function is_empty() : void
+	private function is_empty() : object
 	{
 		if( empty( $_FILES [ $this -> name ][ 'name' ] ) )
 		{
 			throw new Exception( 'Помилка. Необхідно завантажити файл.' );
 		}
+		return $this;
 	}
 
-	private function set_mime() : void
+	private function set_mime() : object
 	{
 		if( !( $this -> mime_type = mime_content_type( $_FILES[ $this -> name ][ 'tmp_name' ] ) ) )
 		{
 			throw new Exception( 'Помилка визначення типу завантажуваного файлу' );
 		}
+		return $this;
 	}
 
 	public function get_name() : string
