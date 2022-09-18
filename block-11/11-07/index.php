@@ -16,9 +16,9 @@
             <button class="form__btn" type="submit">Надіслати</button>
         </div>
         <?php
+        require 'ImageModifyAbstract.php';
+        require 'GDImageModify.php';
         require 'ControlLoadFile.php';
-        require 'GDImageModifyFile.php';
-        require 'SaveFile.php';
 
         function main( string $img_file ) : void
 		{
@@ -29,13 +29,13 @@
 					-> check_mimetypes()
 					-> is_oversize();
 
-				$img = ( new GDImageModifyFile( $file -> get_name() ) )
+				$img = ( new GDImageModify( $file -> get_name() ) )
 					-> check_size_img( 500 )
 					-> crop_instagram()
-					-> scale_img( 240, 300 );
+					-> scale_img( 240, 300 )
+                    -> save_file( time() );
 
-				SaveFile::save( $img -> get_img(), './', 'data/', time(), '.jpg' );
-				echo( '<img src="' . SaveFile::full_path() . '" width=auto height=auto>' );
+				echo( '<img src="' . $img -> full_path() . '" width=auto height=auto>' );
                 $img -> destroy();
 			}
             catch( Exception $error )

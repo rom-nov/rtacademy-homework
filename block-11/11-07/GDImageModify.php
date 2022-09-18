@@ -1,11 +1,7 @@
 <?php
 declare( strict_types = 1);
-class GDImageModifyFile
+class GDImageModify extends ImageModifyAbstract
 {
-	protected GdImage|bool $img = false;
-	protected int $width;
-	protected int $height;
-
 	public function __construct( $src_file )
 	{
 		switch( $_FILES[ $src_file ][ 'type' ] )
@@ -26,30 +22,6 @@ class GDImageModifyFile
 		}
 		$this -> width = imagesx( $this -> img );
 		$this -> height = imagesy( $this -> img );
-	}
-
-	public function get_img() : GdImage|bool
-	{
-		return $this -> img;
-	}
-
-	public function get_width() : int
-	{
-		return $this -> width;
-	}
-
-	public function get_height() : int
-	{
-		return $this -> height;
-	}
-
-	public function check_size_img( int $size ) : object
-	{
-		if( $this -> get_width() < $size || $this -> get_height() < $size )
-		{
-			throw new Exception( 'Ширина та висота зображення має бути більше' . $size . 'px.' );
-		}
-		return $this;
 	}
 
 	public function crop_instagram() : object
