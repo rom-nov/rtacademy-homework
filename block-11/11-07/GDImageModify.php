@@ -24,7 +24,7 @@ class GDImageModify extends ImageModifyAbstract
 		$this -> height = imagesy( $this -> img );
 	}
 
-	public function crop_instagram() : object
+	public function crop_instagram() : self
 	{
 		$width_output = $this -> width;
 		$height_output = round( $width_output * 1.25 );
@@ -38,7 +38,7 @@ class GDImageModify extends ImageModifyAbstract
 		return $this;
 	}
 
-	public function scale_img( int $width, int $height ) : object
+	public function scale_img( int $width, int $height ) : self
 	{
 		if( !( $this -> img = imagescale( $this -> img, $width, $height ) ) )
 		{
@@ -47,11 +47,12 @@ class GDImageModify extends ImageModifyAbstract
 		return $this;
 	}
 
-	public function destroy() : void
+	public function destroy() : self
 	{
 		if( $this -> img )
 		{
 			imagedestroy( $this -> img );
 		}
+		return $this;
 	}
 }

@@ -6,9 +6,9 @@ abstract class ImageModifyAbstract
 	protected int $height;
 	protected string $full_path;
 
-	abstract public function crop_instagram() : object;
-	abstract public function scale_img( int $width, int $height ) : object;
-	abstract public function destroy() : void;
+	abstract public function crop_instagram() : self;
+	abstract public function scale_img( int $width, int $height ) : self;
+	abstract public function destroy() : self;
 
 	public function get_width() : int
 	{
@@ -30,7 +30,7 @@ abstract class ImageModifyAbstract
 		return $this -> full_path;
 	}
 
-	public function check_size_img( int $size ) : object
+	public function check_size_img( int $size ) : self
 	{
 		if( $this -> get_width() < $size || $this -> get_height() < $size )
 		{
@@ -39,7 +39,7 @@ abstract class ImageModifyAbstract
 		return $this;
 	}
 
-	public function save_file( int|string $name, string $type = '.jpg', string $path = './', string $dir = 'data/' ) : object
+	public function save_file( int|string $name, string $type = '.jpg', string $path = './', string $dir = 'data/' ) : self
 	{
 		$this -> full_path = $path . $dir . $name . $type;
 

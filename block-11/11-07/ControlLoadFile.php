@@ -1,6 +1,6 @@
 <?php
 declare( strict_types = 1);
-class ControlLoadFile
+class ControlLoadFile implements ControlLoadFileInterface
 {
 	protected string $name;
 	protected string $mime_type;
@@ -12,7 +12,7 @@ class ControlLoadFile
 		$this -> is_empty() -> set_mime();
 	}
 
-	private function is_empty() : object
+	protected function is_empty() : ControlLoadFileInterface
 	{
 		if( empty( $_FILES [ $this -> name ][ 'name' ] ) )
 		{
@@ -21,7 +21,7 @@ class ControlLoadFile
 		return $this;
 	}
 
-	private function set_mime() : object
+	protected function set_mime() : ControlLoadFileInterface
 	{
 		if( !( $this -> mime_type = mime_content_type( $_FILES[ $this -> name ][ 'tmp_name' ] ) ) )
 		{
@@ -40,7 +40,7 @@ class ControlLoadFile
 		return $this -> mime_type;
 	}
 
-	public function error_load() : object
+	public function error_load() : ControlLoadFileInterface
 	{
 		if( $_FILES[ $this -> name ][ 'error' ] !== UPLOAD_ERR_OK )
 		{
@@ -49,7 +49,7 @@ class ControlLoadFile
 		return $this;
 	}
 
-	public function check_mimetypes() : object
+	public function check_mimetypes() : ControlLoadFileInterface
 	{
 		if( !in_array( $this -> mime_type , [ 'image/jpeg', 'image/png', 'image/gif' ] ) )
 		{
@@ -58,7 +58,7 @@ class ControlLoadFile
 		return $this;
 	}
 
-	public function is_oversize() : object
+	public function is_oversize() : ControlLoadFileInterface
 	{
 		if( $_FILES[ $this -> name ][ 'size' ] > ControlLoadFile::MAX_SIZE )
 		{

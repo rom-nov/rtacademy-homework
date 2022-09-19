@@ -16,9 +16,7 @@
             <button class="form__btn" type="submit">Надіслати</button>
         </div>
         <?php
-        require 'ImageModifyAbstract.php';
-        require 'GDImageModify.php';
-        require 'ControlLoadFile.php';
+        spl_autoload_register( fn( $class_name ) => require $class_name . '.php' );
 
         function main( string $img_file ) : void
 		{
@@ -33,10 +31,10 @@
 					-> check_size_img( 500 )
 					-> crop_instagram()
 					-> scale_img( 240, 300 )
-                    -> save_file( time() );
+                    -> save_file( time() )
+                    -> destroy();
 
 				echo( '<img src="' . $img -> full_path() . '" width=auto height=auto>' );
-                $img -> destroy();
 			}
             catch( Exception $error )
 			{
@@ -47,7 +45,7 @@
 
         //===== main script
 
-        if( empty( $_FILES ) & empty( $_POST ) )
+        if( empty( $_FILES ) && empty( $_POST ) )
         {
             exit();
         }
