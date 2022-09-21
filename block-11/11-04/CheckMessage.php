@@ -6,7 +6,7 @@ class CheckMessage
 	protected string $email = '';
 	protected string $message = '';
 	protected string $agree = '';
-	protected const REGEXP_FULLNAME = "~([А-ЯІЇЄҐа-яіїєґ]+['-]?[А-ЯІЇЄҐа-яіїєґ]+)+\s([А-ЯІЇЄҐа-яіїєґ]+['-]?[А-ЯІЇЄҐа-яіїєґ]+)+~";
+	protected const REGEXP_FULLNAME = '~([А-ЯІЇЄҐа-яіїєґ]+[\'-]?[А-ЯІЇЄҐа-яіїєґ]+)+\s([А-ЯІЇЄҐа-яіїєґ]+[\'-]?[А-ЯІЇЄҐа-яіїєґ]+)+~';
 	protected const REGEXP_EMAIL = '~[A-Za-z0-9._%+-]+@[A-Za-z0-9-.]+.[A-Za-z]{2,4}~';
 
 	public function __construct()
