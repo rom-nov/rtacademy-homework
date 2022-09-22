@@ -17,7 +17,6 @@
         </div>
         <?php
         spl_autoload_register( fn( $class_name ) => require $class_name . '.php' );
-
         function main( string $img_file ) : void
 		{
 			try
@@ -31,7 +30,7 @@
 
                 echo phpinfo();
 
-/*
+                /*
 				$img = ( new GDImageModify( $file -> get_name() ) )
 					-> check_size_img( 500 )
 					-> crop_instagram()
@@ -40,7 +39,7 @@
                     -> destroy();
 
 				echo( '<img src="' . $img -> full_path() . '" width=auto height=auto>' );
-*/
+                */
 			}
             catch( Exception $error )
 			{
