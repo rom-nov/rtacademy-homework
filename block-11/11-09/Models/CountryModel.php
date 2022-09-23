@@ -7,7 +7,6 @@ class CountryModel
 	{
 		try
 		{
-			//$host = '127.0.0.1';
 			$host = 'rtacademy_database_mariadb';
 			$port = '3306';
 			$dbname = 'helloworld';
