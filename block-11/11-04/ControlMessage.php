@@ -1,6 +1,6 @@
 <?php
 declare( strict_types = 1 );
-class CheckMessage
+class ControlMessage
 {
 	protected string $fullname = '';
 	protected string $email = '';
@@ -42,8 +42,10 @@ class CheckMessage
 
 	public function check() : self
 	{
-		$this -> check_fullname() -> check_email() -> check_message();
-		return $this;
+		return $this -> check_fullname()
+			  		 -> check_email()
+			  		 -> check_message()
+			  		 -> check_agree();
 	}
 
 	protected function is_empty( string $value ) : void
@@ -76,7 +78,16 @@ class CheckMessage
 	{
 		if( ( strlen( $this -> message ) < 3 || strlen( $this -> message ) > 200 ) )
 		{
-			throw new Exception( 'Обсяг повідомлення має бути від 3 до 200 символів' );
+			throw new Exception( 'Повідомлення має бути від 3 до 200 символів' );
+		}
+		return $this;
+	}
+
+	protected function check_agree() : self
+	{
+		if( $this -> agree !== 'yes' )
+		{
+			throw new Exception( 'Погодьтесь на отримання спам-повідомлень' );
 		}
 		return $this;
 	}

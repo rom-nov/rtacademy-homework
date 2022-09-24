@@ -1,4 +1,8 @@
-<?php declare( strict_types = 1 ); ?>
+<?php
+declare( strict_types = 1 );
+spl_autoload_register( fn( $class ) => require $class.'.php');
+Main::start();
+?>
 <!doctype html>
 <html lang="uk">
 <head>
@@ -32,25 +36,17 @@
 		</div>
 	</form>
     <script src="script.js"></script>
-<?php
-require 'CheckMessage.php';
-$message = '';
-try
-{
-	if( $_POST )
-	{
-		$message = ( new CheckMessage() ) -> check();
-	}
-	if( $message )
-	{
-        echo( "<div class='user-name'>{$message -> get_fullname()} &lt;{$message -> get_email()}&gt;</div>".
-              "<div class='user-text'>{$message -> get_message()}</div>" );
-	}
-}
-catch( Exception $error )
-{
-	echo( "<div class='user-error'>{$error -> getMessage()}</div>" );
-}
-?>
+    <?php
+    $result = Main::result_message();
+    $error = Main::error_message();
+    if( $error )
+    {
+        echo $error;
+    }
+    if( $result )
+    {
+        echo $result;
+    }
+    ?>
 </body>
 </html>

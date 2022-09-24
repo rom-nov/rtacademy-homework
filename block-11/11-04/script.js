@@ -2,11 +2,11 @@ const regexpName = /^((([а-яіїєґ])+([\`\-])?([а-яіїєґ])+)+)\s((([а-
       regexpEmail = /[A-Z0-9\.\_\%\+\-]+\@[A-Z0-9\-\.]+\.[A-Z]{2,4}/i;
 
 const formData = {
-    fullName  : { id: 'fullname',  type: 'text',     name:'Повне імʼя',        required: true,  min: 5,    max: 64,   regexp: regexpName },
-    email     : { id: 'email',     type: 'email',    name:'Email',             required: true,  min: 6,    max: 255,  regexp: regexpEmail },
-    message   : { id: 'message',   type: 'textarea', name:'Повідомлення',      required: true,  min: 2,    max: 200,  regexp: null },
-    rule      : { id: 'agree',     type: 'checkbox', name:'Спам-повідомлення', required: false, min: null, max: null, regexp: null },
-    btnSubmit : { id: 'btn-submit', type: 'submit',  name:'Надіслати',         required: false, min: null, max: null, regexp: null },
+    fullName  : { id: 'fullname',   type: 'text',     name:'Повне імʼя',        required: true,  min: 5,    max: 64,   regexp: regexpName },
+    email     : { id: 'email',      type: 'email',    name:'Email',             required: true,  min: 6,    max: 255,  regexp: regexpEmail },
+    message   : { id: 'message',    type: 'textarea', name:'Повідомлення',      required: true,  min: 2,    max: 200,  regexp: null },
+    rule      : { id: 'agree',      type: 'checkbox', name:'Спам-повідомлення', required: true,  min: null, max: null, regexp: null },
+    btnSubmit : { id: 'btn-submit', type: 'submit',   name:'Надіслати',         required: false, min: null, max: null, regexp: null },
     setElements() {
         for( const key in this )
         {
@@ -44,8 +44,6 @@ function sendMessage( event )
         event.preventDefault();
         return;
     }
-
-    // showPopUp( document.getElementById( 'form' ), 'Надіслати повідомлення?', '', false, true, true );
 }
 
 function blockUnblockSubmit()
