@@ -2,9 +2,10 @@
 declare( strict_types = 1 );
 class Main
 {
-	protected static ?ControlLoadFileInterface $file = null;
+	protected static ControlLoadFileInterface $file;
 	protected static ?ImageModifyInterface $img = null;
 	protected static string $error_message = '';
+	protected static string $image_path = '';
 
 	protected const IMG_SIZE = 500;
 	protected const IMG_WIDTH = 240;
@@ -30,6 +31,8 @@ class Main
 				-> scale_img( self::IMG_WIDTH, self::IMG_HEIGHT )
 				-> save_file( strval( time() ) )
 				-> destroy();
+
+			self::$image_path = self::$img -> full_path();
 		}
 		catch( Exception $error )
 		{
@@ -39,11 +42,7 @@ class Main
 
 	public static function path_img() : string
 	{
-		if( self::$img )
-		{
-			return self::$img -> full_path();
-		}
-		return '';
+		return self::$image_path;
 	}
 
 	public static function get_error() : string

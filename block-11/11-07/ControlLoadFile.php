@@ -5,9 +5,6 @@ class ControlLoadFile implements ControlLoadFileInterface
 	protected string $file;
 	protected string $mime_type;
 
-	protected const MAX_SIZE = 10485760;
-	protected const TYPE = [ 'image/jpeg', 'image/png', 'image/gif' ];
-
 	public function __construct( string $file )
 	{
 		$this -> file = $file;
@@ -56,7 +53,7 @@ class ControlLoadFile implements ControlLoadFileInterface
 
 	public function check_mimetypes() : ControlLoadFileInterface
 	{
-		if( !in_array( $this -> mime_type, self::TYPE ) )
+		if( !in_array( $this -> mime_type, self::TYPE_MIMY ) )
 		{
 			throw new Exception( 'Помилка. Файл повинен мати формат JPEG / PNG / GIF.' );
 		}

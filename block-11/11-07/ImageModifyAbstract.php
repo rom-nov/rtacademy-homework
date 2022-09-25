@@ -7,10 +7,6 @@ abstract class ImageModifyAbstract implements ImageModifyInterface
 	protected int $height;
 	protected string $full_path;
 
-	protected const TYPE = '.jpg';
-	protected const PATH = './';
-	protected const DIR = 'data/';
-
 	abstract public function crop_instagram() : ImageModifyInterface;
 	abstract public function scale_img( int $width, int $height ) : ImageModifyInterface;
 	abstract public function destroy() : ImageModifyInterface;
