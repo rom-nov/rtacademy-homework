@@ -51,9 +51,9 @@ class ControlLoadFile implements ControlLoadFileInterface
 		return $this;
 	}
 
-	public function check_mimetypes() : ControlLoadFileInterface
+	public function check_mimetypes( array $mimy_type) : ControlLoadFileInterface
 	{
-		if( !in_array( $this -> mime_type, self::TYPE_MIMY ) )
+		if( !in_array( $this -> mime_type, $mimy_type ) )
 		{
 			throw new Exception( 'Помилка. Файл повинен мати формат JPEG / PNG / GIF.' );
 		}
@@ -61,11 +61,11 @@ class ControlLoadFile implements ControlLoadFileInterface
 		return $this;
 	}
 
-	public function is_oversize() : ControlLoadFileInterface
+	public function is_oversize( int $max_size ) : ControlLoadFileInterface
 	{
-		if( $_FILES[ $this -> file ][ 'size' ] > self::MAX_SIZE )
+		if( $_FILES[ $this -> file ][ 'size' ] > $max_size )
 		{
-			throw new Exception( 'Помилка. Файл повинен бути менше ' . self::MAX_SIZE . ' байт.' );
+			throw new Exception( 'Помилка. Файл повинен бути менше ' . $max_size . ' байт.' );
 		}
 
 		return $this;

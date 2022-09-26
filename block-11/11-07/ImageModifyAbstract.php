@@ -41,7 +41,7 @@ abstract class ImageModifyAbstract implements ImageModifyInterface
 		return $this;
 	}
 
-	public function save_file( string $name, string $type = self::TYPE, string $path = self::PATH, string $dir = self::DIR ) : ImageModifyInterface
+	public function save_file( string $name, string $type, string $path, string $dir ) : ImageModifyInterface
 	{
 		$this -> full_path = $path . $dir . $name . $type;
 
