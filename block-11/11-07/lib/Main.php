@@ -3,8 +3,6 @@ declare( strict_types = 1 );
 namespace lib;
 class Main
 {
-	protected static ControlLoadFileInterface $file;
-	protected static ?ImageModifyInterface $img = null;
 	protected static string $error_message = '';
 	protected static string $image_path = '';
 
@@ -26,19 +24,19 @@ class Main
 				return;
 			}
 
-			self::$file = ( new ControlLoadFile( $img_file ) )
+			$file = ( new ControlLoadFile( $img_file ) )
 				-> error_load()
 				-> check_mimetypes( self::TYPE_MIMY )
 				-> is_oversize( self::MAX_SIZE );
 
-			self::$img = ( new GDImageModify( self::$file -> get_name() ) )
+			$img = ( new GDImageModify( $file -> get_name() ) )
 				-> check_size_img( self::MIN_SIZE_IMG )
 				-> crop_instagram()
 				-> scale_img( self::RESULT_IMG_WIDTH, self::RESULT_IMG_HEIGHT )
 				-> save_file( strval( time() ), self::RESULT_IMG_TYPE, self::SAVE_PATH, self::SAVE_DIR )
 				-> destroy();
 
-			self::$image_path = self::$img -> full_path();
+			self::$image_path = $img -> full_path();
 		}
 		catch( \Exception $error )
 		{
