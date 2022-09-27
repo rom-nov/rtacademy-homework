@@ -1,5 +1,6 @@
 <?php
 declare( strict_types = 1);
+namespace lib;
 class GDImageModify extends ImageModifyAbstract
 {
 	public function __construct( $src_file )
@@ -19,7 +20,7 @@ class GDImageModify extends ImageModifyAbstract
 
 		if( !$this -> img )
 		{
-			throw new Exception( 'Помилка. Не вдалося створити зображення.' );
+			throw new \Exception( 'Помилка. Не вдалося створити зображення.' );
 		}
 
 		$this -> width = imagesx( $this -> img );
@@ -36,7 +37,7 @@ class GDImageModify extends ImageModifyAbstract
 
 		if( !$this -> img )
 		{
-			throw new Exception( 'Не вдалося обробити зображення.' );
+			throw new \Exception( 'Не вдалося обробити зображення.' );
 		}
 
 		return $this;
@@ -46,7 +47,7 @@ class GDImageModify extends ImageModifyAbstract
 	{
 		if( !( $this -> img = imagescale( $this -> img, $width, $height ) ) )
 		{
-			throw new Exception( 'Не вдалося обробити зображення.' );
+			throw new \Exception( 'Не вдалося обробити зображення.' );
 		}
 
 		return $this;

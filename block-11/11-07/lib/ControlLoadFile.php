@@ -1,5 +1,6 @@
 <?php
 declare( strict_types = 1);
+namespace lib;
 class ControlLoadFile implements ControlLoadFileInterface
 {
 	protected string $file;
@@ -15,7 +16,7 @@ class ControlLoadFile implements ControlLoadFileInterface
 	{
 		if( empty( $_FILES [ $this -> file ][ 'name' ] ) )
 		{
-			throw new Exception( 'Помилка. Необхідно завантажити файл.' );
+			throw new \Exception( 'Помилка. Необхідно завантажити файл.' );
 		}
 
 		return $this;
@@ -25,7 +26,7 @@ class ControlLoadFile implements ControlLoadFileInterface
 	{
 		if( !( $this -> mime_type = mime_content_type( $_FILES[ $this -> file ][ 'tmp_name' ] ) ) )
 		{
-			throw new Exception( 'Помилка визначення типу завантажуваного файлу' );
+			throw new \Exception( 'Помилка визначення типу завантажуваного файлу' );
 		}
 
 		return $this;
@@ -45,7 +46,7 @@ class ControlLoadFile implements ControlLoadFileInterface
 	{
 		if( $_FILES[ $this -> file ][ 'error' ] !== UPLOAD_ERR_OK )
 		{
-			throw new Exception( 'Сталася помилка під час завантаження файлу.' );
+			throw new \Exception( 'Сталася помилка під час завантаження файлу.' );
 		}
 
 		return $this;
@@ -55,7 +56,7 @@ class ControlLoadFile implements ControlLoadFileInterface
 	{
 		if( !in_array( $this -> mime_type, $mimy_type ) )
 		{
-			throw new Exception( 'Помилка. Файл повинен мати формат JPEG / PNG / GIF.' );
+			throw new \Exception( 'Помилка. Файл повинен мати формат JPEG / PNG / GIF.' );
 		}
 
 		return $this;
@@ -65,7 +66,7 @@ class ControlLoadFile implements ControlLoadFileInterface
 	{
 		if( $_FILES[ $this -> file ][ 'size' ] > $max_size )
 		{
-			throw new Exception( 'Помилка. Файл повинен бути менше ' . $max_size . ' байт.' );
+			throw new \Exception( 'Помилка. Файл повинен бути менше ' . $max_size . ' байт.' );
 		}
 
 		return $this;

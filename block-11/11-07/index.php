@@ -1,7 +1,7 @@
 <?php
 declare( strict_types = 1);
-spl_autoload_register( fn( $class_name ) => require $class_name . '.php' );
-Main::start( 'img' );
+spl_autoload_register( fn( $class_name ) => require './' . str_replace('\\', '/' ,$class_name) . '.php' );
+\lib\Main::start( 'img' );
 ?>
 <!doctype html>
 <html lang="uk">
@@ -21,8 +21,8 @@ Main::start( 'img' );
         </div>
     </form>
     <?php
-    $result = Main::path_img();
-    $error = Main::get_error();
+    $result = \lib\Main::path_img();
+    $error = \lib\Main::get_error();
     if( $result )
 	{
 		echo( '<img class="image" src="' . $result . '" width=auto height=auto>' );

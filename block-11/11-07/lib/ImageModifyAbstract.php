@@ -1,8 +1,9 @@
 <?php
 declare( strict_types = 1);
+namespace lib;
 abstract class ImageModifyAbstract implements ImageModifyInterface
 {
-	protected GdImage | bool $img = false;
+	protected \GdImage | bool $img = false;
 	protected int $width;
 	protected int $height;
 	protected string $full_path;
@@ -21,7 +22,7 @@ abstract class ImageModifyAbstract implements ImageModifyInterface
 		return $this -> height;
 	}
 
-	public function get_img() : GdImage | bool
+	public function get_img() : \GdImage | bool
 	{
 		return $this -> img;
 	}
@@ -35,7 +36,7 @@ abstract class ImageModifyAbstract implements ImageModifyInterface
 	{
 		if( $this -> get_width() < $size || $this -> get_height() < $size )
 		{
-			throw new Exception( 'Ширина та висота зображення має бути більше ' . $size . 'px.' );
+			throw new \Exception( 'Ширина та висота зображення має бути більше ' . $size . 'px.' );
 		}
 
 		return $this;
@@ -54,7 +55,7 @@ abstract class ImageModifyAbstract implements ImageModifyInterface
 
 		if( !imagejpeg( $this -> img, $this -> full_path ) )
 		{
-			throw new Exception( 'Помилка. Не вдалося зберегти файл.' );
+			throw new \Exception( 'Помилка. Не вдалося зберегти файл.' );
 		}
 
 		return $this;
