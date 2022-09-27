@@ -2,7 +2,6 @@
 declare( strict_types = 1);
 class Main
 {
-	protected ControlMessage $message;
 	protected static string $result_message = '';
 	protected static string $error_message = '';
 
