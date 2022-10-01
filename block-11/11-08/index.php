@@ -1,9 +1,13 @@
-<?php declare( strict_types = 1); ?>
+<?php
+declare( strict_types = 1);
+spl_autoload_register( fn( $class_name ) => require './' . str_replace('\\', '/' ,$class_name) . '.php' );
+\lib\Main::start( 'img' );
+?>
 <!doctype html>
 <html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>11.7</title>
+    <title>11.8</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -15,47 +19,18 @@
         <div class="form__row">
             <button class="form__btn" type="submit">Надіслати</button>
         </div>
-        <?php
-        spl_autoload_register( fn( $class_name ) => require $class_name . '.php' );
-        function main( string $img_file ) : void
-		{
-			try
-			{
-				$file = ( new ControlLoadFile( $img_file ) )
-					-> error_load()
-					-> check_mimetypes()
-					-> is_oversize();
-
-                $img = new ImagickModify( $file -> get_name() );
-
-                echo phpinfo();
-
-                /*
-				$img = ( new GDImageModify( $file -> get_name() ) )
-					-> check_size_img( 500 )
-					-> crop_instagram()
-					-> scale_img( 240, 300 )
-                    -> save_file( time() )
-                    -> destroy();
-
-				echo( '<img src="' . $img -> full_path() . '" width=auto height=auto>' );
-                */
-			}
-            catch( Exception $error )
-			{
-				echo( '<div class="error">' . $error -> getMessage() . '</div>' );
-				exit();
-            }
-        }
-
-        //===== main script
-
-        if( empty( $_FILES ) && empty( $_POST ) )
-        {
-            exit();
-        }
-        main( 'img' );
-        ?>
     </form>
+    <?php
+    $result = \lib\Main::path_img();
+    $error = \lib\Main::get_error();
+    if( $result )
+	{
+		echo( '<img class="image" src="' . $result . '" width=auto height=auto>' );
+    }
+    if( $error )
+	{
+		echo( '<div class="error">' . $error . '</div>' );
+    }
+    ?>
 </body>
 </html>
