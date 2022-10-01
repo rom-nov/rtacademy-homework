@@ -26,7 +26,7 @@ class ControlLoadFile implements ControlLoadFileInterface
 	{
 		if( !( $this -> mime_type = mime_content_type( $_FILES[ $this -> file ][ 'tmp_name' ] ) ) )
 		{
-			throw new \Exception( 'Помилка визначення типу завантажуваного файлу' );
+			throw new \Exception( 'Помилка визначення типу завантажуваного файлу.' );
 		}
 
 		return $this;

@@ -20,7 +20,7 @@ class GDImageModify extends ImageModifyAbstract
 
 		if( !$this -> img )
 		{
-			throw new \Exception( 'Помилка. Не вдалося створити зображення.' );
+			throw new \Exception( 'Помилка. Не вдалось створити зображення.' );
 		}
 
 		$this -> width = imagesx( $this -> img );
@@ -37,7 +37,7 @@ class GDImageModify extends ImageModifyAbstract
 
 		if( !$this -> img )
 		{
-			throw new \Exception( 'Не вдалося обробити зображення.' );
+			throw new \Exception( 'Помилка. Не вдалось обробити зображення.' );
 		}
 
 		return $this;
@@ -47,7 +47,26 @@ class GDImageModify extends ImageModifyAbstract
 	{
 		if( !( $this -> img = imagescale( $this -> img, $width, $height ) ) )
 		{
-			throw new \Exception( 'Не вдалося обробити зображення.' );
+			throw new \Exception( 'Помилка. Не вдалось обробити зображення.' );
+		}
+
+		return $this;
+	}
+
+	public function save_file( string $name, string $type, string $path, string $dir ) : ImageModifyInterface
+	{
+		$this -> full_path = $path . $dir . $name . $type;
+
+		if( !file_exists( $path . $dir ) )
+		{
+			chmod( $path, 0777 );
+			mkdir( $path . $dir );
+			chmod( $path, 0775 );
+		}
+
+		if( !imagejpeg( $this -> img, $this -> full_path ) )
+		{
+			throw new \Exception( 'Помилка. Не вдалось зберегти файл.' );
 		}
 
 		return $this;
