@@ -3,7 +3,11 @@
 namespace App\Repository;
 
 use App\Entity\Post;
+//use App\Entity\PostCover;
+//use App\Entity\PostCategory;
+//use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+//use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -38,6 +42,18 @@ class PostRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+
+	public function getPosts() : array//Paginator
+	{
+		$query =  $this -> createQueryBuilder( 'post' )
+			-> where( 'post.status = :val' )
+			-> setParameter( 'val', 'published' )
+			-> orderBy( 'post.id', 'ASC' )
+			-> setMaxResults( 12 )
+			-> getQuery();
+
+		return $query -> execute();//new Paginator( $query );
+	}
 
 //    /**
 //     * @return Post[] Returns an array of Post objects
