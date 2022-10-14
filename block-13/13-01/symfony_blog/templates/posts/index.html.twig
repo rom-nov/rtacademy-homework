@@ -1,0 +1,228 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<main class="main _container">
+    <section class="main__section-title">
+        <h4 class="title-small">Explore.Discover.Share</h4>
+        <h1 class="title-main">Start Your Journey</h1>
+    </section>
+    <section class="slider-main">
+        <div class="slider-main__wrapper">
+            <picture class="slider-main__image">
+                <!--
+                1200px = 75rem
+                1199px = 74.94rem
+                992px = 57.5rem
+                460px = 28.75rem
+                -->
+                <source media="(max-width: 28.75rem)" srcset="images/460px/image-3.webp" type="image/webp">
+                <source media="(max-width: 28.75rem)" srcset="images/460px/image-3.jpg" type="image/jpeg">
+                <source media="(max-width: 57.5rem)" srcset="images/690px/image-3.webp" type="image/webp">
+                <source media="(max-width: 57.5rem)" srcset="images/690px/image-3.jpg" type="image/jpeg">
+                <source media="(max-width: 74.94rem)" srcset="images/910px/image-3.webp" type="image/webp">
+                <source media="(max-width: 74.94rem)" srcset="images/910px/image-3.jpg" type="image/jpeg">
+                <source media="(min-width: 75rem)" srcset="images/1110px/image-3.webp" type="image/webp">
+                <source media="(min-width: 75rem)" srcset="images/1110px/image-3.jpg" type="image/jpeg">
+                <img src="images/460px/image-3.jpg" alt="Mountains and lake">
+            </picture>
+            <div class="slider__meta">
+                <h3 class="slider-main__category category">
+                    <a class="category__link" href="#">Nature</a>
+                </h3>
+                <h2 class="slider-main__title title-post">
+                    <a class="title-post__link" href="#">Explore New Places</a>
+                </h2>
+                <a class="link-post" href="#">read more</a>
+            </div>
+            <div class="slider-main__control">
+                <span class="control-btn control-btn--left">&lt;</span>
+                <span class="control-btn control-btn--right">&gt;</span>
+            </div>
+        </div>
+    </section>
+    {% if posts|length > 0 %}
+    <section class="main__grid grid screen">
+        <div class="grid__wrapper">
+        {% for key in posts|keys %}
+            {% if key == 0 or key == 4 or key == 8  %}
+                <div class="grid__item grid__item--big">
+                    <picture>
+                        <source media="(max-width: 28.75rem)" srcset={{ asset('images/460px/' ~ posts[key].cover.filename ~ '.webp') }} type="image/webp">
+                        <source media="(max-width: 28.75rem)" srcset={{ asset('images/460px/' ~ posts[key].cover.filename ~ '.jpg') }} type="image/jpeg">
+                        <source media="(max-width: 57.5rem)" srcset={{ asset('images/690px/' ~ posts[key].cover.filename ~ '.webp') }} type="image/webp">
+                        <source media="(max-width: 57.5rem)" srcset={{ asset('images/690px/' ~ posts[key].cover.filename ~ '.jpg') }} type="image/jpeg">
+                        <source media="(max-width: 74.94rem)" srcset={{ asset('images/910px/' ~ posts[key].cover.filename ~ '.webp') }} type="image/webp">
+                        <source media="(max-width: 74.94rem)" srcset={{ asset('images/910px/' ~ posts[key].cover.filename ~ '.jpg') }} type="image/jpeg">
+                        <source media="(min-width: 75rem)" srcset={{ asset('images/1110px/' ~ posts[key].cover.filename ~ '.webp') }} type="image/webp">
+                        <source media="(min-width: 75rem)" srcset={{ asset('images/1110px/' ~ posts[key].cover.filename ~ '.jpg') }} type="image/jpeg">
+                        <img src={{ asset('images/460px/' ~ posts[key].cover.filename ~ '.jpg') }} alt={{ posts[key].cover.title }}>
+                    </picture>
+                    <a class="grid__post-link" href="#"></a>
+                    <div class="grid__meta">
+                        <h3 class="grid__category category">
+                            <a class="category__link" href="#">{{ posts[key].category.title }}</a>
+                        </h3>
+                        <h2 class="grid__title title-post">
+                            <a class="title-post__link" href="#">{{ posts[key].title }}</a>
+                        </h2>
+                        <div class="grid__post-info">
+                            <a class="author-post" href="#">{{ posts[key].author.firstname ~ ' ' ~ posts[key].author.lastname }}</a>
+                            <time class="date-post" datetime="{{ posts[key].publishDate|date('c') }}">{{ posts[key].publishDate|date('F d, Y') }}</time>
+                        </div>
+                        <a class="grid__link link-post" href="#">read more</a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="grid__item">
+                    <picture>
+                        <source media="(max-width: 28.75rem)" srcset={{ asset('images/460px/' ~ posts[key].cover.filename ~ '.webp') }} type="image/webp">
+                        <source media="(max-width: 28.75rem)" srcset={{ asset('images/460px/' ~ posts[key].cover.filename ~ '.jpg') }} type="image/jpeg">
+                        <source media="(max-width: 690rem)" srcset={{ asset('images/690px/' ~ posts[key].cover.filename ~ '.webp') }} type="image/webp">
+                        <source media="(max-width: 690rem)" srcset={{ asset('images/690px/' ~ posts[key].cover.filename ~ '.jpg') }} type="image/jpeg">
+                        <source media="(min-width: 690rem)" srcset={{ asset('images/690px/' ~ posts[key].cover.filename ~ '.webp') }} type="image/webp">
+                        <source media="(min-width: 690rem)" srcset={{ asset('images/690px/' ~ posts[key].cover.filename ~ '.jpg') }} type="image/jpeg">
+                        <img src={{ asset('images/460px/' ~ posts[key].cover.filename ~ '.jpg') }} alt={{ posts[key].cover.title }}>
+                    </picture>
+                    <a class="grid__post-link" href="#"></a>
+                    <div class="grid__meta">
+                        <h3 class="grid__category category">
+                            <a class="category__link" href="#">{{ posts[key].category.title }}</a>
+{#                            <a class="category__link" href="#">Travel</a>#}
+                        </h3>
+                        <h2 class="grid__title title-post title-post--small">
+                            <a class="title-post__link" href="#">{{ posts[key].title }}</a>
+                        </h2>
+                        <div class="grid__post-info">
+                            <a class="author-post" href="#">{{ posts[key].author.firstname ~ ' ' ~ posts[key].author.lastname }}</a>
+                            <time class="date-post" datetime="{{ posts[key].publishDate|date('c') }}">{{ posts[key].publishDate|date('F d, Y') }}</time>
+                        </div>
+                        <a class="grid__link link-post" href="#">read more</a>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+{#    <nav class="pagination">#}
+{#        <ul class="pagination__list">#}
+{#            <li class="pagination__item"><a class="pagination__link" href="#"><<</a></li>#}
+{#            <li class="pagination__item pagination__current"><a class="pagination__link" href="#">1</a></li>#}
+{#            <li class="pagination__item"><a class="pagination__link" href="#">2</a></li>#}
+{#            <li class="pagination__item"><a class="pagination__link" href="#">>></a></li>#}
+{#        </ul>#}
+{#    </nav>#}
+
+{#    <div class="print">#}
+{#        <div class="print__item">#}
+{#            <picture>#}
+{#                <source srcset="images/460px/image-2.webp" type="image/webp">#}
+{#                <source srcset="images/460px/image-2.jpg" type="image/jpeg">#}
+{#                <img src="images/460px/image-2.jpg" alt="Mountains and lake">#}
+{#            </picture>#}
+{#            <p class="print__title">Turn Heads with This Outfit</p>#}
+{#            <p><span class="print__author">April Smith</span><span class="print__time">January 17, 2022</span></p>#}
+{#        </div>#}
+{#        <div class="print__item">#}
+{#            <picture>#}
+{#                <source srcset="images/460px/image-1.webp" type="image/webp">#}
+{#                <source srcset="images/460px/image-1.jpg" type="image/jpeg">#}
+{#                <img src="images/460px/image-1.jpg" alt="Mountains and lake">#}
+{#            </picture>#}
+{#            <p class="print__title">Summer Vacation Ideas</p>#}
+{#            <p><span class="print__author">April Smith</span><span class="print__time">January 16, 2022</span></p>#}
+{#        </div>#}
+{#        <div class="print__item">#}
+{#            <picture>#}
+{#                <source srcset="images/460px/image-7.webp" type="image/webp">#}
+{#                <source srcset="images/460px/image-7.jpg" type="image/jpeg">#}
+{#                <img src="images/460px/image-7.jpg" alt="Mountains and lake">#}
+{#            </picture>#}
+{#            <p class="print__title">Photo Session in the Woods</p>#}
+{#            <p><span class="print__author">April Smith</span><span class="print__time">January 15, 2022</span></p>#}
+{#        </div>#}
+{#        <div class="print__item">#}
+{#            <picture>#}
+{#                <source srcset="images/460px/image-15.webp" type="image/webp">#}
+{#                <source srcset="images/460px/image-15.jpg" type="image/jpeg">#}
+{#                <img src="images/460px/image-15.jpg" alt="Mountains and lake">#}
+{#            </picture>#}
+{#            <p class="print__title">Charm and Magic</p>#}
+{#            <p><span class="print__author">April Smtih</span><span class="print__time">January 14, 2022</span></p>#}
+{#        </div>#}
+{#        <div class="print__item">#}
+{#            <picture>#}
+{#                <source srcset="images/460px/image-13.webp" type="image/webp">#}
+{#                <source srcset="images/460px/image-13.jpg" type="image/jpeg">#}
+{#                <img src="images/460px/image-13.jpg" alt="Mountains and lake">#}
+{#            </picture>#}
+{#            <p class="print__title">Morning Exercises</p>#}
+{#            <p><span class="print__author">April Smith</span><span class="print__time">January 13, 2022</span></p>#}
+{#        </div>#}
+{#        <div class="print__item">#}
+{#            <picture>#}
+{#                <source srcset="images/460px/image-3.webp" type="image/webp">#}
+{#                <source srcset="images/460px/image-3.jpg" type="image/jpeg">#}
+{#                <img src="images/460px/image-3.jpg" alt="Mountains and lake">#}
+{#            </picture>#}
+{#            <p class="print__title">Explore New Places</p>#}
+{#            <p><span class="print__author">April Smith</span><span class="print__time">January 12, 2022</span></p>#}
+{#        </div>#}
+{#        <div class="print__item">#}
+{#            <picture>#}
+{#                <source srcset="images/460px/image-11.webp" type="image/webp">#}
+{#                <source srcset="images/460px/image-11.jpg" type="image/jpeg">#}
+{#                <img src="images/460px/image-11.jpg" alt="Mountains and lake">#}
+{#            </picture>#}
+{#            <p class="print__title">Rainy Days</p>#}
+{#            <p><span class="print__author">April Smith</span><span class="print__time">January 11, 2022</span></p>#}
+{#        </div>#}
+{#        <div class="print__item">#}
+{#            <picture>#}
+{#                <source srcset="images/460px/image-10.webp" type="image/webp">#}
+{#                <source srcset="images/460px/image-10.jpg" type="image/jpeg">#}
+{#                <img src="images/460px/image-10.jpg" alt="Mountains and lake">#}
+{#            </picture>#}
+{#            <p class="print__title">Hot Air Balloons</p>#}
+{#            <p><span class="print__author">April Smith</span><span class="print__time">January 10, 2022</span></p>#}
+{#        </div>#}
+{#        <div class="print__item">#}
+{#            <picture>#}
+{#                <source srcset="images/460px/image-9.webp" type="image/webp">#}
+{#                <source srcset="images/460px/image-9.jpg" type="image/jpeg">#}
+{#                <img src="images/460px/image-9.jpg" alt="Mountains and lake">#}
+{#            </picture>#}
+{#            <p class="print__title">The Road</p>#}
+{#            <p><span class="print__author">April Smith</span><span class="print__time">January 9, 2022</span></p>#}
+{#        </div>#}
+{#        <div class="print__item">#}
+{#            <picture>#}
+{#                <source srcset="images/460px/image-8.webp" type="image/webp">#}
+{#                <source srcset="images/460px/image-8.jpg" type="image/jpeg">#}
+{#                <img src="images/460px/image-8.jpg" alt="Mountains and lake">#}
+{#            </picture>#}
+{#            <p class="print__title">Trip to Sea</p>#}
+{#            <p><span class="print__author">April Smith</span><span class="print__time">January 8, 2022</span></p>#}
+{#        </div>#}
+{#        <div class="print__item">#}
+{#            <picture>#}
+{#                <source srcset="images/460px/image-4.webp" type="image/webp">#}
+{#                <source srcset="images/460px/image-4.jpg" type="image/jpeg">#}
+{#                <img src="images/460px/image-4.jpg" alt="Mountains and lake">#}
+{#            </picture>#}
+{#            <p class="print__title">Travel Days</p>#}
+{#            <p><span class="print__author">April Smith</span><span class="print__time">January 7, 2022</span></p>#}
+{#        </div>#}
+{#        <div class="print__item">#}
+{#            <picture>#}
+{#                <source srcset="images/460px/image-5.webp" type="image/webp">#}
+{#                <source srcset="images/460px/image-5.jpg" type="image/jpeg">#}
+{#                <img src="images/460px/image-5.jpg" alt="Mountains and lake">#}
+{#            </picture>#}
+{#            <p class="print__title">Wearing White Dress</p>#}
+{#            <p><span class="print__author">April Smith</span><span class="print__time">January 6, 2022</span></p>#}
+{#        </div>#}
+{#    </div>#}
+</main>
+{% endblock %}
