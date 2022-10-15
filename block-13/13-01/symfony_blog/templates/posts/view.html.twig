@@ -64,7 +64,7 @@
         </div>
         <div class="article__wrapper">
             <section class="article__content content">
-{#                {{ post.content|raw }}#}
+                {#{{ post.content|raw }}#}
                 {{ post.content|striptags }}
             </section>
             <div class="article__tags tags">
@@ -131,7 +131,7 @@
                             <div class="grid__meta">
                                 <h3 class="grid__category category">
                                     <a class="category__link" href="#">{{ post.category.title }}</a>
-{#                                    <a class="category__link" href="#">Travel</a>#}
+                                    {#<a class="category__link" href="#">Travel</a>#}
                                 </h3>
                                 <h2 class="grid__title title-post title-post--small">
                                     <a class="title-post__link" href="{{ path( 'post_view', { id: post.id, alias: post.alias } ) }}">{{ post.title }}</a>

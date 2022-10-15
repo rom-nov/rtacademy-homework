@@ -87,7 +87,7 @@
                     <div class="grid__meta">
                         <h3 class="grid__category category">
                             <a class="category__link" href="#">{{ posts[key].category.title }}</a>
-{#                            <a class="category__link" href="#">Travel</a>#}
+                            {#<a class="category__link" href="#">Travel</a> #}
                         </h3>
                         <h2 class="grid__title title-post title-post--small">
                             <a class="title-post__link" href="{{ path( 'post_view', { id: posts[key].id, alias: posts[key].alias } ) }}">{{ posts[key].title }}</a>
@@ -101,6 +101,14 @@
                 </div>
             {% endif %}
         {% endfor %}
+        </div>
+    </section>
+    {% else %}
+    <section class="main__grid grid screen">
+        <div class="grid__wrapper">
+            <div class="grid__item grid__item--big">
+                <p class="grid__title title-post title-post--small">No artical</p>
+            </div>
         </div>
     </section>
     {% endif %}
