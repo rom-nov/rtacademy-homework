@@ -29,6 +29,19 @@ class PostsController extends AbstractController
 				throw new \Exception( 'Error 404. Page not found' );
 			}
 			$random_posts = $postRepository -> getRandomPosts();
+
+			if( $post->getAlias() !== $alias )
+			{
+				return $this -> redirectToRoute(
+					'post_view',
+					[
+						'id'    => $post->getId(),
+						'alias' => $post->getAlias(),
+					],
+					301
+				);
+			}
+
 			return $this -> render( 'posts/view.html.twig',
 			[
 				'post' => $post,
