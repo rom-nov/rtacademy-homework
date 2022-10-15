@@ -7,14 +7,15 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital@0;1&family=Open+Sans:wght@400;700;800&display=swap" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('/css/style.css') }}">
         <title>Mara – Beautiful Photo</title>
+        {% block ldjson %}{% endblock %}
     </head>
     <body>
         <header class="header _container">
             <div class="header__row">
                 <div class="header__col logo">
-                    <a class="logo__link" href="#">mara</a>
+                    <a class="logo__link" href="{{ path('homepage') }}">mara</a>
                 </div>
                 <nav class="header__col menu">
                     <div class="menu__burger _burger-icon">
@@ -23,7 +24,7 @@
                     <div class="menu__wrapper">
                         <ul class="menu__body">
                             <li class="menu__item">
-                                <a class="menu__link _active" href="#">home</a>
+                                <a class="menu__link _active" href="{{ path('homepage') }}">home</a>
                             </li>
                             <li class="menu__item">
                                 <a class="menu__link" href="#">home styles</a>
@@ -96,14 +97,14 @@
                 <div class="footer__item collage">
                     <h4 class="collage__title title-small title-small--b title-small--w">Follow me</h4>
                     <div class="collage__wrapper">
-                        <a class="collage__link" href="#"><img class="collage__img" src="images/footer/01.jpg" alt="instagram photo"></a>
-                        <a class="collage__link" href="#"><img class="collage__img" src="images/footer/02.jpg" alt="instagram photo"></a>
-                        <a class="collage__link" href="#"><img class="collage__img" src="images/footer/03.jpg" alt="instagram photo"></a>
-                        <a class="collage__link" href="#"><img class="collage__img" src="images/footer/04.jpg" alt="instagram photo"></a>
-                        <a class="collage__link" href="#"><img class="collage__img" src="images/footer/05.jpg" alt="instagram photo"></a>
-                        <a class="collage__link" href="#"><img class="collage__img" src="images/footer/06.jpg" alt="instagram photo"></a>
-                        <a class="collage__link" href="#"><img class="collage__img" src="images/footer/07.jpg" alt="instagram photo"></a>
-                        <a class="collage__link" href="#"><img class="collage__img" src="images/footer/08.jpg" alt="instagram photo"></a>
+                        <a class="collage__link" href="#"><img class="collage__img" src="{{ asset( '/images/footer/01.jpg' ) }}" alt="instagram photo"></a>
+                        <a class="collage__link" href="#"><img class="collage__img" src="{{ asset( '/images/footer/02.jpg' ) }}" alt="instagram photo"></a>
+                        <a class="collage__link" href="#"><img class="collage__img" src="{{ asset( '/images/footer/03.jpg' ) }}" alt="instagram photo"></a>
+                        <a class="collage__link" href="#"><img class="collage__img" src="{{ asset( '/images/footer/04.jpg' ) }}" alt="instagram photo"></a>
+                        <a class="collage__link" href="#"><img class="collage__img" src="{{ asset( '/images/footer/05.jpg' ) }}" alt="instagram photo"></a>
+                        <a class="collage__link" href="#"><img class="collage__img" src="{{ asset( '/images/footer/06.jpg' ) }}" alt="instagram photo"></a>
+                        <a class="collage__link" href="#"><img class="collage__img" src="{{ asset( '/images/footer/07.jpg' ) }}" alt="instagram photo"></a>
+                        <a class="collage__link" href="#"><img class="collage__img" src="{{ asset( '/images/footer/08.jpg' ) }}" alt="instagram photo"></a>
                     </div>
                 </div>
                 <div class="footer__item tags">
@@ -166,6 +167,6 @@
                 <p class="footer__copyright">2022 © Mara. Designed by <a href="#">MatchThemes.com</a></p>
             </nav>
         </footer>
-        <script src="js/script.js"></script>
+        <script src="{{ asset('/js/script.js') }}"></script>
     </body>
 </html>

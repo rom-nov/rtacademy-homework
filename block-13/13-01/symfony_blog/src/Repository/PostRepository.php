@@ -3,9 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Post;
-//use App\Entity\PostCover;
-//use App\Entity\PostCategory;
-//use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 //use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
@@ -20,9 +17,17 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostRepository extends ServiceEntityRepository
 {
+	public const PAGE_COUNT = 12;
+	public const PAGE_RANDOM = 3;
+//	protected int $count_post = 0;
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Post::class);
+//		$this -> count_post = $this -> count(
+//		[
+//			'status' => 'published'
+//		]);
     }
 
     public function save(Post $entity, bool $flush = false): void
@@ -43,40 +48,41 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-	public function getPosts() : array//Paginator
+	public function getPosts() : ?array//Paginator
 	{
 		$query =  $this -> createQueryBuilder( 'post' )
 			-> where( 'post.status = :val' )
 			-> setParameter( 'val', 'published' )
 			-> orderBy( 'post.id', 'ASC' )
-			-> setMaxResults( 12 )
+			-> setMaxResults( self::PAGE_COUNT )
 			-> getQuery();
 
 		return $query -> execute();//new Paginator( $query );
 	}
 
-//    /**
-//     * @return Post[] Returns an array of Post objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+	public function getPost( int $id ) : ?Post
+	{
+		return $this -> findOneBy(
+			[
+				'id' => $id,
+				'status' => 'published'
+			]);
+	}
 
-//    public function findOneBySomeField($value): ?Post
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+	public function getRandomPosts() : ?array
+	{
+		$count_post = $this -> count(
+		[
+			'status' => 'published'
+		]);
+		return $this -> findBy(
+			[
+				'status' => 'published'
+	    	],
+			[
+				'id' => 'ASC'
+			],
+			self::PAGE_RANDOM, rand(1, $count_post - self::PAGE_RANDOM )
+		);
+	}
 }

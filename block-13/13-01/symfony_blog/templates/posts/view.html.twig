@@ -1,0 +1,164 @@
+{% extends 'base.html.twig' %}
+
+{% block ldjson %}
+<script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Article",
+        "author": {
+            "@type": "Person",
+            "name": "April Smith",
+            "email": "mailto:AprilSmith@gmail.com",
+            "telephone": "(425) 123-4567",
+            "url": "http://example.com/profile/aprilsmith"
+        },
+        "headline": "Turn Heads with This Outfit",
+        "articleSection": "Lifestyle",
+        "articleBody": "Maecenas ornare varius mauris eu commodo. Aenean nibh risus, rhoncus eget consectetur ac. Consectetur adipiscing elit. Vivamus auctor condimentum sem et gravida. Maecenas id enim pharetra, sollicitudin dui eget, blandit lorem. Nunc vitae blandit lectus. Donec lacinia magna sit amet arcu aliquet luctus. ",
+        "image": ["http://exemple.com/images/460px/image-2.jpg",
+                "http://exemple.com/images/460px/image-10.jpg",
+                "http://exemple.com/images/460px/image-11.jpg",
+                "http://exemple.com/images/460px/image-13.jpg",
+                "http://exemple.com/images/460px/image-3.jpg",
+                "http://exemple.com/images/460px/image-7.jpg"],
+        "datePublished": "2022-01-17T09:00:00+03:00",
+        "dateModified": "2022-01-20T09:00:00+03:00"
+    }
+</script>
+{% endblock %}
+
+{% block body %}
+    <main class="article _container">
+        <section class="article__image img-post screen">
+            <picture>
+                <source media="(max-width: 28.75rem)" srcset="{{ asset( 'images/460px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
+                <source media="(max-width: 28.75rem)" srcset="{{ asset( 'images/460px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
+                <source media="(max-width: 57.5rem)" srcset="{{ asset( 'images/690px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
+                <source media="(max-width: 57.5rem)" srcset="{{ asset( 'images/690px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
+                <source media="(max-width: 74.94rem)" srcset="{{ asset( 'images/910px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
+                <source media="(max-width: 74.94rem)" srcset="{{ asset( 'images/910px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
+                <source media="(min-width: 75rem)" srcset="{{ asset( 'images/1110px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
+                <source media="(min-width: 75rem)" srcset="{{ asset( 'images/1110px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
+                <img src="{{ asset( 'images/460px/' ~ post.cover.filename ~'.jpg' ) }}" alt="{{ post.cover.title }}">
+            </picture>
+            <span class="img-post__mask"></span>
+            <div class="img-post__meta">
+                <h3 class="img-post__category category">
+                    <a class="category__link" href="#">{{ post.category.title }}</a>
+                </h3>
+                <h1 class="img-post__title title-main title-main--w">{{ post.title }}</h1>
+                <div class="img-post__info">
+                    <a class="author-post" href="#">{{ post.author.firstname ~ ' ' ~ post.author.lastname }}</a>
+                    <time class="date-post" datetime="{{ post.publishDate|date('c') }}">{{ post.publishDate|date('F d, Y') }}</time>
+                </div>
+            </div>
+        </section>
+        <div class="print">
+            <picture>
+                <source srcset="{{ asset( 'images/460px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
+                <source srcset="{{ asset( 'images/460px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
+                <img src="{{ asset( 'images/460px/' ~ post.cover.filename ~'.jpg' ) }}" alt="{{ post.cover.title }}">
+            </picture>
+            <p class="print__title">{{ post.title }}</p>
+            <p><span class="print__author">{{ post.author.firstname ~ ' ' ~ post.author.lastname }}</span><span class="print__time">{{ post.publishDate|date('F d, Y') }}</span></p>
+        </div>
+        <div class="article__wrapper">
+            <section class="article__content content">
+{#                {{ post.content|raw }}#}
+                {{ post.content|striptags }}
+            </section>
+            <div class="article__tags tags">
+                <a class="tags__item tags__item--gray" href="#">hat</a>
+                <a class="tags__item tags__item--gray" href="#">outfit</a>
+                <a class="tags__item tags__item--gray" href="#">summer</a>
+            </div>
+            <section class="article__social social-links">
+                <h5 class="social-links__title title-small title-small--b">Share This</h5>
+                <nav class="social-links__nav social">
+                    <ul class="social__list">
+                        <li class="social__item social__item--gold">
+                            <a class="social__link social__link--facebook" href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                        </li>
+                        <li class="social__item social__item--gold">
+                            <a class="social__link social__link--twitter" href="#"><i class="fa-brands fa-twitter"></i></a>
+                        </li>
+                        <li class="social__item social__item--gold">
+                            <a class="social__link social__link--pinterest" href="#"><i class="fa-brands fa-pinterest"></i></a>
+                        </li>
+                    </ul>
+                </nav>
+            </section>
+            <section class="article__author author-info">
+                <h5 class="author-info__header title-small title-small--b">Written By</h5>
+                <div class="author-info__body">
+                    <div class="author-info__avatar">
+                        <picture>
+                            <source srcset="{{ asset( '/images/avatar/avatar-60px.webp' ) }}" type="image/webp">
+                            <source srcset="{{ asset( 'images/avatar/avatar-60px.jpg' ) }}" type="image/jpeg">
+                            <img src="{{ asset( '/images/avatar/avatar-60px.jpeg' ) }}" alt="Avatar author">
+                        </picture>
+                    </div>
+                    <div class="author-info__content ">
+                        <h4 class="author-info__title">
+                            <a href="#">{{ post.author.firstname ~ ' ' ~ post.author.lastname }}</a>
+                        </h4>
+                        <p class="author-info__text">This is the author's bio. Praesent placerat, nunc non consectetur ultricies, sem dui placerat elit, sed iaculis orci ligula quis magna. Aliquam at nulla auctor. Ut maximus nulla vel malesuada dapibus. Cum sociis natoque.</p>
+                        <nav class="author-info__social social-author">
+                            <ul class="social-author__list">
+                                <li class="social-author__item">
+                                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                                </li>
+                                <li class="social-author__item">
+                                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </section>
+        </div>
+        {% if random_posts|length > 0 %}
+            <section class="article__news grid">
+                <div class="grid__wrapper">
+                    {% for post in random_posts %}
+                        <div class="grid__item">
+                            <picture>
+                                <source media="(min-width: 1rem)" srcset="{{ asset( '/images/690px/' ~ post.cover.filename ~ '.webp' ) }}" type="image/webp">
+                                <source media="(min-width: 1rem)" srcset="{{ asset( '/images/690px/' ~ post.cover.filename ~ '.jpg' ) }}" type="image/jpeg">
+                                <img src="{{ asset( '/images/690px/' ~ post.cover.filename ~ '.jpg' ) }}" alt="{{ post.cover.title }}">
+                            </picture>
+                            <a class="grid__post-link" href="{{ path( 'post_view', { id: post.id, alias: post.alias } ) }}"></a>
+                            <div class="grid__meta">
+                                <h3 class="grid__category category">
+                                    <a class="category__link" href="#">{{ post.category.title }}</a>
+{#                                    <a class="category__link" href="#">Travel</a>#}
+                                </h3>
+                                <h2 class="grid__title title-post title-post--small">
+                                    <a class="title-post__link" href="{{ path( 'post_view', { id: post.id, alias: post.alias } ) }}">{{ post.title }}</a>
+                                </h2>
+                                <div class="grid__post-info">
+                                    <a class="author-post" href="#">{{ post.author.firstname ~ ' ' ~ post.author.lastname }}</a>
+                                    <time class="date-post" datetime="{{ post.publishDate|date('c') }}">{{ post.publishDate|date('F d, Y') }}</time>
+                                </div>
+                                <a class="grid__link link-post" href="{{ path( 'post_view', { id: post.id, alias: post.alias } ) }}">read more</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </section>
+        {% endif %}
+        <div class="article__wrapper">
+            <section class="article__comment comment">
+                <h5 class="comment__title title-small title-small--b">Leave a Comment</h5>
+                <form class="comment__form form" action="#" method="post">
+                    <ul>
+                        <li><textarea class="form__textarea" name="message" rows="7" placeholder="Comment"></textarea></li>
+                        <li><input class="form__username" type="text" name="user-name" placeholder="Name"></li>
+                        <li><input class="form__email" type="text" name="user-email" placeholder="Email"></li>
+                        <li><button class="btn" type="submit">Submit Comment</button></li>
+                    </ul>
+                </form>
+            </section>
+        </div>
+    </main>
+{% endblock %}
