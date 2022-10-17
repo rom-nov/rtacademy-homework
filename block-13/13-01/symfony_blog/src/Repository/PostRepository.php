@@ -19,6 +19,7 @@ class PostRepository extends ServiceEntityRepository
 {
 	public const PAGE_COUNT = 12;
 	public const PAGE_RANDOM = 3;
+	public const POST_STATUS = 'published';
 //	protected int $count_post = 0;
 
     public function __construct(ManagerRegistry $registry)
@@ -52,7 +53,7 @@ class PostRepository extends ServiceEntityRepository
 	{
 		$query =  $this -> createQueryBuilder( 'post' )
 			-> where( 'post.status = :val' )
-			-> setParameter( 'val', 'published' )
+			-> setParameter( 'val', self::POST_STATUS )
 			-> orderBy( 'post.id', 'ASC' )
 			-> setMaxResults( self::PAGE_COUNT )
 			-> getQuery();
@@ -65,7 +66,7 @@ class PostRepository extends ServiceEntityRepository
 		return $this -> findOneBy(
 			[
 				'id' => $id,
-				'status' => 'published'
+				'status' => self::POST_STATUS
 			]);
 	}
 
@@ -73,16 +74,29 @@ class PostRepository extends ServiceEntityRepository
 	{
 		$count_post = $this -> count(
 		[
-			'status' => 'published'
+			'status' => self::POST_STATUS
 		]);
 		return $this -> findBy(
 			[
-				'status' => 'published'
+				'status' => self::POST_STATUS
 	    	],
 			[
 				'id' => 'ASC'
 			],
 			self::PAGE_RANDOM, rand(1, $count_post - self::PAGE_RANDOM )
 		);
+	}
+
+	public function getTagPosts( int $id ) : ?array
+	{
+		$query =  $this -> createQueryBuilder( 'post' )
+			-> where( 'post.status = :val', 'post.category = :id' )
+			-> setParameter( 'val', self::POST_STATUS )
+			-> setParameter( 'id', $id )
+			-> orderBy( 'post.id', 'ASC' )
+			-> setMaxResults( self::PAGE_COUNT )
+			-> getQuery();
+
+		return $query -> execute();
 	}
 }

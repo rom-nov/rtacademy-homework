@@ -9,17 +9,27 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class PostsController extends AbstractController
 {
-	#[Route('/', name: 'homepage', methods: ['GET', 'HEAD'])]
+	#[ Route( '/', name: 'homepage', methods: ['GET', 'HEAD'] ) ]
     public function index( PostRepository $postRepository ) : ?Response
     {
 		$posts = $postRepository -> getPosts();
-        return $this -> render('posts/index.html.twig',
+        return $this -> render( 'posts/index.html.twig',
 		[
             'posts' => $posts,
         ]);
     }
 
-	#[Route('/post/{id}-{alias}', name: 'post_view', methods: ['GET', 'HEAD'])]
+	#[ Route( '/{id}-{tag}', name: 'tag', methods: ['GET', 'HEAD'] ) ]
+	public function index_tags( int $id, string $tag, PostRepository $postRepository ) : ?Response
+	{
+		$posts = $postRepository -> getTagPosts( $id );
+		return $this -> render( 'posts/index.html.twig',
+		[
+			'posts' => $posts,
+		]);
+	}
+
+	#[ Route( '/post/{id}-{alias}', name: 'post_view', methods: ['GET', 'HEAD'] ) ]
 	public function view( int $id, string $alias, PostRepository $postRepository ) : ?Response
 	{
 		try

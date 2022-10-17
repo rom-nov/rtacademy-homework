@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'base.html.twig'%}
 
 {% block body %}
 <main class="main _container">
@@ -45,61 +45,45 @@
         <div class="grid__wrapper">
         {% for key in posts|keys %}
             {% if key == 0 or key == 4 or key == 8  %}
-                <div class="grid__item grid__item--big">
-                    <picture>
-                        <source media="(max-width: 28.75rem)" srcset="{{ asset('images/460px/' ~ posts[key].cover.filename ~ '.webp') }}" type="image/webp">
-                        <source media="(max-width: 28.75rem)" srcset="{{ asset('images/460px/' ~ posts[key].cover.filename ~ '.jpg') }}" type="image/jpeg">
-                        <source media="(max-width: 57.5rem)" srcset="{{ asset('images/690px/' ~ posts[key].cover.filename ~ '.webp') }}" type="image/webp">
-                        <source media="(max-width: 57.5rem)" srcset="{{ asset('images/690px/' ~ posts[key].cover.filename ~ '.jpg') }}" type="image/jpeg">
-                        <source media="(max-width: 74.94rem)" srcset="{{ asset('images/910px/' ~ posts[key].cover.filename ~ '.webp') }}" type="image/webp">
-                        <source media="(max-width: 74.94rem)" srcset="{{ asset('images/910px/' ~ posts[key].cover.filename ~ '.jpg') }}" type="image/jpeg">
-                        <source media="(min-width: 75rem)" srcset="{{ asset('images/1110px/' ~ posts[key].cover.filename ~ '.webp') }}" type="image/webp">
-                        <source media="(min-width: 75rem)" srcset="{{ asset('images/1110px/' ~ posts[key].cover.filename ~ '.jpg') }}" type="image/jpeg">
-                        <img src="{{ asset('images/460px/' ~ posts[key].cover.filename ~ '.jpg') }}" alt="{{ posts[key].cover.title }}">
-                    </picture>
-                    <a class="grid__post-link" href="{{ path( 'post_view', { id: posts[key].id, alias: posts[key].alias } ) }}"></a>
-                    <div class="grid__meta">
-                        <h3 class="grid__category category">
-                            <a class="category__link" href="#">{{ posts[key].category.title }}</a>
-                        </h3>
-                        <h2 class="grid__title title-post">
-                            <a class="title-post__link" href="{{ path( 'post_view', { id: posts[key].id, alias: posts[key].alias } ) }}">{{ posts[key].title }}</a>
-                        </h2>
-                        <div class="grid__post-info">
-                            <a class="author-post" href="#">{{ posts[key].author.firstname ~ ' ' ~ posts[key].author.lastname }}</a>
-                            <time class="date-post" datetime="{{ posts[key].publishDate|date('c') }}">{{ posts[key].publishDate|date('F d, Y') }}</time>
-                        </div>
-                        <a class="grid__link link-post" href="{{ path( 'post_view', { id: posts[key].id, alias: posts[key].alias } ) }}">read more</a>
-                    </div>
-                </div>
+            <div class="grid__item grid__item--big">
+                <picture>
+                    <source media="(max-width: 28.75rem)" srcset="{{ asset('/images/460px/' ~ posts[key].cover.filename ~ '.webp') }}" type="image/webp">
+                    <source media="(max-width: 28.75rem)" srcset="{{ asset('/images/460px/' ~ posts[key].cover.filename ~ '.jpg') }}" type="image/jpeg">
+                    <source media="(max-width: 57.5rem)" srcset="{{ asset('/images/690px/' ~ posts[key].cover.filename ~ '.webp') }}" type="image/webp">
+                    <source media="(max-width: 57.5rem)" srcset="{{ asset('/images/690px/' ~ posts[key].cover.filename ~ '.jpg') }}" type="image/jpeg">
+                    <source media="(max-width: 74.94rem)" srcset="{{ asset('/images/910px/' ~ posts[key].cover.filename ~ '.webp') }}" type="image/webp">
+                    <source media="(max-width: 74.94rem)" srcset="{{ asset('/images/910px/' ~ posts[key].cover.filename ~ '.jpg') }}" type="image/jpeg">
+                    <source media="(min-width: 75rem)" srcset="{{ asset('/images/1110px/' ~ posts[key].cover.filename ~ '.webp') }}" type="image/webp">
+                    <source media="(min-width: 75rem)" srcset="{{ asset('/images/1110px/' ~ posts[key].cover.filename ~ '.jpg') }}" type="image/jpeg">
+                    <img src="{{ asset('/images/460px/' ~ posts[key].cover.filename ~ '.jpg') }}" alt="{{ posts[key].cover.title }}">
+                </picture>
             {% else %}
-                <div class="grid__item">
-                    <picture>
-                        <source media="(max-width: 28.75rem)" srcset="{{ asset('images/460px/' ~ posts[key].cover.filename ~ '.webp') }}" type="image/webp">
-                        <source media="(max-width: 28.75rem)" srcset="{{ asset('images/460px/' ~ posts[key].cover.filename ~ '.jpg') }}" type="image/jpeg">
-                        <source media="(max-width: 690rem)" srcset="{{ asset('images/690px/' ~ posts[key].cover.filename ~ '.webp') }}" type="image/webp">
-                        <source media="(max-width: 690rem)" srcset="{{ asset('images/690px/' ~ posts[key].cover.filename ~ '.jpg') }}" type="image/jpeg">
-                        <source media="(min-width: 690rem)" srcset="{{ asset('images/690px/' ~ posts[key].cover.filename ~ '.webp') }}" type="image/webp">
-                        <source media="(min-width: 690rem)" srcset="{{ asset('images/690px/' ~ posts[key].cover.filename ~ '.jpg') }}" type="image/jpeg">
-                        <img src="{{ asset('images/460px/' ~ posts[key].cover.filename ~ '.jpg') }}" alt="{{ posts[key].cover.title }}">
-                    </picture>
-                    <a class="grid__post-link" href="{{ path( 'post_view', { id: posts[key].id, alias: posts[key].alias } ) }}"></a>
-                    <div class="grid__meta">
-                        <h3 class="grid__category category">
-                            <a class="category__link" href="#">{{ posts[key].category.title }}</a>
-                            {#<a class="category__link" href="#">Travel</a> #}
-                        </h3>
-                        <h2 class="grid__title title-post title-post--small">
-                            <a class="title-post__link" href="{{ path( 'post_view', { id: posts[key].id, alias: posts[key].alias } ) }}">{{ posts[key].title }}</a>
-                        </h2>
-                        <div class="grid__post-info">
-                            <a class="author-post" href="#">{{ posts[key].author.firstname ~ ' ' ~ posts[key].author.lastname }}</a>
-                            <time class="date-post" datetime="{{ posts[key].publishDate|date('c') }}">{{ posts[key].publishDate|date('F d, Y') }}</time>
-                        </div>
-                        <a class="grid__link link-post" href="{{ path( 'post_view', { id: posts[key].id, alias: posts[key].alias } ) }}">read more</a>
-                    </div>
-                </div>
+            <div class="grid__item">
+                <picture>
+                    <source media="(max-width: 28.75rem)" srcset="{{ asset('/images/460px/' ~ posts[key].cover.filename ~ '.webp') }}" type="image/webp">
+                    <source media="(max-width: 28.75rem)" srcset="{{ asset('/images/460px/' ~ posts[key].cover.filename ~ '.jpg') }}" type="image/jpeg">
+                    <source media="(max-width: 690rem)" srcset="{{ asset('/images/690px/' ~ posts[key].cover.filename ~ '.webp') }}" type="image/webp">
+                    <source media="(max-width: 690rem)" srcset="{{ asset('/images/690px/' ~ posts[key].cover.filename ~ '.jpg') }}" type="image/jpeg">
+                    <source media="(min-width: 690rem)" srcset="{{ asset('/images/690px/' ~ posts[key].cover.filename ~ '.webp') }}" type="image/webp">
+                    <source media="(min-width: 690rem)" srcset="{{ asset('/images/690px/' ~ posts[key].cover.filename ~ '.jpg') }}" type="image/jpeg">
+                    <img src="{{ asset('/images/460px/' ~ posts[key].cover.filename ~ '.jpg') }}" alt="{{ posts[key].cover.title }}">
+                </picture>
             {% endif %}
+                <a class="grid__post-link" href="{{ path( 'post_view', { id: posts[key].id, alias: posts[key].alias } ) }}"></a>
+                <div class="grid__meta">
+                    <h3 class="grid__category category">
+                        <a class="category__link" href="{{ path( 'tag', { id: posts[key].category.id, tag: posts[key].category.title  } ) }}">{{ posts[key].category.title }}</a>
+                    </h3>
+                    <h2 class="grid__title title-post">
+                        <a class="title-post__link" href="{{ path( 'post_view', { id: posts[key].id, alias: posts[key].alias } ) }}">{{ posts[key].title }}</a>
+                    </h2>
+                    <div class="grid__post-info">
+                        <a class="author-post" href="#">{{ posts[key].author.firstname ~ ' ' ~ posts[key].author.lastname }}</a>
+                        <time class="date-post" datetime="{{ posts[key].publishDate|date('c') }}">{{ posts[key].publishDate|date('F d, Y') }}</time>
+                    </div>
+                    <a class="grid__link link-post" href="{{ path( 'post_view', { id: posts[key].id, alias: posts[key].alias } ) }}">read more</a>
+                </div>
+            </div>
         {% endfor %}
         </div>
     </section>
@@ -112,7 +96,6 @@
         </div>
     </section>
     {% endif %}
-
 {#    <nav class="pagination">#}
 {#        <ul class="pagination__list">#}
 {#            <li class="pagination__item"><a class="pagination__link" href="#"><<</a></li>#}
@@ -121,7 +104,6 @@
 {#            <li class="pagination__item"><a class="pagination__link" href="#">>></a></li>#}
 {#        </ul>#}
 {#    </nav>#}
-
 {#    <div class="print">#}
 {#        <div class="print__item">#}
 {#            <picture>#}

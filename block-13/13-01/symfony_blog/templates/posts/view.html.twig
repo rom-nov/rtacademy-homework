@@ -7,22 +7,15 @@
         "@type": "Article",
         "author": {
             "@type": "Person",
-            "name": "April Smith",
-            "email": "mailto:AprilSmith@gmail.com",
-            "telephone": "(425) 123-4567",
-            "url": "http://example.com/profile/aprilsmith"
+            "name": "{{ post.author.firstname ~ ' ' ~ post.author.lastname }}",
+            "email": "{{ post.author.email }}",
+            "url": "{{ path( 'homepage' ) }}"
         },
-        "headline": "Turn Heads with This Outfit",
-        "articleSection": "Lifestyle",
-        "articleBody": "Maecenas ornare varius mauris eu commodo. Aenean nibh risus, rhoncus eget consectetur ac. Consectetur adipiscing elit. Vivamus auctor condimentum sem et gravida. Maecenas id enim pharetra, sollicitudin dui eget, blandit lorem. Nunc vitae blandit lectus. Donec lacinia magna sit amet arcu aliquet luctus. ",
-        "image": ["http://exemple.com/images/460px/image-2.jpg",
-                "http://exemple.com/images/460px/image-10.jpg",
-                "http://exemple.com/images/460px/image-11.jpg",
-                "http://exemple.com/images/460px/image-13.jpg",
-                "http://exemple.com/images/460px/image-3.jpg",
-                "http://exemple.com/images/460px/image-7.jpg"],
-        "datePublished": "2022-01-17T09:00:00+03:00",
-        "dateModified": "2022-01-20T09:00:00+03:00"
+        "headline": "{{ post.title }}",
+        "articleSection": "{{ post.category.title }}",
+        "articleBody": "{{ post.content|striptags|slice(0,240) }}",
+        "image": [ "{{ asset( '/images/460px/' ~ post.cover.filename ~ '.jpg' ) }}" ],
+        "datePublished": "{{ post.publishDate|date('Y-m-d') ~ 'T' ~ post.publishDate|date('h:m:s') }}"
     }
 </script>
 {% endblock %}
@@ -31,20 +24,20 @@
     <main class="article _container">
         <section class="article__image img-post screen">
             <picture>
-                <source media="(max-width: 28.75rem)" srcset="{{ asset( 'images/460px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
-                <source media="(max-width: 28.75rem)" srcset="{{ asset( 'images/460px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
-                <source media="(max-width: 57.5rem)" srcset="{{ asset( 'images/690px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
-                <source media="(max-width: 57.5rem)" srcset="{{ asset( 'images/690px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
-                <source media="(max-width: 74.94rem)" srcset="{{ asset( 'images/910px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
-                <source media="(max-width: 74.94rem)" srcset="{{ asset( 'images/910px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
-                <source media="(min-width: 75rem)" srcset="{{ asset( 'images/1110px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
-                <source media="(min-width: 75rem)" srcset="{{ asset( 'images/1110px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
-                <img src="{{ asset( 'images/460px/' ~ post.cover.filename ~'.jpg' ) }}" alt="{{ post.cover.title }}">
+                <source media="(max-width: 28.75rem)" srcset="{{ asset( '/images/460px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
+                <source media="(max-width: 28.75rem)" srcset="{{ asset( '/images/460px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
+                <source media="(max-width: 57.5rem)" srcset="{{ asset( '/images/690px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
+                <source media="(max-width: 57.5rem)" srcset="{{ asset( '/images/690px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
+                <source media="(max-width: 74.94rem)" srcset="{{ asset( '/images/910px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
+                <source media="(max-width: 74.94rem)" srcset="{{ asset( '/images/910px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
+                <source media="(min-width: 75rem)" srcset="{{ asset( '/images/1110px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
+                <source media="(min-width: 75rem)" srcset="{{ asset( '/images/1110px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
+                <img src="{{ asset( '/images/460px/' ~ post.cover.filename ~'.jpg' ) }}" alt="{{ post.cover.title }}">
             </picture>
             <span class="img-post__mask"></span>
             <div class="img-post__meta">
                 <h3 class="img-post__category category">
-                    <a class="category__link" href="#">{{ post.category.title }}</a>
+                    <a class="category__link" href="{{ path( 'tag', { id: post.category.id, tag: post.category.title } ) }}">{{ post.category.title }}</a>
                 </h3>
                 <h1 class="img-post__title title-main title-main--w">{{ post.title }}</h1>
                 <div class="img-post__info">
@@ -55,9 +48,9 @@
         </section>
         <div class="print">
             <picture>
-                <source srcset="{{ asset( 'images/460px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
-                <source srcset="{{ asset( 'images/460px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
-                <img src="{{ asset( 'images/460px/' ~ post.cover.filename ~'.jpg' ) }}" alt="{{ post.cover.title }}">
+                <source srcset="{{ asset( '/images/460px/' ~ post.cover.filename ~'.webp' ) }}" type="image/webp">
+                <source srcset="{{ asset( '/images/460px/' ~ post.cover.filename ~'.jpg' ) }}" type="image/jpeg">
+                <img src="{{ asset( '/images/460px/' ~ post.cover.filename ~'.jpg' ) }}" alt="{{ post.cover.title }}">
             </picture>
             <p class="print__title">{{ post.title }}</p>
             <p><span class="print__author">{{ post.author.firstname ~ ' ' ~ post.author.lastname }}</span><span class="print__time">{{ post.publishDate|date('F d, Y') }}</span></p>
@@ -130,7 +123,7 @@
                             <a class="grid__post-link" href="{{ path( 'post_view', { id: post.id, alias: post.alias } ) }}"></a>
                             <div class="grid__meta">
                                 <h3 class="grid__category category">
-                                    <a class="category__link" href="#">{{ post.category.title }}</a>
+                                    <a class="category__link" href="{{ path( 'tag', { id: post.category.id, tag: post.category.title } ) }}">{{ post.category.title }}</a>
                                     {#<a class="category__link" href="#">Travel</a>#}
                                 </h3>
                                 <h2 class="grid__title title-post title-post--small">
