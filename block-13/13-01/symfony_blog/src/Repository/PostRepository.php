@@ -4,7 +4,6 @@ namespace App\Repository;
 
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-//use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -49,16 +48,17 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-	public function getPosts() : ?array//Paginator
+	public function getPosts( int $offset = 0 ) : ?array
 	{
 		$query =  $this -> createQueryBuilder( 'post' )
 			-> where( 'post.status = :val' )
 			-> setParameter( 'val', self::POST_STATUS )
 			-> orderBy( 'post.id', 'ASC' )
 			-> setMaxResults( self::PAGE_COUNT )
+			->setFirstResult( $offset )
 			-> getQuery();
 
-		return $query -> execute();//new Paginator( $query );
+		return $query -> execute();
 	}
 
 	public function getPost( int $id ) : ?Post

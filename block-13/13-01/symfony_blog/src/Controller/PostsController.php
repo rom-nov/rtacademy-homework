@@ -16,8 +16,26 @@ class PostsController extends AbstractController
         return $this -> render( 'posts/index.html.twig',
 		[
             'posts' => $posts,
+			'next_offset' => min( count( $posts ), PostRepository::PAGE_COUNT ),
+			'current_page' => 1,
         ]);
     }
+
+	#[ Route( '/post/list/{offset}', name: 'posts_list', methods: ['GET', 'HEAD'] ) ]
+	public function list( int $offset, PostRepository $postRepository ) : ?Response
+	{
+		$posts = $postRepository->getPosts( $offset );
+
+		return $this->render(
+			'posts/list.html.twig',
+			[
+				'posts' => $posts,
+				'prev_offset' => $offset - PostRepository::PAGE_COUNT,
+				'next_offset' => min( count( $posts ), $offset + PostRepository::PAGE_COUNT ),
+				'current_page' => ceil( $offset / PostRepository::PAGE_COUNT ) + 1,
+			]
+		);
+	}
 
 	#[ Route( '/{id}-{tag}', name: 'tag', methods: ['GET', 'HEAD'] ) ]
 	public function index_tags( int $id, string $tag, PostRepository $postRepository ) : ?Response
