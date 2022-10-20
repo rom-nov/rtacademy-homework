@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Post;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+//use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -16,7 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostRepository extends ServiceEntityRepository
 {
-	public const PAGE_COUNT = 12;
+	public const PAGE_COUNT = 4;
 	public const PAGE_RANDOM = 3;
 	public const POST_STATUS = 'published';
 //	protected int $count_post = 0;
@@ -48,17 +49,18 @@ class PostRepository extends ServiceEntityRepository
         }
     }
 
-	public function getPosts( int $offset = 0 ) : ?array
+	public function getPosts( int $offset = 0 ) : ?array //Paginator
 	{
 		$query =  $this -> createQueryBuilder( 'post' )
 			-> where( 'post.status = :val' )
 			-> setParameter( 'val', self::POST_STATUS )
 			-> orderBy( 'post.id', 'ASC' )
 			-> setMaxResults( self::PAGE_COUNT )
-			->setFirstResult( $offset )
+			-> setFirstResult( $offset )
 			-> getQuery();
 
 		return $query -> execute();
+		//return new Paginator( $query );
 	}
 
 	public function getPost( int $id ) : ?Post
@@ -87,7 +89,7 @@ class PostRepository extends ServiceEntityRepository
 		);
 	}
 
-	public function getTagPosts( int $id ) : ?array
+	public function getTagPosts( int $id, int $offset = 0 ) : ?array
 	{
 		$query =  $this -> createQueryBuilder( 'post' )
 			-> where( 'post.status = :val', 'post.category = :id' )
@@ -95,6 +97,7 @@ class PostRepository extends ServiceEntityRepository
 			-> setParameter( 'id', $id )
 			-> orderBy( 'post.id', 'ASC' )
 			-> setMaxResults( self::PAGE_COUNT )
+			-> setFirstResult( $offset )
 			-> getQuery();
 
 		return $query -> execute();

@@ -13,6 +13,7 @@ class PostsController extends AbstractController
     public function index( PostRepository $postRepository ) : ?Response
     {
 		$posts = $postRepository -> getPosts();
+		//dd( $posts );
         return $this -> render( 'posts/index.html.twig',
 		[
             'posts' => $posts,
@@ -21,13 +22,12 @@ class PostsController extends AbstractController
         ]);
     }
 
-	#[ Route( '/post/list/{offset}', name: 'posts_list', methods: ['GET', 'HEAD'] ) ]
+	#[ Route( '/list/{offset}', name: 'posts_list', methods: ['GET', 'HEAD'] ) ]
 	public function list( int $offset, PostRepository $postRepository ) : ?Response
 	{
-		$posts = $postRepository->getPosts( $offset );
+		$posts = $postRepository -> getPosts( $offset );
 
-		return $this->render(
-			'posts/list.html.twig',
+		return $this->render( 'posts/list.html.twig',
 			[
 				'posts' => $posts,
 				'prev_offset' => $offset - PostRepository::PAGE_COUNT,
@@ -37,13 +37,32 @@ class PostsController extends AbstractController
 		);
 	}
 
-	#[ Route( '/{id}-{tag}', name: 'tag', methods: ['GET', 'HEAD'] ) ]
+	#[ Route( '/{id}-{tag}', name: 'posts_tag', methods: ['GET', 'HEAD'] ) ]
 	public function index_tags( int $id, string $tag, PostRepository $postRepository ) : ?Response
 	{
 		$posts = $postRepository -> getTagPosts( $id );
-		return $this -> render( 'posts/index.html.twig',
+		return $this -> render( 'posts/tag.html.twig',
 		[
 			'posts' => $posts,
+			'next_offset' => min( count( $posts ), PostRepository::PAGE_COUNT ),
+			'current_page' => 1,
+			'current_id' => $id,
+			'current_tag' => $tag,
+		]);
+	}
+
+	#[ Route( '/{id}-{tag}/{offset}', name: 'posts_tag_list', methods: ['GET', 'HEAD'] ) ]
+	public function index_tags_list( int $id, string $tag, int $offset, PostRepository $postRepository ) : ?Response
+	{
+		$posts = $postRepository -> getTagPosts( $id, $offset );
+		return $this -> render( 'posts/tag_list.html.twig',
+		[
+			'posts' => $posts,
+			'prev_offset' => $offset - PostRepository::PAGE_COUNT,
+			'next_offset' => min( count( $posts ), $offset + PostRepository::PAGE_COUNT ),
+			'current_page' => ceil( $offset / PostRepository::PAGE_COUNT ) + 1,
+			'current_id' => $id,
+			'current_tag' => $tag,
 		]);
 	}
 

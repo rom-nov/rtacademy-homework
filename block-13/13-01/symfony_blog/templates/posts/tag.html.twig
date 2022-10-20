@@ -72,7 +72,7 @@
                             <a class="grid__post-link" href="{{ path( 'post_view', { id: posts[key].id, alias: posts[key].alias } ) }}"></a>
                             <div class="grid__meta">
                                 <h3 class="grid__category category">
-                                    <a class="category__link" href="{{ path( 'posts_tag', { id: posts[key].category.id, tag: posts[key].category.title } ) }}">{{ posts[key].category.title }}</a>
+                                    <a class="category__link" href="{{ path( 'posts_tag', { id: posts[key].category.id, tag: posts[key].category.title  } ) }}">{{ posts[key].category.title }}</a>
                                 </h3>
                                 <h2 class="grid__title title-post">
                                     <a class="title-post__link" href="{{ path( 'post_view', { id: posts[key].id, alias: posts[key].alias } ) }}">{{ posts[key].title }}</a>
@@ -98,19 +98,10 @@
         {% endif %}
         <nav class="pagination">
             <ul class="pagination__list">
-                {% if prev_offset == 0 %}
-                    <li class="pagination__item"><a class="pagination__link" href="{{ path( 'homepage' ) }}"><<</a></li>
-                    <li class="pagination__item pagination__current"><span class="pagination__link">{{ current_page }}</span></li>
-                {% elseif prev_offset > 0 %}
-                    <li class="pagination__item"><a class="pagination__link" href="{{ path( 'posts_list', { offset: prev_offset } ) }}"><<</a></li>
-                    <li class="pagination__item pagination__current"><span class="pagination__link">{{ current_page }}</span></li>
-                {% endif %}
-                {% if next_offset < posts|length %}
-                    {#            <li class="pagination__item pagination__current"><a class="pagination__link" href="#">1</a></li>#}
-                    {#            <li class="pagination__item"><a class="pagination__link" href="#">2</a></li>#}
-                    <li class="pagination__item pagination__current"><span class="pagination__link">{{ current_page }}</span></li>
-                    <li class="pagination__item"><a class="pagination__link" href="{{ path( 'posts_list', { offset: next_offset } ) }}">>></a></li>
-                {% endif %}
+{#                <li class="pagination__item"><a class="pagination__link" href="#"><<</a></li>#}
+                <li class="pagination__item pagination__current"><span class="pagination__link">{{ current_page }}</span></li>
+{#                <li class="pagination__item"><a class="pagination__link" href="#">2</a></li>#}
+                <li class="pagination__item"><a class="pagination__link" href="{{ path( 'posts_tag_list', { id: current_id, tag: current_tag, offset: next_offset } ) }}">>></a></li>
             </ul>
         </nav>
         {#    <div class="print">#}
