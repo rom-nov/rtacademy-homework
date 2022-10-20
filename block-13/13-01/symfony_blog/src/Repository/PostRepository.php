@@ -17,37 +17,50 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostRepository extends ServiceEntityRepository
 {
-	public const PAGE_COUNT = 4;
+	public const PAGE_COUNT = 8;
 	public const PAGE_RANDOM = 3;
 	public const POST_STATUS = 'published';
-//	protected int $count_post = 0;
 
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Post::class);
-//		$this -> count_post = $this -> count(
-//		[
-//			'status' => 'published'
-//		]);
     }
 
-    public function save(Post $entity, bool $flush = false): void
+    public function save( Post $entity, bool $flush = false ) : void
     {
-        $this->getEntityManager()->persist($entity);
+        $this -> getEntityManager() -> persist($entity);
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
+        if ( $flush )
+		{
+            $this->getEntityManager() -> flush();
         }
     }
 
-    public function remove(Post $entity, bool $flush = false): void
+    public function remove( Post $entity, bool $flush = false ) : void
     {
-        $this->getEntityManager()->remove($entity);
+        $this -> getEntityManager() -> remove( $entity );
 
-        if ($flush) {
-            $this->getEntityManager()->flush();
+        if ( $flush )
+		{
+            $this -> getEntityManager() -> flush();
         }
     }
+
+	public function getCountPosts( int $id = -1 ) : int
+	{
+		if( $id >= 0 )
+		{
+			return $this -> count(
+			[
+				'status' => self::POST_STATUS,
+				'id' => $id,
+			]);
+		}
+		return $this -> count(
+		[
+			'status' => self::POST_STATUS
+		]);
+	}
 
 	public function getPosts( int $offset = 0 ) : ?array //Paginator
 	{
@@ -74,10 +87,7 @@ class PostRepository extends ServiceEntityRepository
 
 	public function getRandomPosts() : ?array
 	{
-		$count_post = $this -> count(
-		[
-			'status' => self::POST_STATUS
-		]);
+		$count_post = $this -> getCountPosts();
 		return $this -> findBy(
 			[
 				'status' => self::POST_STATUS

@@ -13,11 +13,10 @@ class PostsController extends AbstractController
     public function index( PostRepository $postRepository ) : ?Response
     {
 		$posts = $postRepository -> getPosts();
-		//dd( $posts );
         return $this -> render( 'posts/index.html.twig',
 		[
             'posts' => $posts,
-			'next_offset' => min( count( $posts ), PostRepository::PAGE_COUNT ),
+			'next_offset' => PostRepository::PAGE_COUNT,//min( count( $posts ), PostRepository::PAGE_COUNT ),
 			'current_page' => 1,
         ]);
     }
@@ -26,13 +25,14 @@ class PostsController extends AbstractController
 	public function list( int $offset, PostRepository $postRepository ) : ?Response
 	{
 		$posts = $postRepository -> getPosts( $offset );
-
+		$count_posts = $postRepository -> getCountPosts ();
 		return $this->render( 'posts/list.html.twig',
 			[
 				'posts' => $posts,
 				'prev_offset' => $offset - PostRepository::PAGE_COUNT,
-				'next_offset' => min( count( $posts ), $offset + PostRepository::PAGE_COUNT ),
+				'next_offset' => $offset + PostRepository::PAGE_COUNT,//min( count( $posts ), $offset + PostRepository::PAGE_COUNT ),
 				'current_page' => ceil( $offset / PostRepository::PAGE_COUNT ) + 1,
+				'count_posts' => $count_posts,
 			]
 		);
 	}
@@ -44,7 +44,7 @@ class PostsController extends AbstractController
 		return $this -> render( 'posts/tag.html.twig',
 		[
 			'posts' => $posts,
-			'next_offset' => min( count( $posts ), PostRepository::PAGE_COUNT ),
+			'next_offset' => PostRepository::PAGE_COUNT,//min( count( $posts ), PostRepository::PAGE_COUNT ),
 			'current_page' => 1,
 			'current_id' => $id,
 			'current_tag' => $tag,
@@ -55,14 +55,16 @@ class PostsController extends AbstractController
 	public function index_tags_list( int $id, string $tag, int $offset, PostRepository $postRepository ) : ?Response
 	{
 		$posts = $postRepository -> getTagPosts( $id, $offset );
+		$count_posts = $postRepository -> getCountPosts( $id );
 		return $this -> render( 'posts/tag_list.html.twig',
 		[
 			'posts' => $posts,
 			'prev_offset' => $offset - PostRepository::PAGE_COUNT,
-			'next_offset' => min( count( $posts ), $offset + PostRepository::PAGE_COUNT ),
+			'next_offset' => $offset + PostRepository::PAGE_COUNT,//min( count( $posts ), $offset + PostRepository::PAGE_COUNT ),
 			'current_page' => ceil( $offset / PostRepository::PAGE_COUNT ) + 1,
 			'current_id' => $id,
 			'current_tag' => $tag,
+			'count_posts' => $count_posts,
 		]);
 	}
 

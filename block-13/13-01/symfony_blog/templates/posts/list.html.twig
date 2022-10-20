@@ -105,10 +105,7 @@
                     <li class="pagination__item"><a class="pagination__link" href="{{ path( 'posts_list', { offset: prev_offset } ) }}"><<</a></li>
                     <li class="pagination__item pagination__current"><span class="pagination__link">{{ current_page }}</span></li>
                 {% endif %}
-                {% if next_offset < posts|length %}
-                    {#            <li class="pagination__item pagination__current"><a class="pagination__link" href="#">1</a></li>#}
-                    {#            <li class="pagination__item"><a class="pagination__link" href="#">2</a></li>#}
-                    <li class="pagination__item pagination__current"><span class="pagination__link">{{ current_page }}</span></li>
+                {% if next_offset < count_posts %}
                     <li class="pagination__item"><a class="pagination__link" href="{{ path( 'posts_list', { offset: next_offset } ) }}">>></a></li>
                 {% endif %}
             </ul>

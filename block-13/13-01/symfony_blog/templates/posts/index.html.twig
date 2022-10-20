@@ -98,9 +98,7 @@
     {% endif %}
     <nav class="pagination">
         <ul class="pagination__list">
-{#            <li class="pagination__item"><a class="pagination__link" href="#"><<</a></li>#}
             <li class="pagination__item pagination__current"><span class="pagination__link">{{ current_page }}</span></li>
-{#            <li class="pagination__item"><a class="pagination__link" href="#">2</a></li>#}
             <li class="pagination__item"><a class="pagination__link" href="{{ path( 'posts_list', { offset: next_offset } ) }}">>></a></li>
         </ul>
     </nav>
