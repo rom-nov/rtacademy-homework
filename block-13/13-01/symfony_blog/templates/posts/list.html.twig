@@ -72,7 +72,7 @@
                             <a class="grid__post-link" href="{{ path( 'post_view', { id: posts[key].id, alias: posts[key].alias } ) }}"></a>
                             <div class="grid__meta">
                                 <h3 class="grid__category category">
-                                    <a class="category__link" href="{{ path( 'posts_tag', { id: posts[key].category.id, tag: posts[key].category.title } ) }}">{{ posts[key].category.title }}</a>
+                                    <a class="category__link" href="{{ path( 'posts_category', { id: posts[key].category.id, category: posts[key].category.title } ) }}">{{ posts[key].category.title }}</a>
                                 </h3>
                                 <h2 class="grid__title title-post">
                                     <a class="title-post__link" href="{{ path( 'post_view', { id: posts[key].id, alias: posts[key].alias } ) }}">{{ posts[key].title }}</a>

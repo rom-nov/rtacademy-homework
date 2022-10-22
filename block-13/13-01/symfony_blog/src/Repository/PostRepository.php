@@ -17,7 +17,7 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class PostRepository extends ServiceEntityRepository
 {
-	public const PAGE_COUNT = 8;
+	public const PAGE_COUNT = 4;
 	public const PAGE_RANDOM = 3;
 	public const POST_STATUS = 'published';
 
@@ -99,7 +99,7 @@ class PostRepository extends ServiceEntityRepository
 		);
 	}
 
-	public function getTagPosts( int $id, int $offset = 0 ) : ?array
+	public function getCategoryPosts( int $id, int $offset = 0 ) : ?array
 	{
 		$query =  $this -> createQueryBuilder( 'post' )
 			-> where( 'post.status = :val', 'post.category = :id' )

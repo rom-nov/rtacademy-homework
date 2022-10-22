@@ -37,33 +37,33 @@ class PostsController extends AbstractController
 		);
 	}
 
-	#[ Route( '/{id}-{tag}', name: 'posts_tag', methods: ['GET', 'HEAD'] ) ]
-	public function index_tags( int $id, string $tag, PostRepository $postRepository ) : ?Response
+	#[ Route( '/category/{id}-{category}', name: 'posts_category', methods: ['GET', 'HEAD'] ) ]
+	public function index_category( int $id, string $category, PostRepository $postRepository ) : ?Response
 	{
-		$posts = $postRepository -> getTagPosts( $id );
-		return $this -> render( 'posts/tag.html.twig',
+		$posts = $postRepository -> getCategoryPosts( $id );
+		return $this -> render( 'posts/category.html.twig',
 		[
 			'posts' => $posts,
 			'next_offset' => PostRepository::PAGE_COUNT,//min( count( $posts ), PostRepository::PAGE_COUNT ),
 			'current_page' => 1,
 			'current_id' => $id,
-			'current_tag' => $tag,
+			'current_category' => $category,
 		]);
 	}
 
-	#[ Route( '/{id}-{tag}/{offset}', name: 'posts_tag_list', methods: ['GET', 'HEAD'] ) ]
-	public function index_tags_list( int $id, string $tag, int $offset, PostRepository $postRepository ) : ?Response
+	#[ Route( '/category/{id}-{category}/list/{offset}', name: 'posts_category_list', methods: ['GET', 'HEAD'] ) ]
+	public function index_category_list( int $id, string $category, int $offset, PostRepository $postRepository ) : ?Response
 	{
-		$posts = $postRepository -> getTagPosts( $id, $offset );
+		$posts = $postRepository -> getCategoryPosts( $id, $offset );
 		$count_posts = $postRepository -> getCountPosts( $id );
-		return $this -> render( 'posts/tag_list.html.twig',
+		return $this -> render( 'posts/category_list.html.twig',
 		[
 			'posts' => $posts,
 			'prev_offset' => $offset - PostRepository::PAGE_COUNT,
 			'next_offset' => $offset + PostRepository::PAGE_COUNT,//min( count( $posts ), $offset + PostRepository::PAGE_COUNT ),
 			'current_page' => ceil( $offset / PostRepository::PAGE_COUNT ) + 1,
 			'current_id' => $id,
-			'current_tag' => $tag,
+			'current_category' => $category,
 			'count_posts' => $count_posts,
 		]);
 	}
