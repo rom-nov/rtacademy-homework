@@ -1,17 +1,35 @@
 <?php
 declare( strict_types = 1 );
 
-$checkOnHardString = fn( string $str ) : bool => ( mb_strpos( $str, '-' ) > 0  || mb_strpos( $str, ' ' ) > 0 );
-$getSeparator = fn( string $str ) : string => mb_strpos( $str, '-' ) > 0 ? '-' : ' ';
-$splitString = fn( string $str, string $separator ) : array => mb_split( $separator , $str );
-$joinString = fn( array $arr, string $separator ) : string => join( $separator, $arr );
-
-function Error() : void
+class supportFunction
 {
-	exit( 'Очікую рядок або масив рядків!' );
+	static function checkOnHardString( string $str ) : bool
+	{
+		return mb_strpos( $str, '-' ) > 0  || mb_strpos( $str, ' ' ) > 0;
+	}
+
+	static function getSeparator( string $str ) : string
+	{
+		return mb_strpos( $str, '-' ) > 0 ? '-' : ' ';
+	}
+
+	static function splitString( string $str, string $separator ) : array
+	{
+		return mb_split( $separator , $str );
+	}
+
+	static function joinString( array $arr, string $separator ) : string
+	{
+		return join( $separator, $arr );
+	}
+
+	static function Error() : void
+	{
+		exit( 'Очікую рядок або масив рядків!' );
+	}
 }
 
-function checkOnExeption ( int $index, string $item, array $arr, callable $checkOnHardStr, callable $getSeparator, callable $splitStr, callable $joinStr ) : string
+function checkOnExeption ( int $index, string $item, array $arr ) : string
 {
 	$result = $item;
 
@@ -28,32 +46,31 @@ function checkOnExeption ( int $index, string $item, array $arr, callable $check
 	{
 		if( $index > 0 )
 		{
-			$result = mb_strtolower( mb_substr( $item, 0, 2 ) ) . modifyString( mb_substr( $item, 2 ), $checkOnHardStr, $getSeparator, $splitStr, $joinStr );
+			$result = mb_strtolower( mb_substr( $item, 0, 2 ) ) . modifyString( mb_substr( $item, 2 ) );
 		}
 		else
 		{
-			$result = mb_substr( $item, 0, 2 ) . modifyString( mb_substr( $item, 2 ), $checkOnHardStr, $getSeparator, $splitStr, $joinStr );
+			$result = mb_substr( $item, 0, 2 ) . modifyString( mb_substr( $item, 2 ) );
 		}
 	}
 
 	if( $index > 0 && $item === 'сен' )
 	{
-		$result = modifyString( $item, $checkOnHardStr, $getSeparator, $splitStr, $joinStr );
+		$result = modifyString( $item );
 	}
 
 	return $result;
 };
 
-function modifyHardString( string $str, string $separator, callable $checkOnHardStr, callable $getSeparator, callable $splitStr, callable $joinStr ) : string
+function modifyHardString( string $str, string $separator ) : string
 {
-	//global $splitString, $joinString;
-	$arrayWords = $splitStr( $str, $separator );
-	$modifyArrayWords = modifyArrayStrings( $arrayWords, $checkOnHardStr, $getSeparator, $splitStr, $joinStr );
+	$arrayWords = supportFunction::splitString( $str, $separator );
+	$modifyArrayWords = modifyArrayStrings( $arrayWords );
 	foreach( $modifyArrayWords as $index => $value )
 	{
-		$modifyArrayWords[ $index ] = checkOnExeption( $index, $value, $modifyArrayWords, $checkOnHardStr, $getSeparator, $splitStr, $joinStr );
+		$modifyArrayWords[ $index ] = checkOnExeption( $index, $value, $modifyArrayWords );
 	}
-	return $joinStr( $modifyArrayWords, $separator );
+	return supportFunction::joinString( $modifyArrayWords, $separator );
 }
 
 function modifyNormalString( string $str ) : string
@@ -63,59 +80,50 @@ function modifyNormalString( string $str ) : string
 	return $firstLetter . $subString;
 }
 
-function modifyString( string $str, callable $checkOnHardStr, callable $getSeparator, callable $splitStr, callable $joinStr ) : string
+function modifyString( string $str ) : string
 {
-	//global $checkOnHardString, $getSeparator;
 	if( gettype( $str ) !== 'string' || !mb_strlen( $str, 'UTF-8' ) )
 	{
-		Error();
+		supportFunction::Error();
 	}
-	if( $checkOnHardStr( $str ) )
+	if( supportFunction::checkOnHardString( $str ) )
 	{
-		return modifyHardString( $str, $getSeparator( $str ), $checkOnHardStr, $getSeparator, $splitStr, $joinStr );
+		return modifyHardString( $str, supportFunction::getSeparator( $str ) );
 	}
 	return modifyNormalString( $str );
 }
 
-function modifyArrayStrings( array &$arr, callable $checkOnHardStr, callable $getSeparator, callable $splitStr, callable $joinStr, int $inc = 0 ) : array
+function modifyArrayStrings( array &$arr, int $inc = 0 ) : array
 {
 	if( $inc < count( $arr ) )
 	{
 		if ( gettype( $arr[ $inc ] ) === 'array' && count( $arr[ $inc ] ) )
 		{
-			$arr[ $inc ] = modifyArrayStrings( $arr[ $inc ], $checkOnHardStr, $getSeparator, $splitStr, $joinStr );
+			$arr[ $inc ] = modifyArrayStrings( $arr[ $inc ] );
 		}
 		else
 		{
-			$arr[ $inc ] =  modifyString( $arr[ $inc ], $checkOnHardStr, $getSeparator, $splitStr, $joinStr );
+			$arr[ $inc ] =  modifyString( $arr[ $inc ] );
 		}
-		modifyArrayStrings( $arr, $checkOnHardStr, $getSeparator, $splitStr, $joinStr, ++$inc );
+		modifyArrayStrings( $arr, ++$inc );
 	}
 	return $arr;
 }
 
-function capitalize( mixed $param,
-					 callable $checkOnHardStr,
-					 callable $getSeparator,
-					 callable $splitStr,
-					 callable $joinStr) : string|array
+function capitalize( mixed $param ) : string|array
 {
 	switch( true )
 	{
 		case( gettype( $param ) === 'string' ):
-			return modifyString( $param, $checkOnHardStr, $getSeparator, $splitStr, $joinStr );
+			return modifyString( $param );
 		case( gettype( $param ) === 'array' && count( $param ) ):
-			return modifyArrayStrings( $param, $checkOnHardStr, $getSeparator, $splitStr, $joinStr );
+			return modifyArrayStrings( $param );
 		default:
-			Error();
+			supportFunction::Error();
 	}
 }
 
-//echo capitalize( 'киїВ',
-//				 $checkOnHardString,
-//				 $getSeparator,
-//				 $splitString,
-//				 $joinString );
+//echo capitalize( 'киїВ' );
 //echo "<br>";
 //echo capitalize( 'ньЮ-йоРк' );
 //echo "<br>";
@@ -123,11 +131,7 @@ function capitalize( mixed $param,
 //echo "<br>";
 //echo capitalize( 'ла-сЕЙн-СЮР-меР' );
 //echo "<br>";
-var_dump( capitalize( ['киїВ', 'ньЮ-йоРк', 'рІо-дЕ-жаНеЙро', 'сЕН-сАтЮрНЕн-ЛЕЗ-аПт', 'сі-фур-ЛЕ-плаЖ', 'вільНЕв-сЕн-жОРж'],
-					  $checkOnHardString,
-					  $getSeparator,
-					  $splitString,
-					  $joinString) );
+//var_dump( capitalize( ['киїВ', 'ньЮ-йоРк', 'рІо-дЕ-жаНеЙро', 'сЕН-сАтЮрНЕн-ЛЕЗ-аПт', 'сі-фур-ЛЕ-плаЖ', 'вільНЕв-сЕн-жОРж'] ) );
 //echo "<br>";
 //var_dump( capitalize( ["лА-рОш-СЮР-іОн", ['киїВ', 'ньЮ-йоРк', 'лЬвів'], "ЛЕ-сАБль-Д'олОНн", "брАЙтон І гоУв", "кіНГСТон-апОН-гаЛЛ", "л'аї-ЛЕ-рОз", "лагАРД-д'АПТ", "нова грАДишКА"] ) );
 //echo capitalize( 123456 );
