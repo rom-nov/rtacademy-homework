@@ -1,56 +1,65 @@
 <!DOCTYPE html>
 <html lang="uk">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Бронювання</title>
-    <link rel="stylesheet" href="style.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Бронювання</title>
+	<link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <header>
-        <h1>Бронювання фотостудії</h1>
-    </header>
-    <main>
-        <form id="form" action="#" method="get">
-            <div><label for="lastname">* Прізвище:</label></div>
-            <div><input type="text" id="lastname" name="user-lastname" placeholder="Введіть прізвище" required minlength="2" maxlength="64"></div>
-            <div><label for="firstname">* Ім'я:</label></div>
-            <div><input type="text" id="firstname" name="user-firstname" placeholder="Введіть ім'я" required minlength="2" maxlength="64"></div>
-            <div><label for="email">* Email:</label></div>
-            <div><input type="email" id="email" name="user-email" placeholder="Введіть email" required minlength="6" maxlength="255"></div>
-            <div><label for="telephone">* Телефон:</label></div>
-            <div><input type="tel" id="telephone" name="usertelphone" placeholder="+380000000000" required minlength="13" maxlength="13"></div>
-            <div><label for="instagram">Профіль Instagram:</label></div>
-            <div><input type="url" id="instagram" name="userinstagram" placeholder="https://instagram.com" minlength="23" maxlength="255"></div>
-            <div><label for="room">* Зал:</label></div>
-            <div>
-                <select id="room" required>
-                    <option value="">Оберіть зал</option>
-                    <option value="1000">Зал 1</option>
-                    <option value="900">Зал 2</option>
-                    <option value="800">Зал 3</option>
-                </select>
-            </div>
-            <div><label for="startdate">* Дата та час початку:</label></div>
-            <div><input type="datetime-local" id="startdate" name="date-start" required min="2022-01-01T00:00" max="2023-01-01T00:00"></div>
-            <div><label for="enddate">* Дата та час кінця:</label></div>
-            <div><input type="datetime-local" id="enddate" name="date-end" required min="2022-01-01T00:00" max="2023-01-01T00:00"></div>
-            <div><label for="number">* Кількість людей у залі:</label></div>
-            <div><input type="number" min="1" max="10" step="1" id="number" name="user-number" value="2" required></div>
-            <div><label for="color">Колір фону:</label></div>
-            <div><input type="color" id="color"></div>
-            <div><label for="comment">Коментар:</label></div>
-            <div><textarea name="user-comment" id="comment" cols="30" rows="5"></textarea></div>
-            <div><input type="checkbox" id="rule" required><label for="rule"> Я погоджуюсь з </label><a href="#"> правилами фотостудії</a></div>
-            <div>
-                <button type="reset" id="btn-clear">Очистити</button>
-                <button type="button" id="btn-submit" disabled>Надіслати</button>
-            </div>
-        </form>
-    </main>
-    <footer>
-        <a href="#"><strong>2022 RTAcademy</strong></a>
-    </footer>
-    <script src="script.js"></script>
+	<header>
+		<h1>Бронювання фотостудії</h1>
+	</header>
+	<main>
+		<form id="form" action="#" method="get">
+			<div><label for="lastname">* Прізвище:</label></div>
+			<div><input type="text" id="lastname" name="user-lastname" placeholder="Введіть прізвище" required
+					minlength="2" maxlength="64"></div>
+			<div><label for="firstname">* Ім'я:</label></div>
+			<div><input type="text" id="firstname" name="user-firstname" placeholder="Введіть ім'я" required minlength="2"
+					maxlength="64"></div>
+			<div><label for="email">* Email:</label></div>
+			<div><input type="email" id="email" name="user-email" placeholder="Введіть email" required minlength="6"
+					maxlength="255"></div>
+			<div><label for="telephone">* Телефон:</label></div>
+			<div><input type="tel" id="telephone" name="usertelphone" placeholder="+380000000000" required minlength="13"
+					maxlength="13"></div>
+			<div><label for="instagram">Профіль Instagram:</label></div>
+			<div><input type="url" id="instagram" name="userinstagram" placeholder="https://instagram.com" minlength="23"
+					maxlength="255"></div>
+			<div><label for="room">* Зал:</label></div>
+			<div>
+				<select id="room" required>
+					<option value="">Оберіть зал</option>
+					<option value="1000">Зал 1</option>
+					<option value="900">Зал 2</option>
+					<option value="800">Зал 3</option>
+				</select>
+			</div>
+			<div><label for="startdate">* Дата та час початку:</label></div>
+			<div><input type="datetime-local" id="startdate" name="date-start" required min="2023-01-01T00:00" max="2024-01-01T00:00"></div>
+			<div><label for="enddate">* Дата та час кінця:</label></div>
+			<div><input type="datetime-local" id="enddate" name="date-end" required min="2023-01-01T00:00" max="2024-01-01T00:00"></div>
+			<div><label for="number">* Кількість людей у залі:</label></div>
+			<div><input type="number" min="1" max="10" step="1" id="number" name="user-number" value="2" required></div>
+			<div><label for="color">Колір фону:</label></div>
+			<div><input type="color" id="color"></div>
+			<div><label for="comment">Коментар:</label></div>
+			<div><textarea name="user-comment" id="comment" cols="30" rows="5"></textarea></div>
+			<div><input type="checkbox" id="rule" required><label for="rule"> Я погоджуюсь з </label><a href="#"> правилами
+					фотостудії</a></div>
+			<div>
+				<button type="reset" id="btn-clear">Очистити</button>
+				<button type="button" id="btn-submit" disabled>Надіслати</button>
+			</div>
+		</form>
+	</main>
+	<footer>
+		<a href="#"><strong>2023 RTAcademy</strong></a>
+	</footer>
+	<script src="script.js"></script>
 </body>
+
 </html>
