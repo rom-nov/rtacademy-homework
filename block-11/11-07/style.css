@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    text-shadow: 0 0 0.05rem #000000;
+}
+
+form, input, textarea, button, label, select, option, a {
+    box-sizing: border-box;
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    margin-bottom: 0.35rem;
+}
+
+input, textarea, select {
+    outline: none;
+    padding: 0.25rem 0.5rem;
+}
+
+.form {
+    width: 50%;
+    height: 100%;
+    margin: 2rem auto;
+    padding: 1rem;
+}
+
+.form__img {
+    padding: 0.25rem 0;
+}
+
+.form__btn {
+    cursor: pointer;
+    padding: 0.35rem;
+}
+
+.image {
+    position: relative;
+    left: 50%;
+    transform: translateX( -50% );
+}
+
+.error {
+    font-size: 1.2rem;
+    color: #ff0000;
+    text-align: center;
+}
