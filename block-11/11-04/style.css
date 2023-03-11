@@ -1,0 +1,114 @@
+#form{
+    position: relative;
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    display: flex;
+    flex-direction: column;
+    max-width: 30%;
+    padding-top: 3rem;
+    margin: 0 auto;
+}
+
+#message {
+    outline: none;
+    min-height: 12rem;
+    min-width: 18rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border-radius: 0.3rem;
+    border: 0.1rem solid #808080;
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+#btn-submit {
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    padding: 0.5rem;
+    border: 0.1rem solid #808080;
+    border-radius: 0.3rem;
+    background-color: #fff;
+    transition: background-color 0.3s ease;
+}
+
+#btn-submit:hover {
+    cursor: pointer;
+    background-color: #eee;
+}
+
+#btn-submit:disabled {
+    cursor: pointer;
+    background-color: #fff;
+}
+
+#fullname, #email {
+    outline: none;
+    min-width: 18rem;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border-radius: 0.3rem;
+    border: 0.1rem solid #808080;
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.form_row {
+    margin-bottom: 0.5rem;
+}
+
+#popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    z-index: 10;
+    display: inline-block;
+    text-align: center;
+    padding: 0.75rem 2.25rem;
+    border-radius: 0.25rem;
+    box-shadow: 0.2rem 0.2rem 0.5rem #000;
+    background-color: #fff;
+    color: #000000;
+    text-shadow: none;
+}
+
+#btn-button {
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    display: inline-block;
+    margin-top: 1rem;
+    margin-right: 1rem;
+    padding: 0.35rem 1rem;
+}
+
+#btn-button:last-child {
+    margin-right: 0;
+}
+
+#error-message p {
+    display: inline-block;
+    text-align: center;
+    padding: 0.75rem 0;
+    margin: 0;
+    color: #ff0000;
+}
+
+.error {
+    box-shadow: 0 0 0.5rem #ff0000;
+}
+
+.user-name, .user-text, .user-error {
+    font-size: 1rem;
+    font-family: 'Open Sans', sans-serif;
+    text-align: center;
+}
+
+.user-name {
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.user-error {
+    color: #ff0000;
+}
+
