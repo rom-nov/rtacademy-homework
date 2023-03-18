@@ -1,23 +1,17 @@
 <?php
 declare( strict_types = 1 );
 namespace Models;
-class CountryModel
+class CountriesModel extends Model
 {
 	public function get_list() : array
 	{
 		try
 		{
-			$host = 'rtacademy_database_mariadb';
-			$port = '3306';
-			$dbname = 'helloworld';
-			$dbuser = 'helloworld';
-			$dbpass = 'helloworld';
-
-			$DB = new \PDO( "mysql:host=$host;port=$port;dbname=$dbname", $dbuser, $dbpass );
+			$DB = Model::DB();
 			$statment = $DB -> query(
-				'SELECT name
-						  FROM countries
-						  ORDER BY name ASC',
+						'SELECT name
+						 FROM countries
+						 ORDER BY name ASC;',
 				\PDO::FETCH_ASSOC );
 			$result = $statment->fetchAll( \PDO::FETCH_COLUMN, 0 );
 		}
